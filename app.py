@@ -16,8 +16,10 @@ def root():
 @app.route('/bsg-people')
 def bsg_people():
     query = "SELECT * FROM bsg_people;"
+    # Cursor acts as the person typing the specified command into MySQL
     cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
+    results = cursor.fetchall()     # I think this is a list of
+    print(results)
     return render_template("bsg.j2", bsg_people=results)
 
 # Listener

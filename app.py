@@ -30,7 +30,10 @@ def Customers():
     # Step 3: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
 
-    print(f"My Test:\n {results}")
+    print(f"Type:\n {type(results)}")
+    print(f"Length:\n {len(results)}")
+    for val in results:
+        print(val)
 
     # The specified file is rendered with the queried data
     return render_template("index.j2")

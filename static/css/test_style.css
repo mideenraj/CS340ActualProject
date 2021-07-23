@@ -1,0 +1,102 @@
+
+/* Body-------------------------------- */
+body {
+  background-color: #FAEBD7;
+  height: 900px;
+}
+
+
+/* Table-------------------------------- */
+th, td {
+  border: 1px solid black;
+  background-color: #FFFAF0;
+  text-align: center;
+}
+
+table {
+  border: 2px solid black;
+  background-color: #FFFFF0;
+  overflow:  auto;
+  text-align: center;
+}
+
+
+/* Title div-------------------------------- */
+#title{
+    text-align: center;
+    font-family: "Times New Roman";
+    font-size: 40px;
+}
+
+
+/* Navigation Bar-------------------------------- */
+a:link,a:visited {
+  color:#595959;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#000000;
+}
+
+#nav_bar {
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    color: #595959
+}
+
+#nav_bar_elem {
+  display: inline;
+  padding-left: 30px;
+  padding-right: 30px;
+
+}
+
+#nav_bar_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Container div-------------------------------- */
+.container_div{
+    margin-top: 30px;
+}
+
+
+/* Table div (left)-------------------------------- */
+.table_div{
+    width: 45%;
+    float: left;
+    margin-left: 50px;
+
+}
+
+
+.table_title{
+    text-align: center;
+    font-family: "Times New Roman";
+    font-size: 25px;
+}
+
+
+
+/* Data Display div (right)-------------------------------- */
+.dataDisplay_div {
+    margin: 0 auto;
+    width: 45%;
+    float: right;
+}
+
+
+.sub_title{
+    margin-bottom: 0px;
+    font-family: "script";
+    font-size: 20px;
+}
+
+#top_seller{
+    background-color: green;
+}

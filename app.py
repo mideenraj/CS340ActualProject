@@ -12,7 +12,10 @@ db_connection = db.connect_to_database()
 # Route 1: Home page (aka 'Reports')
 @app.route('/')
 def root():
+
+    # *Need to insert logic for populating report tables here
     return render_template("index.j2")
+
 
 # Route 2: 'Customers' subpage
 @app.route('/customers')
@@ -31,11 +34,6 @@ def Customers():
 
     # The specified file is rendered with the queried data
     return render_template("bsg.j2", bsg_people=results)
-
-    # The specified file is rendered with the queried data
-
-
-
 
 
 

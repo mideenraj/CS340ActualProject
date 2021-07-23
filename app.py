@@ -27,7 +27,7 @@ def bsg_people():
     return render_template("bsg.j2", bsg_people=results)
 
 @app.route('/test')
-def bsg_people():
+def test():
 
     # The specified file is rendered with the queried data
     return render_template("test.j2")

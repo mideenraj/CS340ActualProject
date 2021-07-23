@@ -3,7 +3,7 @@ import os
 import database.db_connector as db
 
 # -------------------- Initialization --------------------
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 db_connection = db.connect_to_database()
 
 

@@ -65,7 +65,10 @@ fieldset > legend{
 th, td {
   border: 1px solid black;
   background-color: #FFFAF0;
+}
 
+tr{
+  width: 100%;
 }
 
 table {

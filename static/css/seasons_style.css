@@ -20,8 +20,9 @@ table {
 }
 
   #title {
-  padding: 10px;
-  font-size: 20px;
+  text-align: center;
+  font-family: "Times New Roman";
+  font-size: 40px;
   text-align: center;
   }
 

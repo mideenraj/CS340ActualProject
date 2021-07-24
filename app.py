@@ -14,7 +14,7 @@ db_connection = db.connect_to_database()
 def root():
 
     # Step 1: Write query
-    query = "SELECT * FROM OrderProduct;"
+    query = "SELECT * FROM OrderProducts;"
 
     # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)

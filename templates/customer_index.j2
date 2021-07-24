@@ -1,0 +1,64 @@
+
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Customers</title>
+  <Link rel="stylesheet" href="static/css/customer_style.css" type="text/css">
+ </head>
+ <body>
+    <!--Nav bar-->
+    <div id="nav_bar">
+      <ul id="nav_bar_list">
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/">Reports</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/customers">Customers</a></li>
+        <li id="nav_bar_elem"><a href="orders.html">Orders</a></li>
+        <li id="nav_bar_elem"><a href="products.html">Products</a></li>
+        <li id="nav_bar_elem"><a href="departments.html">Departments</a></li>
+        <li id="nav_bar_elem"><a href="seasons.html">Seasons</a></li>
+      </ul>
+    </div>
+
+    <div id="page_title">
+      <h2>Customers</h2>
+    </div>
+
+    <div>
+      <table>
+
+        <!-- Table Headers -->
+        <tr>
+          <th>CustomerID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Birthday</th>
+          <th>Zipcode</th>
+          <th>Modify</th>
+        </tr>
+
+        <!-- Sample data -->
+        {% for key in customer_data[0].keys() %}
+        <tr>
+            <td>{{key[0]}}</td>
+            <td>{{key[1]}}</td>
+            <td>{{key[2]}}</td>
+            <td>{{key[3]}}</td>
+            <td>{{key[4]}}</td>
+            <td><button>Update</button><button>Delete</button></td>
+        </tr>
+
+        <!-- Input Box -->
+        <tr>
+          <td>Auto-entered</td>
+          <td><input type="text" placeholder="First Name"></input></td>
+          <td><input type="text" placeholder="Last Name"></input></td>
+          <td><input type="text" placeholder="Birthday"></input></td>
+          <td><input type="text" placeholder="Zipcode"></input></td>
+          <td><button id="submit_button">Submit</button> </td>
+        </tr>
+
+      </table>
+    </div>
+
+
+ </body>
+</html>

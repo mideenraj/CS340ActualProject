@@ -36,7 +36,7 @@ def Customers():
         print(val)
 
     # The specified file is rendered with the queried data
-    return render_template("index.j2")
+    return render_template("index.j2", customer_data=results)
     #return render_template("bsg.j2", bsg_people=results)
 
 

@@ -38,11 +38,11 @@
         <!-- Sample data -->
         {% for key in customer_data[0].keys() %}
         <tr>
-            <td>{{key[0]}}</td>
-            <td>{{key[1]}}</td>
-            <td>{{key[2]}}</td>
-            <td>{{key[3]}}</td>
-            <td>{{key[4]}}</td>
+            <td>{{key["customerID"]}}</td>
+            <td>{{key["fName"]}}</td>
+            <td>{{key["lName"]}}</td>
+            <td>{{key["birthDate"]}}</td>
+            <td>{{key["zipCode"]}}</td>
             <td><button>Update</button><button>Delete</button></td>
         </tr>
         {% endfor %}

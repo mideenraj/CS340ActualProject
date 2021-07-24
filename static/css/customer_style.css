@@ -5,6 +5,7 @@ body {
 }
 
 th, td {
+  text-align: center;
   border: 1px solid black;
   margin: auto;
   background-color: #FFFAF0;
@@ -55,12 +56,9 @@ a:hover {
   padding: 0;
 }
 
-/* Put back if title class re-entered
-#page_title {
-  padding: 10px;
-  text-align: center;
-}
-*/ 
+
+
+
 #page_title{
     text-align: center;
     font-family: "Times New Roman";

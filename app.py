@@ -13,9 +13,9 @@ db_connection = db.connect_to_database()
 @app.route('/')
 def root():
 
-    # *Need to insert logic for populating report tables here
-    return render_template("index.j2")
+    # Need to insert logic for populating report tables here
 
+    return render_template("index.j2")
 
 # Route 2: 'Customers' subpage
 @app.route('/customers')
@@ -30,14 +30,19 @@ def Customers():
     # Step 3: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
 
-    #
-    print(f"Length:\n {len(results)}")
-    for val in results:
-        print(val)
+    # Debugging
+    """"""
+    print("\n")
+    print(f"Length: {len(results)}")
+    print(f"Result:\n {results}")
 
     # The specified file is rendered with the queried data
     return render_template("customer_index.j2", customer_data=results)
-    #return render_template("bsg.j2", bsg_people=results)
+
+    # The specified file is rendered with the queried data
+
+
+
 
 
 

@@ -36,13 +36,13 @@
         </tr>
 
         <!-- Sample data -->
-        {% for key in customer_data[0].keys() %}
+        {% for row in customer_data[0] %}
         <tr>
-            <td>{{key["customerID"]}}</td>
-            <td>{{key["fName"]}}</td>
-            <td>{{key["lName"]}}</td>
-            <td>{{key["birthDate"]}}</td>
-            <td>{{key["zipCode"]}}</td>
+            <td>{{row["customerID"]}}</td>
+            <td>{{row["fName"]}}</td>
+            <td>{{row["lName"]}}</td>
+            <td>{{row["birthDate"]}}</td>
+            <td>{{row["zipCode"]}}</td>
             <td><button>Update</button><button>Delete</button></td>
         </tr>
         {% endfor %}

@@ -38,11 +38,11 @@
         <!-- Sample data -->
         {% for row in customer_data[0] %}
         <tr>
-            <td>{{row["customerID"]}}</td>
-            <td>{{row["fName"]}}</td>
-            <td>{{row["lName"]}}</td>
-            <td>{{row["birthDate"]}}</td>
-            <td>{{row["zipCode"]}}</td>
+            <td>{{row['customerID']}}</td>
+            <td>{{row['fName']}}</td>
+            <td>{{row['lName']}}</td>
+            <td>{{row['birthDate']}}</td>
+            <td>{{row['zipCode']}}</td>
             <td><button>Update</button><button>Delete</button></td>
         </tr>
         {% endfor %}

@@ -34,7 +34,9 @@ def Customers():
     """"""
     print("\n")
     print(f"Length: {len(results)}")
-    print(f"Result:\n {results}")
+    print("Result:")
+    for row in results:
+        print(row)
 
     # The specified file is rendered with the queried data
     return render_template("customer_index.j2", customer_data=results)

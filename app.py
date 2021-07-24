@@ -66,6 +66,8 @@ def load_products():
 
     # Step 3: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
+    payload = []
+    payload.append(results)
 
     # Step 4: Print query results if Debugging
     debug = False
@@ -78,7 +80,7 @@ def load_products():
             print(row)
 
     # Step 5: The specified file is rendered with the queried data
-    return render_template("products_subpage.j2", product_data=results)
+    return render_template("products_subpage.j2", product_data=payload)
 
 
 

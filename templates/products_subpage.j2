@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <title>Customers</title>
-  <Link rel="stylesheet" href="static/css/customer_style.css" type="text/css">
+  <Link rel="stylesheet" href="static/css/products_style.css" type="text/css">
  </head>
  <body>
 
@@ -43,10 +43,10 @@
             <!-- Sample Data -->
             {% for row in product_data[0] %}
             <tr>
-                <td>1</td>
-                <td>Apple</td>
-                <td>1</td>
-                <td>2.99</td>
+                <td>{{row['productID']}}</td>
+                <td>{{row['productName']}}</td>
+                <td>{{row['departmentID']}}</td>
+                <td>{{row['salePrice']}}</td>
                 <td><button>Update</button><button>Delete</button></td>
             </tr>
             {% endfor %}

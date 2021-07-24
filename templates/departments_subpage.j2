@@ -1,0 +1,54 @@
+
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Customers</title>
+  <Link rel="stylesheet" href="static/css/departments_style.css" type="text/css">
+ </head>
+ <body>
+
+    <!--Nav bar-->
+    <div id="nav_bar">
+      <ul id="nav_bar_list">
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/">Reports</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/customers">Customers</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/orders">Orders</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/products">Products</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/departments">Departments</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/seasons">Seasons</a></li>
+      </ul>
+    </div>
+
+    <div id="page_title">
+      <h2>Departments</h2>
+    </div>
+
+    <div>
+      <table>
+
+        <!-- Table Header -->
+        <tr>
+          <th>DepartmentID</th>
+          <th>Department Name</th>
+        </tr>
+
+
+        <!-- Sample Data -->
+        {% for row in department_data[0] %}
+        <tr>
+          <td>{{row['departmentID']}}</td>
+          <td>{{row['name']}}</td>
+        </tr>
+        {% endfor %}
+
+        <!-- Input Box -->
+        <tr>
+          <td></td>
+          <td><input type="text" placeholder="Department Name"></input></td>
+          <td><button id="submit_button">Submit</button> </td>
+        </tr>
+      </table>
+    </div>
+
+ </body>
+</html>

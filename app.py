@@ -83,6 +83,33 @@ def load_products():
     return render_template("products_subpage.j2", product_data=payload)
 
 
+# Route 5: 'Departments' subpage
+@app.route('/departments')
+def load_departments():
+
+    # Step 1: Write query
+    query = "SELECT * FROM Departments;"
+
+    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    # Step 3: Access result (This returns a tuple of selected rows from query)
+    results = cursor.fetchall()
+    payload = []
+    payload.append(results)
+
+    # Step 4: Print query results if Debugging
+    debug = False
+    if debug:
+        print("\n")
+        print(f"Type:{type(results)}")
+        print(f"Length: {len(results)}")
+        print("Result:")
+        for row in results:
+            print(row)
+
+    # Step 5: The specified file is rendered with the queried data
+    return render_template("departments_subpage.j2", department_data=payload)
 
 
 

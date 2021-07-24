@@ -44,7 +44,7 @@ def load_customers():
             print(row)
 
     # Step 5: The specified file is rendered with the queried data
-    return render_template("customer_subpage.j2", customer_data=payload)
+    return render_template("customers_subpage.j2", customer_data=payload)
 
 
 # Route 3: 'Orders' subpage
@@ -78,14 +78,14 @@ def load_products():
             print(row)
 
     # Step 5: The specified file is rendered with the queried data
-    return render_template("customer_subpage.j2", customer_data=results)
+    return render_template("products_subpage.j2", customer_data=results)
 
 
 
 
 
 
-products_subpage
+
 
 
 # -------------------- Listener --------------------

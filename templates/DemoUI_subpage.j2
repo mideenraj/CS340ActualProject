@@ -32,28 +32,30 @@
 
 
     <!-------- Product selection -------->
-    <table class="product_table">
+    <div class="main_div">
+        <table class="product_table">
 
-      <!--- Table header --->
-      Select produce
-      <tr>
-        <td>Name</td>
-        <td>Price ($)</td>
-        <td>Unit</td>
-        <td>Quantity</td>
-      </tr>
+          <!--- Table header --->
+          Select produce
+          <tr>
+            <td>Name</td>
+            <td>Price ($)</td>
+            <td>Unit</td>
+            <td>Quantity</td>
+          </tr>
 
-      <!--- Products --->
-      {% for row in demo_data[0] %}
-      <tr>
-        <td>{{row['productName']}}</td>
-        <td>{{row['salePrice']}}</td>
-        <td>{{row['unitType']}}</td>
-        <td><input></input></td>
-      </tr>
-      {% endfor %}
+          <!--- Products --->
+          {% for row in demo_data[0] %}
+          <tr>
+            <td>{{row['productName']}}</td>
+            <td>{{row['salePrice']}}</td>
+            <td>{{row['unitType']}}</td>
+            <td><input></input></td>
+          </tr>
+          {% endfor %}
 
-    </table>
+        </table>
+    </div>
 
 
 

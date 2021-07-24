@@ -13,13 +13,14 @@ db_connection = db.connect_to_database()
 @app.route('/')
 def root():
 
-    # Need to insert logic for populating report tables here
+    # **Need to insert logic for populating report tables here
 
+    # Step x: Render HomePage
     return render_template("index.j2")
 
 # Route 2: 'Customers' subpage
 @app.route('/customers')
-def Customers():
+def load_customers():
 
     # Step 1: Write query
     query = "SELECT * FROM Customers;"
@@ -29,25 +30,62 @@ def Customers():
 
     # Step 3: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
+    payload = []
+    payload.append(results)
 
-    # Debugging
-    """"""
-    print("\n")
-    print(f"Type:{type(results)}")
-    print(f"Length: {len(results)}")
-    print("Result:")
-    for row in results:
-        print(row)
+    # Step 4: Print query results if Debugging
+    debug = False
+    if debug:
+        print("\n")
+        print(f"Type:{type(results)}")
+        print(f"Length: {len(results)}")
+        print("Result:")
+        for row in results:
+            print(row)
 
-    # The specified file is rendered with the queried data
+    # Step 5: The specified file is rendered with the queried data
+    return render_template("customer_subpage.j2", customer_data=payload)
+
+
+# Route 3: 'Orders' subpage
+@app.route('/orders')
+def load_orders():
+    # ***NEED TO IMPLEMENT***
+    pass
+
+
+# Route 4: 'Products' subpage
+@app.route('/products')
+def load_products():
+
+    # Step 1: Write query
+    query = "SELECT * FROM Products;"
+
+    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    # Step 3: Access result (This returns a tuple of selected rows from query)
+    results = cursor.fetchall()
+
+    # Step 4: Print query results if Debugging
+    debug = False
+    if debug:
+        print("\n")
+        print(f"Type:{type(results)}")
+        print(f"Length: {len(results)}")
+        print("Result:")
+        for row in results:
+            print(row)
+
+    # Step 5: The specified file is rendered with the queried data
     return render_template("customer_subpage.j2", customer_data=results)
 
-    # The specified file is rendered with the queried data
 
 
 
 
 
+products_subpage
 
 
 # -------------------- Listener --------------------

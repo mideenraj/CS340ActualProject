@@ -78,7 +78,7 @@ def load_products():
             print(row)
 
     # Step 5: The specified file is rendered with the queried data
-    return render_template("products_subpage.j2", customer_data=results)
+    return render_template("products_subpage.j2", product_data=results)
 
 
 

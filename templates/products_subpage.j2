@@ -6,58 +6,61 @@
   <Link rel="stylesheet" href="static/css/customer_style.css" type="text/css">
  </head>
  <body>
+
     <!--Nav bar-->
     <div id="nav_bar">
       <ul id="nav_bar_list">
         <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/">Reports</a></li>
         <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/customers">Customers</a></li>
-        <li id="nav_bar_elem"><a href="orders.html">Orders</a></li>
-        <li id="nav_bar_elem"><a href="products.html">Products</a></li>
-        <li id="nav_bar_elem"><a href="departments.html">Departments</a></li>
-        <li id="nav_bar_elem"><a href="seasons.html">Seasons</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/orders">Orders</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/products">"Products"</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/departments">Departments</a></li>
+        <li id="nav_bar_elem"><a href="http://flip1.engr.oregonstate.edu:1027/seasons">Seasons</a></li>
       </ul>
     </div>
 
-    <div id="page_title">
-      <h2>Customers</h2>
+
+    <!--Page title-->
+    <div id="title">
+        <h2>Products</h2>
     </div>
 
-    <div>
-      <table>
 
-        <!-- Table Headers -->
-        <tr>
-          <th>CustomerID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Birthday</th>
-          <th>Zipcode</th>
-          <th>Modify</th>
-        </tr>
+    <!--Table (Products) -->
+    <div class="product_table">
 
-        <!-- Sample data -->
-        {% for row in customer_data %}
-        <tr>
-            <td>{{row['customerID']}}</td>
-            <td>{{row['fName']}}</td>
-            <td>{{row['lName']}}</td>
-            <td>{{row['birthDate']}}</td>
-            <td>{{row['zipCode']}}</td>
-            <td><button>Update</button><button>Delete</button></td>
-        </tr>
-        {% endfor %}
+        <table>
 
-        <!-- Input Box -->
-        <tr>
-          <td></td>
-          <td><input type="text" placeholder="First Name"></input></td>
-          <td><input type="text" placeholder="Last Name"></input></td>
-          <td><input type="text" placeholder="Birthday"></input></td>
-          <td><input type="text" placeholder="Zipcode"></input></td>
-          <td><button id="submit_button">Submit</button> </td>
-        </tr>
+            <!-- Table Header -->
+            <tr>
+                <th>productID</th>
+                <th>productName</th>
+                <th>departmentID</th>
+                <th>salePrice</th>
+                <th>Modify</th>
+            </tr>
 
-      </table>
+            <!-- Sample Data -->
+            {% for row in product_data[0] %}
+            <tr>
+                <td>1</td>
+                <td>Apple</td>
+                <td>1</td>
+                <td>2.99</td>
+                <td><button>Update</button><button>Delete</button></td>
+            </tr>
+            {% endfor %
+
+            <!-- Input Box-->
+            <tr>
+                <td><input type="text" placeholder="Product ID"></input></td>
+                <td><input type="text" placeholder="Name"></input></td>
+                <td><input type="text" placeholder="Department ID"></input></td>
+                <td> <input type="text" placeholder="Sale Price"></input></td>
+                <td><button id="submit_button">Submit</button> </td>
+            </tr>
+
+        </table>
     </div>
 
 

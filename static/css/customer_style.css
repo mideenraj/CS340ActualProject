@@ -17,6 +17,7 @@ table {
   background-color: #FFFFF0;
   height: 50px;
   overflow:  auto;
+  text-align: center;
 }
 
   #title {

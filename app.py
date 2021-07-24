@@ -33,6 +33,7 @@ def Customers():
     # Debugging
     """"""
     print("\n")
+    print(f"Type:{type(results)}")
     print(f"Length: {len(results)}")
     print("Result:")
     for row in results:

@@ -40,7 +40,7 @@ def Customers():
         print(row)
 
     # The specified file is rendered with the queried data
-    return render_template("customer_index.j2", customer_data=results)
+    return render_template("customer_subpage.j2", customer_data=results)
 
     # The specified file is rendered with the queried data
 

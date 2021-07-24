@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <title>Customers</title>
-  <Link rel="stylesheet" href="static/css/seasons_style.css" type="text/css">
+  <Link rel="stylesheet" href="static/css/orders_style.css" type="text/css">
  </head>
  <body>
 
@@ -20,31 +20,28 @@
     </div>
 
 
-    <div id="page_title">
-      <h2>Seasons</h2>
-    </div>
+    <div id="page_title"><h2>Seasons</h2></div>
 
     <div>
       <table>
 
         <!-- Table Header -->
         <tr>
+          <th>orderID</th>
+          <th>customerID</th>
           <th>seasonID</th>
-          <th>seasonName</th>
-          <th>startDate</th>
-          <th>sndDate</th>
+          <th>totalCost</th>
         </tr>
 
         <!-- Sample Data -->
-        {% for row in season_data[0] %}
+        {% for row in order_data[0] %}
         <tr>
+          <td>{{row['orderID']}}</td>
+          <td>{{row['customerID']}}</td>
           <td>{{row['seasonID']}}</td>
-          <td>{{row['seasonName']}}</td>
-          <td>{{row['startDate']}}</td>
-          <td>{{row['endDate']}}</td>
+          <td>{{row['totalCost']}}</td>
         </tr>
         {% endfor %}
-
 
       </table>
     </div>

@@ -50,8 +50,29 @@ def load_customers():
 # Route 3: 'Orders' subpage
 @app.route('/orders')
 def load_orders():
-    # ***NEED TO IMPLEMENT***
-    pass
+    # Step 1: Write query
+    query = "SELECT * FROM Orders;"
+
+    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+
+    # Step 3: Access result (This returns a tuple of selected rows from query)
+    results = cursor.fetchall()
+    payload = []
+    payload.append(results)
+
+    # Step 4: Print query results if Debugging
+    debug = False
+    if debug:
+        print("\n")
+        print(f"Type:{type(results)}")
+        print(f"Length: {len(results)}")
+        print("Result:")
+        for row in results:
+            print(row)
+
+    # Step 5: The specified file is rendered with the queried data
+    return render_template("orders_subpage.j2", order_data=payload)
 
 
 # Route 4: 'Products' subpage

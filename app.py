@@ -113,7 +113,7 @@ def load_departments():
 
 
 # Route 6: 'Seasons' subpage
-@app.route('/departments')
+@app.route('/seasons')
 def load_seasons():
 
     # Step 1: Write query

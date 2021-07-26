@@ -14,7 +14,9 @@ db_connection = db.connect_to_database()
 def root():
 
     # Step 1: Write query
+    # --Query 1: Access 'Sell log' table data
     query = "SELECT * FROM OrderProducts;"
+    # -- ** Insert queries to populate other tables here
 
     # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -179,6 +181,7 @@ def load_seasons():
 
     # Step 5: The specified file is rendered with the queried data
     return render_template("seasons_subpage.j2", season_data=payload)
+
 
 # Route 6: 'Demo UI' subpage
 @app.route('/demoUI')

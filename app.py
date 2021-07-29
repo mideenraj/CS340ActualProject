@@ -87,7 +87,7 @@ def load_orders():
     result2 = cursor2.fetchall()
     full_names = []
     for names in result2:
-        full_name = names["fname"] + " " + names['lName']
+        full_name = names["fName"] + " " + names['lName']
         print(full_name)
         full_names.append(full_name)
 

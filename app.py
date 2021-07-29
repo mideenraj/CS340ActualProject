@@ -148,9 +148,13 @@ def load_products():
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query2)
             results = cursor.fetchall()
-            print("TEST_2", results[0])          # For Debugging
-            #response = jsonify(results[0])
-            return results[0]
+
+            # Step 3: create payload with returned data
+            payload = results[0]
+            payload["salePrice"] = string(payload["salePrice"])
+            print("TEST_2", payload)
+            
+            return payload
 
 
 

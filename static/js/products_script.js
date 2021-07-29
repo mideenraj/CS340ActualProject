@@ -103,7 +103,6 @@ async function update_product (){
 
     // -------- Step 4: Assign listener to 'Make Change' button
     document.getElementById(makeChange.id).addEventListener('click', submit_edit)
-
 };
 
 

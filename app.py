@@ -142,6 +142,7 @@ def load_products():
             # Step 1: Write query
             query = f"UPDATE Products SET productName={response_obj['name']}, departmentID={response_obj['department']}, " \
                     f"salePrice={response_obj['price']}, unitType={response_obj['unitType']} WHERE productID={response_obj['ID']};"
+            print("TEST_3", query)
 
             # Step 2: Send query and access results
             cursor = db.execute_query(db_connection=db_connection, query=query)

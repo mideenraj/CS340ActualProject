@@ -55,6 +55,7 @@ async function update_product (){
     nameInputBox.setAttribute('type', 'text')
     nameInputBox.setAttribute('name', 'newName')
     nameInputBox.setAttribute('value', old_name)
+    nameInputBox.style.backgroundColor = "yellow"
     nameEditCell.appendChild(nameInputBox)
     editRow.appendChild(nameEditCell)
         // --3. DepartMent ID
@@ -63,6 +64,7 @@ async function update_product (){
     departmentInputBox.setAttribute('type', 'text')
     departmentInputBox.setAttribute('name', 'newDepartment')
     departmentInputBox.setAttribute('value', old_dID)
+    departmentInputBox.style.backgroundColor = "yellow"
     departmentEditCell.appendChild(departmentInputBox)
     editRow.appendChild(departmentEditCell)
         // --4. Sale Price
@@ -71,6 +73,7 @@ async function update_product (){
     priceInputBox.setAttribute('type', 'text')
     priceInputBox.setAttribute('name', 'newPrice')
     priceInputBox.setAttribute('value', old_price)
+    priceInputBox.style.backgroundColor = "yellow"
     priceEditCell.appendChild(priceInputBox)
     editRow.appendChild(priceEditCell)
         // --5. Unit Type
@@ -79,12 +82,14 @@ async function update_product (){
     unitInputBox.setAttribute('type', 'text')
     unitInputBox.setAttribute('name', 'newUnit')
     unitInputBox.setAttribute('value', old_unit)
+    unitInputBox.style.backgroundColor = "yellow"
     unitEditCell.appendChild(unitInputBox)
     editRow.appendChild(unitEditCell)
         // --6. Log Edit Button
     var makeChange = document.createElement('button')
     makeChange.id = "submit_edit"
     makeChange.textContent = "Make Change"
+    makeChange.style.backgroundColor = "yellow"
     editRow.appendChild(makeChange)
 
     // --Append row to Table (right underneath the row that is being edited)

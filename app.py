@@ -83,17 +83,13 @@ def load_orders():
 
     # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor1 = db.execute_query(db_connection=db_connection, query=query1)
-    print("TEST_1")
     cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-    print("TEST_2")
 
-
-    # Test
-    print("TEST:", cursor2)
 
     # Step 3: Access result (This returns a tuple of selected rows from query). Then append to payload variable
     result1 = cursor1.fetchall()
     result2 = cursor2.fetchall()
+    print("TEST:", result2)
     payload = []
     payload.append(result1)
     payload.append(result2)

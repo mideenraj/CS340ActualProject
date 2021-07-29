@@ -2,7 +2,7 @@
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("TEST_1 !!!")
+    console.log("TEST_2 !!!")
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
 
@@ -20,18 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function update_product (){
     productID = this.id
 
-    // Step 1: Select row that was selected to be edited
-    productRow = document.querySelectorAll(".product_row")
-    for (var row of productRow){
-        if (row.id == productID){
-            var rowToEdit = row
-            console.log("FOUND")
-            break
-        }
-    }
-
-    // Step 2: xxx
-    rowToEdit.style.backgroundcolor = "2px solid red"
+    // Change color and text of 'update' button that was clicked
+    this.style.backgroundcolor = "yellow"
+    this.textontent = "Change"
 
 
 

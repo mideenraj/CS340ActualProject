@@ -91,6 +91,7 @@ def load_orders():
         print(customer_info)
         full_names.append(customer_info)
     payload.append(full_names)
+    print(full_names)
 
     # Step 4: Write Query 3 (Product selection menu) and append to payload
     query3 = "SELECT productName, salePrice, unitType FROM Products;"

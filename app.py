@@ -89,7 +89,8 @@ def load_orders():
     # Step 3: Access result (This returns a tuple of selected rows from query). Then append to payload variable
     result1 = cursor1.fetchall()
     result2 = cursor2.fetchall()
-    print("TEST:", result2)
+    print("TEST_1:", result1)
+    print("TEST_2:", result2)
     payload = []
     payload.append(result1)
     payload.append(result2)

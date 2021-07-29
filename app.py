@@ -165,10 +165,21 @@ def load_products():
             query = f"DELETE FROM Products WHERE productID='{response_obj['rowToDelete']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
-            print("TEST_3", results)
+            # print("TEST_3", results)  # For debugging
 
             # Step 2: Send bogus response
             return {"Status":"Complete"}
+
+        # ---- If this is a POST request for Inserting a new product into the database
+        elif response_obj["action"] == 'insert':
+
+            # Step 1: Send query
+            query = f"INSERT INTO Products (productName, salePrice, departmentID, unitType) VALUES " \
+                    f"({response_obj['name']}, {response_obj['department']}, {response_obj['price']}, {response_obj['unit']};"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            print("TEST_4:", results)
+
 
 
 

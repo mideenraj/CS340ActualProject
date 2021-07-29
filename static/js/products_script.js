@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     //'Delete' button event listener(s)
     document.querySelectorAll(".delete_button").forEach(item => {item.addEventListener('click', delete_product)});
 
+    //'Add product' button event listener
+    document.querySelector("#add_product").addEventListener('click', add_product);
+
 });
 
 
@@ -198,8 +201,8 @@ async function delete_product(){
         headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
-    var response = await response.json()
-    console.log(response)
+    var data = await response.json()
+    console.log(data)
 
 
     // -------- Step 2: Delete row from HTML
@@ -211,7 +214,25 @@ async function delete_product(){
             break
         }       
     }
+}
 
+// Function 5: 'New Product' callback function (Adds a new product to database)
+async function add_product(){
 
-
+    // -------- Step 1: Formulate and make request
+    var url = baseURL + "products"
+    var payload = {
+        "action" : "insert",
+        "name" : document.getElementById("new_name").value,
+        "department" : document.getElementById("new_department").value,
+        "price" : document.getElementById("new_price").value,
+        "unit" : document.getElementById("new_unit").value
+    }
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = response.data
 }

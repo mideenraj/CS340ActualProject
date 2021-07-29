@@ -92,15 +92,23 @@ async function update_product (){
     unitInputBox.style.backgroundColor = "yellow"
     unitEditCell.appendChild(unitInputBox)
     editRow.appendChild(unitEditCell)
-        // --6. 'Make Change' Button
+        // --6. Make 'Change' Button
     var makeChange = document.createElement('button')
     makeChange.id = "submit_edit" + productID           // Store ID of edit row at end of row
-    makeChange.className
-    makeChange.textContent = "Make Change"
+    makeChange.textContent = "Change"
     makeChange.style.backgroundColor = "yellow"
-    makeChange.style.width = "100%"
+    makeChange.style.width = "50%"
     makeChange.style.height = "100%"
     editRow.appendChild(makeChange)
+        // --7. Make 'Cancel' Button
+    var cancelChange = document.createElement('button')
+    cancelChange.id = 'cancel_edit'
+    cancelChange.textContent = "Cancel"
+    cancelChange.style.backgroundColor = "yellow"
+    cancelChange.style.width = "50%"
+    cancelChange.style.height = "100%"
+    editRow.appendChild(cancelChange)
+
 
         // --Append row to Table (right underneath the row that is being edited)
     rowToEdit.insertAdjacentElement('afterend', editRow)

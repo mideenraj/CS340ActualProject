@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, jsonify
 import os
 import database.db_connector as db
 
@@ -151,8 +151,8 @@ def load_products():
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query2)
             results = cursor.fetchall()
-            print("TEST_4:", results)
-            return results
+            response = jsonify(results[0])
+            return response
 
 
 

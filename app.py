@@ -76,7 +76,7 @@ def load_orders():
     query1 = "SELECT * FROM Orders;"
 
     # --Query 2: Customer selection drop down menu population
-    query2 = "SELECT fName, lName FROM Customers"
+    query2 = "SELECT fName, lName FROM Customers;"
 
 
     # --Query 3: Product selection menu population

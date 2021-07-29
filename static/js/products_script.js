@@ -5,17 +5,13 @@ var baseURL = "http://flip3.engr.oregonstate.edu:1027/"
 
 
 
-
+// Master event listener (Page Load)
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("TEST_2 !!!")
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
 
 });
-
-
-
-
 
 
 
@@ -112,22 +108,29 @@ async function update_product (){
 
 
 
-
+// Function 2: Log edit callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
     // id of row being edited == last index of event button's id value
 
-    // -------- Step 1: access modified values
-    var name = document.getElementById("newName").value
-    var department = document.getElementById("newDepartment").value
-    var price = document.getElementById("newPrice").value
-    var unitType = document.getElementById("newUnit").value
-    console.log(name, department, price, unitType)
+    // -------- Step 1: access modified values and initialze layload
+    var payload = {}
+    payload.name = document.getElementById("newName").value
+    payload.department = document.getElementById("newDepartment").value
+    payload.price = document.getElementById("newPrice").value
+    payload.unitType = document.getElementById("newUnit").value
 
 
     // -------- Step 2: Formulate request and sent it
-    var url = baseURL
-    console.log(baseURL)
+    var url = baseURL + "products"
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        header: {'Content-Type' : 'aplication/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+    console.log("TEST:", data)
 
 
 

@@ -69,7 +69,6 @@
 
           <!--Add items to cart-->
         <table class="product_table">
-
             Select produce
             <tr>
                 <th>Name</td>
@@ -78,7 +77,7 @@
                 <th>Quantity</td>
             </tr>
 
-            {% for row in order_data[3] %}
+            {% for row in order_data[2] %}
             <tr>
                 <td>{{row['productName']}}</td>
                 <td>{{row['salePrice']}}</td>

@@ -87,17 +87,14 @@ def load_orders():
     full_names = []   # This will end up being a list of 1-tuples [(ID.1  Bob Roberts), ... ]
     for name in result2:
         customer_info = f"ID.{name['customerID']}" + "  " + name["fName"] + " " + name['lName']
-        print(customer_info)
         full_names.append(customer_info)
     payload.append(full_names)
-    print(full_names)
 
     # Step 4: Write Query 3 (Product selection menu) and append to payload
     query3 = "SELECT productName, salePrice, unitType FROM Products;"
     cursor3 = db.execute_query(db_connection=db_connection, query=query3)
     result3 = cursor3.fetchall()
     payload.append(result3)
-
 
     # Step 5: The specified file is rendered with the queried data
     return render_template("orders_subpage.j2", order_data=payload)

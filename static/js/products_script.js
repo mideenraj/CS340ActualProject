@@ -90,6 +90,8 @@ async function update_product (){
     makeChange.id = "submit_edit"
     makeChange.textContent = "Make Change"
     makeChange.style.backgroundColor = "yellow"
+    makeChange.style.width = "100%"
+    makeChange.style.height = "100%"
     editRow.appendChild(makeChange)
 
     // --Append row to Table (right underneath the row that is being edited)

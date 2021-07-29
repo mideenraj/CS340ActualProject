@@ -191,7 +191,7 @@ async function delete_product(){
 
     // -------- Step 1: Make request to delete row from databse
     var url = baseURL + 'products'
-    var payload = {"rowToDelete": this.id}
+    var payload = {"rowToDelete": this.id, "action":"delete"}
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

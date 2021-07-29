@@ -114,7 +114,7 @@ async function submit_edit(){
     // id of row being edited == last index of event button's id value
 
     // -------- Step 1: access modified values and initialze layload
-    var payload = {}
+    var payload = {};
     payload.name = document.getElementById("newName").value
     payload.department = document.getElementById("newDepartment").value
     payload.price = document.getElementById("newPrice").value

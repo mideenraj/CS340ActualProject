@@ -1,5 +1,6 @@
 
 
+console.log("YES");
 
 document.addEventListener('DOMContentLoaded', async () => {
     //'Update' button event listener(s)

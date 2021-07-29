@@ -91,7 +91,7 @@ def load_orders():
     payload.append(full_names)
 
     # Step 4: Write Query 3 (Product selection menu) and append to payload
-    query3 = "SELECT productName, salePrice, unitType FROM Products;"
+    query3 = "SELECT productID, productName, salePrice, unitType FROM Products;"
     cursor3 = db.execute_query(db_connection=db_connection, query=query3)
     result3 = cursor3.fetchall()
     payload.append(result3)

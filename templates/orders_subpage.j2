@@ -63,7 +63,6 @@
                 <option value="">{{row}}</option>
             {% endfor %}
 
-
           </select>
           <br><br>
 
@@ -82,7 +81,7 @@
                 <td>{{row['productName']}}</td>
                 <td>{{row['salePrice']}}</td>
                 <td>{{row['unitType']}}</td>
-                <td><input value="0"></input></td>
+                <td><input class = "a_product" id={{row['productID'}} value="0"></input></td>
             </tr>
             {% endfor %}
 

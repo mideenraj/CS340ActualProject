@@ -134,7 +134,7 @@ def load_products():
     elif request.method == 'POST':
         # ---- Access request Payload
         response_obj = request.json
-        print("TEST_1", response_obj)          # For Debugging
+        # print("TEST_1", response_obj)          # For Debugging
 
         # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
@@ -142,7 +142,6 @@ def load_products():
             # Step 1: Write query
             query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
                     f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
-            print("TEST_3", query)
 
             # Step 2: Send query and make change
             cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -151,8 +150,8 @@ def load_products():
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query2)
             results = cursor.fetchall()
-            response = jsonify(results[0])
-            return response
+            #response = jsonify(results[0])
+            return results
 
 
 

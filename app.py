@@ -139,17 +139,16 @@ def load_products():
         # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
 
-            # Step 1: Write query
+            # Step 1: Sent query and access result
             query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
                     f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
-
-            # Step 2: Send query and make change
             cursor = db.execute_query(db_connection=db_connection, query=query)
 
-            # Step 3: Access updated row from database
+            # Step 2: Access updated row from database
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query2)
             results = cursor.fetchall()
+            # print("TEST_2", results)          # For Debugging
             #response = jsonify(results[0])
             return results
 

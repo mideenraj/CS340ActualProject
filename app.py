@@ -85,9 +85,13 @@ def load_orders():
     query2 = "SELECT fName, lName FROM Customers;"
     cursor2 = db.execute_query(db_connection=db_connection, query=query2)
     result2 = cursor2.fetchall()
+    full_names = []
+    for names in result2:
+        full_name = names["fname"] + " " + names['lName']
+        print(full_name)
+        full_names.append(full_name)
 
-    print("TEST:", result2)
-    payload.append(result2)
+    payload.append(full_names)
 
 
 

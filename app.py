@@ -87,11 +87,8 @@ def load_orders():
     result2 = cursor2.fetchall()
     full_names = []   # This will end up being a list of 1-tuples [(ID.1  Bob Roberts), ... ]
     for name in result2:
-        customer_id = f"ID.{name['customerID']}"
-        full_name = name["fName"] + " " + name['lName']
-        customer_info = customer_id + "  " + full_name
+        customer_info = f"ID.{name['customerID']}" + "  " + name["fName"] + " " + name['lName']
         print(customer_info)
-
         full_names.append(customer_info)
     payload.append(full_names)
 

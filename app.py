@@ -90,6 +90,7 @@ def load_orders():
         customer_id = f"ID.{name['customerID']}"
         full_name = name["fName"] + " " + name['lName']
         customer_info = customer_id + "  " + full_name
+        print(customer_info)
 
         full_names.append(customer_info)
     payload.append(full_names)

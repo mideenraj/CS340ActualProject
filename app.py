@@ -151,9 +151,9 @@ def load_products():
 
             # Step 3: create payload with returned data
             payload = results[0]
-            payload["salePrice"] = string(payload["salePrice"])
+            payload["salePrice"] = str(payload["salePrice"])
             print("TEST_2", payload)
-            
+
             return payload
 
 

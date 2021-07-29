@@ -43,7 +43,7 @@
 
             <!-- Sample Data -->
             {% for row in product_data[0] %}
-            <tr>
+            <tr class="product_row" id={{row['productID']}}>
                 <td>{{row['productID']}}</td>
                 <td>{{row['productName']}}</td>
                 <td>{{row['departmentID']}}</td>
@@ -55,7 +55,7 @@
 
             <!-- Input Box-->
             <tr>
-                <td><input type="text" placeholder="Product ID"></input></td>
+                <td></td>
                 <td><input type="text" placeholder="Name"></input></td>
                 <td><input type="text" placeholder="Department ID"></input></td>
                 <td> <input type="text" placeholder="Sale Price"></input></td>

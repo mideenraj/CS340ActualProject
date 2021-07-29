@@ -104,8 +104,8 @@ def load_orders():
 @app.route('/products', methods=['POST', 'GET'])
 def load_products():
 
+    # For loading page
     if request.method == 'GET':
-        print("GET")
         # Step 1: Write query
         query = "SELECT * FROM Products;"
 
@@ -130,10 +130,24 @@ def load_products():
         # Step 5: The specified file is rendered with the queried data
         return render_template("products_subpage.j2", product_data=payload)
 
+    # For taking commands (Update, delete, or insert)
     elif request.method == 'POST':
-        print("POST")
-        pass
+        response_obj = requests.json
+        print(response_obj)
 
+
+
+
+
+
+
+
+
+
+
+
+
+    # ---------------------------------------------------------------------------------------------
 
 # Route 5: 'Departments' subpage
 @app.route('/departments')

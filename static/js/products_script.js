@@ -120,7 +120,7 @@ async function submit_edit(){
     // -------- Step 1: access modified values and initialze layload
     var payload = {};
     payload.action = "update"
-    if (thid.id.length == 12){          // If ID is 1 digit
+    if (this.id.length == 12){          // If ID is 1 digit
         payload.ID = this.id[this.id.length - 1]
     } else {                            // If ID is 2 digits
         payload.ID = this.id.slice(11, 13)

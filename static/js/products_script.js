@@ -24,7 +24,7 @@ async function update_product (){
     productRow = document.querySelectorAll(".product_row")
     for (var row of productRow){
         if (row.id == productID){
-            rowToEdit = row
+            var rowToEdit = row
             break
         }
     }

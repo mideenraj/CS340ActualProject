@@ -85,12 +85,12 @@ def load_orders():
     query2 = "SELECT customerID, fName, lName FROM Customers;"
     cursor2 = db.execute_query(db_connection=db_connection, query=query2)
     result2 = cursor2.fetchall()
-    full_names = []   # This will end up being a list of strings [ID.1  Bob Roberts, ... ]
+    full_names = []   # This will end up being a list of 1-tuples [(ID.1  Bob Roberts), ... ]
     for name in result2:
         customer_id = f"ID.{name['customerID']}"
         full_name = name["fName"] + " " + name['lName']
-        customer_info = customer_id + "  " + full_name
-        print(customer_info)
+        customer_info = (customer_id + "  " + full_name)
+
         full_names.append(customer_info)
     payload.append(full_names)
 

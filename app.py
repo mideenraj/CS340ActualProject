@@ -94,25 +94,12 @@ def load_orders():
         full_names.append(customer_info)
     payload.append(full_names)
 
+    # Step 4: Write Query 3 (Product selection menu) and append to payload
+    query3 = "SELECT productName, salePrice, unitType FROM Products;"
+    cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+    result3 = cursor3.fetchall()
+    payload.append(result3)
 
-
-
-    # Step 3: Write Query 3 (Product selection menu) and append to payload
-
-
-
-
-
-
-    # Step 4: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
 
     # Step 5: The specified file is rendered with the queried data
     return render_template("orders_subpage.j2", order_data=payload)

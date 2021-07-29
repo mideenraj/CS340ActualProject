@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: Update product callback function
 async function update_product (){
     productID = this.id
+    this.id = "test"
 
     // Change color and text of 'update' button that was clicked
     this.style.backgroundcolor = "yellow"

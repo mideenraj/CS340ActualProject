@@ -144,10 +144,16 @@ def load_products():
                     f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
             print("TEST_3", query)
 
-            # Step 2: Send query and access results
+            # Step 2: Send query and make change
             cursor = db.execute_query(db_connection=db_connection, query=query)
+
+            # Step 3: Access updated row from database
+            query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query2)
             results = cursor.fetchall()
-            print("TEST_2:", results)
+            print("TEST_4:", results)
+            return results
+
 
 
 

@@ -78,3 +78,7 @@ table {
 #submit_button{
     width: 100%;
 }
+
+.update_button{
+  background-color: red;
+}

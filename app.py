@@ -82,15 +82,16 @@ def load_orders():
     payload.append(result1)
 
     # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
-    query2 = "SELECT fName, lName FROM Customers;"
+    query2 = "SELECT customerID, fName, lName FROM Customers;"
     cursor2 = db.execute_query(db_connection=db_connection, query=query2)
     result2 = cursor2.fetchall()
-    full_names = []
-    for names in result2:
-        full_name = names["fName"] + " " + names['lName']
-        print(full_name)
-        full_names.append(full_name)
-
+    full_names = []   # This will end up being a list of strings [ID.1  Bob Roberts, ... ]
+    for name in result2:
+        customer_id = f"ID.{name['customerID']}"
+        full_name = name["fName"] + " " + name['lName']
+        customer_info = customer_id + "  " + full_name
+        print(customer_info)
+        full_names.append(customer_info)
     payload.append(full_names)
 
 

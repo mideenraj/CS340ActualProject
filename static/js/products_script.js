@@ -1,5 +1,10 @@
 
 
+// Global variable
+var baseURL = "http://flip3.engr.oregonstate.edu:1027/"
+
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("TEST_2 !!!")
@@ -118,7 +123,11 @@ async function submit_edit(){
     var price = document.getElementById("newPrice").value
     var unitType = document.getElementById("newUnit").value
     console.log(name, department, price, unitType)
-    
+
+
+    // -------- Step 2: Formulate request and sent it
+    var url = baseURL
+    console.log(baseURL)
 
 
 

@@ -114,8 +114,9 @@ async function update_product (){
     rowToEdit.insertAdjacentElement('afterend', editRow)
 
 
-    // -------- Step 5: Assign listener to 'Make Change' button
+    // -------- Step 5: Assign listener to 'Change' and 'Cancel' Buttons
     document.getElementById(makeChange.id).addEventListener('click', submit_edit)
+    document.getElementById(cancelChange.id).addEventListener('click', cancel_edit)
 };
 
 
@@ -173,4 +174,9 @@ async function submit_edit(){
     document.getElementById("editBlock").remove()
 
 
+}
+
+
+async function cancel_edit(){
+    document.getElementById("editBlock").remove()
 }

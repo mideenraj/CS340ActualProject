@@ -198,6 +198,8 @@ async function delete_product(){
         headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
+    var response = await response.json()
+    console.log(response)
 
 
     // -------- Step 2: Delete row from HTML

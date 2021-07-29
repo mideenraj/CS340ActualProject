@@ -164,6 +164,8 @@ def load_products():
             # Step 1: Send query to delete chosen row
             query = f"DELETE FROM Products WHERE productID='{response_obj['rowToDelete']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            print("TEST_3", results)
 
             # Step 2: Send bogus response
             return {"Status":"Complete"}

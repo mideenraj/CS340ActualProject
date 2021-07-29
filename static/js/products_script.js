@@ -25,6 +25,7 @@ async function update_product (){
     for (var row of productRow){
         if (row.id == productID){
             var rowToEdit = row
+            console.log("FOUND")
             break
         }
     }

@@ -44,6 +44,7 @@ async function update_product (){
 
     // --Create edit row
     var editRow = document.createElement('tr')              //New row
+    editRow.setAttribute('id', 'editBlock')
 
     // --Modify and append elements to edit row
         // --1. PlaceHolder (for productID column)
@@ -52,35 +53,35 @@ async function update_product (){
         // --2. Name
     var nameEditCell = document.createElement('td')      
     var nameInputBox = document.createElement('input')  
+    nameInputBox.setAttribute('id', 'newName')
     nameInputBox.setAttribute('type', 'text')
-    nameInputBox.setAttribute('name', 'newName')
     nameInputBox.setAttribute('value', old_name)
     nameInputBox.style.backgroundColor = "yellow"
     nameEditCell.appendChild(nameInputBox)
     editRow.appendChild(nameEditCell)
         // --3. DepartMent ID
     var departmentEditCell = document.createElement('td')      
-    var departmentInputBox = document.createElement('input')    
+    var departmentInputBox = document.createElement('input')  
+    departmentInputBox.setAttribute('id', 'newDepartment')  
     departmentInputBox.setAttribute('type', 'text')
-    departmentInputBox.setAttribute('name', 'newDepartment')
     departmentInputBox.setAttribute('value', old_dID)
     departmentInputBox.style.backgroundColor = "yellow"
     departmentEditCell.appendChild(departmentInputBox)
     editRow.appendChild(departmentEditCell)
         // --4. Sale Price
     var priceEditCell = document.createElement('td')     
-    var priceInputBox = document.createElement('input')    
+    var priceInputBox = document.createElement('input')  
+    priceInputBox.setAttribute('id', 'newPrice')    
     priceInputBox.setAttribute('type', 'text')
-    priceInputBox.setAttribute('name', 'newPrice')
     priceInputBox.setAttribute('value', old_price)
     priceInputBox.style.backgroundColor = "yellow"
     priceEditCell.appendChild(priceInputBox)
     editRow.appendChild(priceEditCell)
         // --5. Unit Type
-    var unitEditCell = document.createElement('td')      
-    var unitInputBox = document.createElement('input')    
+    var unitEditCell = document.createElement('td')
+    var unitInputBox = document.createElement('input')
+    unitInputBox.setAttribute('id', 'newUnit')
     unitInputBox.setAttribute('type', 'text')
-    unitInputBox.setAttribute('name', 'newUnit')
     unitInputBox.setAttribute('value', old_unit)
     unitInputBox.style.backgroundColor = "yellow"
     unitEditCell.appendChild(unitInputBox)
@@ -108,5 +109,17 @@ async function update_product (){
 
 
 async function submit_edit(){
+    // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
+    // id of row being edited == last index of event button's id value
+
+    // -------- Step 1: access modified values
+    var name = document.getElementById("newName").value
+    var department = document.getElementById("newDepartment").value
+    var price = document.getElementById("newPrice").value
+    var unitType = document.getElementById("newUnit").value
+    console.log(name, department, price, unitType)
+    
+
+
 
 }

@@ -132,8 +132,14 @@ def load_products():
 
     # For taking commands (Update, delete, or insert)
     elif request.method == 'POST':
+        # Access request Payload
         response_obj = request.json
         print(response_obj)
+
+        # If this is a POST request for Updating the database
+        if response_obj["action"] == 'update':
+            print("TRIG")
+            pass
 
 
 

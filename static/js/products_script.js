@@ -114,6 +114,8 @@ async function submit_edit(){
 
     // -------- Step 1: access modified values and initialze layload
     var payload = {};
+    payload.action = "update"
+    payload.ID = this.id[this.id.length - 1]
     payload.name = document.getElementById("newName").value
     payload.department = document.getElementById("newDepartment").value
     payload.price = document.getElementById("newPrice").value

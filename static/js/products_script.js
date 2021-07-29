@@ -18,10 +18,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ----------------- Function(s) block -----------------
 // Function 1: Update product callback function
 async function update_product (){
+
+
+    // -------- Step 1: store ID of row to edit
     productID = this.id
 
 
-    // Determine row to edit
+    // -------- Step 2: Determine row to edit
     all_rows = document.querySelectorAll(".product_row")
     for (var row of all_rows){
         if (row.id == productID){
@@ -31,7 +34,7 @@ async function update_product (){
     }
 
 
-    // ------ Step 1: create edit row ------
+    // -------- Step 3: Create and display the edit block
     // --Access current value of respective rows in selected row
     rowCells = rowToEdit.children
     var old_name = rowCells.item(1).textContent
@@ -39,14 +42,14 @@ async function update_product (){
     var old_price = rowCells.item(3).textContent
     var old_unit = rowCells.item(4).textContent
 
-    // --Create elements
+    // --Create edit row
     var editRow = document.createElement('tr')              //New row
 
-    // --Modify and append elements
-        // --PlaceHolder (for productID column)
+    // --Modify and append elements to edit row
+        // --1. PlaceHolder (for productID column)
     var placeholderCell = document.createElement('td')      //Data cell
     editRow.appendChild(placeholderCell)
-        // --Name
+        // --2. Name
     var nameEditCell = document.createElement('td')         //Data cell
     var nameInputBox = document.createElement('input')      //Text box
     nameInputBox.setAttribute('type', 'text')
@@ -54,7 +57,7 @@ async function update_product (){
     nameInputBox.setAttribute('value', old_name)
     nameEditCell.appendChild(nameInputBox)
     editRow.appendChild(nameEditCell)
-        // --DepartMent ID
+        // --3. DepartMent ID
     var departmentEditCell = document.createElement('td')         //Data cell
     var departmentInputBox = document.createElement('input')      //Text box
     departmentInputBox.setAttribute('type', 'text')
@@ -62,7 +65,7 @@ async function update_product (){
     departmentInputBox.setAttribute('value', old_dID)
     departmentEditCell.appendChild(departmentInputBox)
     editRow.appendChild(departmentEditCell)
-        // --Sale Price
+        // --4. Sale Price
     var priceEditCell = document.createElement('td')         //Data cell
     var priceInputBox = document.createElement('input')      //Text box
     priceInputBox.setAttribute('type', 'text')
@@ -70,7 +73,7 @@ async function update_product (){
     priceInputBox.setAttribute('value', old_price)
     priceEditCell.appendChild(priceInputBox)
     editRow.appendChild(priceEditCell)
-        // --Unit Type
+        // --5. Unit Type
     var unitEditCell = document.createElement('td')         //Data cell
     var unitInputBox = document.createElement('input')      //Text box
     unitInputBox.setAttribute('type', 'text')
@@ -78,11 +81,17 @@ async function update_product (){
     unitInputBox.setAttribute('value', old_unit)
     unitEditCell.appendChild(unitInputBox)
     editRow.appendChild(unitEditCell)
+        // --6. Log Edit Button
+    var makeChange = document.createElement('button')
+    makeChange.id = "submit_edit"
+    makeChange.textContent = "Make Change"
+    editRow.appendChild(makeChange)
 
     // --Append row to Table (right underneath the row that is being edited)
     rowToEdit.insertAdjacentElement('afterend', editRow)
 
 
+    // -------- Step 4: Manage the requested edit 
 
 
 
@@ -91,7 +100,7 @@ async function update_product (){
 
 
 
-
+    
 
 
 

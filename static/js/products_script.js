@@ -20,16 +20,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: 'Update' button callback function
 async function update_product (){
 
+    // -------- Step 1: Check if another row is being edited, if so, return
     if (document.getElementById('editBlock')){
         return
     }
 
 
-    // -------- Step 1: store ID of row to edit
+    // -------- Step 2: store ID of row to edit
     productID = this.id
 
 
-    // -------- Step 2: Determine row to edit
+    // -------- Step 3: Determine row to edit
     all_rows = document.querySelectorAll(".product_row")
     for (var row of all_rows){
         if (row.id == productID){
@@ -39,7 +40,7 @@ async function update_product (){
     }
 
 
-    // -------- Step 3: Create and display the edit block
+    // -------- Step 4: Create and display the edit block
     // --Access current value of respective rows in selected row
     rowCells = rowToEdit.children
     var old_name = rowCells.item(1).textContent
@@ -48,7 +49,7 @@ async function update_product (){
     var old_unit = rowCells.item(4).textContent
 
     // --Create edit row
-    var editRow = document.createElement('tr')              //New row
+    var editRow = document.createElement('tr')           //New row
     editRow.setAttribute('id', 'editBlock')
 
     // --Modify and append elements to edit row
@@ -93,7 +94,7 @@ async function update_product (){
     editRow.appendChild(unitEditCell)
         // --6. 'Make Change' Button
     var makeChange = document.createElement('button')
-    makeChange.id = "submit_edit" + productID
+    makeChange.id = "submit_edit" + productID           // Store ID of edit row at end of row
     makeChange.className
     makeChange.textContent = "Make Change"
     makeChange.style.backgroundColor = "yellow"
@@ -101,11 +102,11 @@ async function update_product (){
     makeChange.style.height = "100%"
     editRow.appendChild(makeChange)
 
-    // --Append row to Table (right underneath the row that is being edited)
+        // --Append row to Table (right underneath the row that is being edited)
     rowToEdit.insertAdjacentElement('afterend', editRow)
 
 
-    // -------- Step 4: Assign listener to 'Make Change' button
+    // -------- Step 5: Assign listener to 'Make Change' button
     document.getElementById(makeChange.id).addEventListener('click', submit_edit)
 };
 
@@ -119,7 +120,12 @@ async function submit_edit(){
     // -------- Step 1: access modified values and initialze layload
     var payload = {};
     payload.action = "update"
-    payload.ID = this.id[this.id.length - 1]
+    if (thid.id.length == 12){          // If ID is 1 digit
+        payload.ID = this.id[this.id.length - 1]
+    } else {                            // If ID is 2 digits
+        payload.ID = this.id.slice(11, 13)
+    }
+                
     payload.name = document.getElementById("newName").value
     payload.department = document.getElementById("newDepartment").value
     payload.price = document.getElementById("newPrice").value

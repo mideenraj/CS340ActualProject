@@ -132,7 +132,7 @@ def load_products():
 
     # For taking commands (Update, delete, or insert)
     elif request.method == 'POST':
-        response_obj = requests.json
+        response_obj = request.json
         print(response_obj)
 
 

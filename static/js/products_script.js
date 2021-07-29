@@ -17,6 +17,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 // ----------------- Function(s) block -----------------
 // Function 1: Update product callback function
 async function update_product (){
-    console.log("THIS IS A TEST!")
-    console.log(this.id)
+    
 };

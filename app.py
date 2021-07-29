@@ -9,7 +9,7 @@ db_connection = db.connect_to_database()
 
 # ------------------- Routes --------------------
 
-# Route 1: Home page (aka 'Reports')
+# Route 1: Homepage (aka 'Reports')
 @app.route('/')
 def root():
 
@@ -38,6 +38,7 @@ def root():
 
     # Step x: Render HomePage
     return render_template("index.j2", reports_data=payload)
+
 
 # Route 2: 'Customers' subpage
 @app.route('/customers')
@@ -154,8 +155,20 @@ def load_products():
             payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
             # print("!!! Payload response: ", payload)          # For Debugging
 
-            # Step 4: Return respnose
+            # Step 4: Return response
             return payload
+
+        # ---- If this is a POST request for Deleting a row from the database
+        elif response_obj["action"] == 'delete':
+
+            # Step 1: Send query to delete chosen row
+            query = f"DELETE FROM Products WHERE productID='{response_obj['rowToDelete']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+
+            # Step 2: Send bogus response
+            return {"Status":"Complete"}
+
+
 
 
 

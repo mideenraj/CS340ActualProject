@@ -8,15 +8,19 @@ var baseURL = "http://flip3.engr.oregonstate.edu:1027/"
 // Master event listener (Page Load)
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("TEST_2 !!!")
+
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
+
+    //'Delete' button event listener(s)
+    document.querySelectorAll(".delete_button").forEach(item => {item.addEventListener('click', delete_product)});
 
 });
 
 
 
 
-// ----------------- Function(s) block -----------------
+// ---------------------------------- Function(s) block ----------------------------------
 // Function 1: 'Update' button callback function
 async function update_product (){
 
@@ -121,7 +125,7 @@ async function update_product (){
 
 
 
-// Function 2: Log edit callback function
+// Function 2: 'Change' button's callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
     // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
@@ -176,7 +180,36 @@ async function submit_edit(){
 
 }
 
-
+// Function 3:'Cancel' button's callback function (Cancels an edit)
 async function cancel_edit(){
     document.getElementById("editBlock").remove()
+}
+
+
+// Function 4: 'Delete' button's callback function (deletes a row)
+async function delete_product(){
+
+    // -------- Step 1: Make request to delete row from databse
+    var url = baseURL + 'products'
+    var payload = {"rowToDelete": this.id}
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+
+
+    // -------- Step 2: Delete row from HTML
+    all_rows = document.querySelectorAll(".product_row")
+    for (var row of all_rows){
+        if (row.id == this.id){
+            rowToDelete = row
+            rowToDelete.remove()
+            break
+        }       
+    }
+
+
+
 }

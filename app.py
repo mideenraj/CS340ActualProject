@@ -71,6 +71,7 @@ def load_customers():
 # Route 3: 'Orders' subpage
 @app.route('/orders')
 def load_orders():
+    print("TESTTTTT")
     # Step 1: Write queries
     # --Query 1: order table population
     query1 = "SELECT * FROM Orders;"

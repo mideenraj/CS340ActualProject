@@ -140,8 +140,8 @@ def load_products():
         if response_obj["action"] == 'update':
 
             # Step 1: Write query
-            query = f"UPDATE Products SET productName={response_obj['name']}, departmentID={response_obj['department']}, " \
-                    f"salePrice={response_obj['price']}, unitType={response_obj['unitType']} WHERE productID={response_obj['ID']};"
+            query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
+                    f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
             print("TEST_3", query)
 
             # Step 2: Send query and access results

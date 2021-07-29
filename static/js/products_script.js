@@ -51,7 +51,7 @@ async function update_product (){
     var nameInputBox = document.createElement('input')      //Text box
     nameInputBox.setAttribute('type', 'text')
     nameInputBox.setAttribute('name', 'newName')
-    nameInputBox.setAttribute('textContent', old_name)
+    nameInputBox.setAttribute('value', old_name)
     nameEditCell.appendChild(nameInputBox)
     editRow.appendChild(nameEditCell)
         // --DepartMent ID
@@ -59,7 +59,7 @@ async function update_product (){
     var departmentInputBox = document.createElement('input')      //Text box
     departmentInputBox.setAttribute('type', 'text')
     departmentInputBox.setAttribute('name', 'newDepartment')
-    departmentInputBox.setAttribute('textContent', old_dID)
+    departmentInputBox.setAttribute('value', old_dID)
     departmentEditCell.appendChild(departmentInputBox)
     editRow.appendChild(departmentEditCell)
         // --Sale Price
@@ -67,7 +67,7 @@ async function update_product (){
     var priceInputBox = document.createElement('input')      //Text box
     priceInputBox.setAttribute('type', 'text')
     priceInputBox.setAttribute('name', 'newPrice')
-    priceInputBox.setAttribute('textContent', old_price)
+    priceInputBox.setAttribute('value', old_price)
     priceEditCell.appendChild(priceInputBox)
     editRow.appendChild(priceEditCell)
         // --Unit Type
@@ -75,7 +75,7 @@ async function update_product (){
     var unitInputBox = document.createElement('input')      //Text box
     unitInputBox.setAttribute('type', 'text')
     unitInputBox.setAttribute('name', 'newUnit')
-    unitInputBox.setAttribute('textContent', old_unit)
+    unitInputBox.setAttribute('value', old_unit)
     unitEditCell.appendChild(unitInputBox)
     editRow.appendChild(unitEditCell)
 

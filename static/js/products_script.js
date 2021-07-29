@@ -17,8 +17,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // ----------------- Function(s) block -----------------
-// Function 1: Update product callback function
+// Function 1: 'Update' button callback function
 async function update_product (){
+
+    if (document.getElementById('editBlock')){
+        return
+    }
 
 
     // -------- Step 1: store ID of row to edit

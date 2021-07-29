@@ -110,7 +110,7 @@ async function update_product (){
 // Function 2: Log edit callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
-    // id of row being edited == last index of event button's id value
+    // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
 
     // -------- Step 1: access modified values and initialze layload
     var payload = {};
@@ -131,8 +131,28 @@ async function submit_edit(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log("TEST:", data)
+    // console.log("!!! Server response:", data)       // For debugging
 
+    // -------- Step 3: Update the displayed data
+        // -- First, access the row to update
+    all_rows = document.querySelectorAll(".product_row")
+    for (var row of all_rows){
+        if (row.id == productID){
+            rowToEdit = row
+            break
+        }       
+    }
+    // -- Second, edit the row
+    rowCells = rowToEdit.children
+    rowCells.item(0).textContent = data['productID']
+    rowCells.item(1).textContent = data['productName']
+    rowCells.item(2).textContent = data['departmentID']
+    rowCells.item(3).textContent = data['salePrice']
+    rowCells.item(4).textContent = data['unitType']
+
+
+    // -------- Step 4: Delete the Edit row
+    document.getElementById("editBlock").remove()
 
 
 }

@@ -134,7 +134,7 @@ def load_products():
     elif request.method == 'POST':
         # ---- Access request Payload
         response_obj = request.json
-        # print("TEST_1", response_obj)          # For Debugging
+        # print("!!! Data from Post Request: ", response_obj)          # For Debugging
 
         # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
@@ -151,9 +151,10 @@ def load_products():
 
             # Step 3: create payload with returned data
             payload = results[0]
-            payload["salePrice"] = str(payload["salePrice"])
-            print("TEST_2", payload)
+            payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
+            # print("!!! Payload response: ", payload)          # For Debugging
 
+            # Step 4: Return respnose
             return payload
 
 

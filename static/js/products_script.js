@@ -29,7 +29,7 @@ async function update_product (){
     }
 
     // Step 2: xxx
-    row.style.backgroundcolor = 'yellow'
+    rowToEdit.style.backgroundcolor = 'yellow'
 
 
 

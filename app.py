@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, request
 import os
 import database.db_connector as db
 
@@ -104,7 +104,7 @@ def load_orders():
 @app.route('/products', methods=['POST', 'GET'])
 def load_products():
 
-    if requests.method == 'GET':
+    if request.method == 'GET':
         print("GET")
         # Step 1: Write query
         query = "SELECT * FROM Products;"
@@ -116,7 +116,7 @@ def load_products():
         results = cursor.fetchall()
         payload = []
         payload.append(results)
-        
+
         # Step 4: Print query results if Debugging
         debug = False
         if debug:
@@ -130,7 +130,7 @@ def load_products():
         # Step 5: The specified file is rendered with the queried data
         return render_template("products_subpage.j2", product_data=payload)
 
-    elif requests.method == 'POST':
+    elif request.method == 'POST':
         print("POST")
         pass
 

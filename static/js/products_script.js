@@ -125,7 +125,7 @@ async function submit_edit(){
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),
-        header: {'Content-Type' : 'application/json'}
+        headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()

@@ -132,14 +132,24 @@ def load_products():
 
     # For taking commands (Update, delete, or insert)
     elif request.method == 'POST':
-        # Access request Payload
+        # ---- Access request Payload
         response_obj = request.json
-        print(response_obj)
+        # print(response_obj)          # For Debugging
 
-        # If this is a POST request for Updating the database
+        # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
-            print("TRIG")
-            pass
+
+            # Step 1: Write query
+            query = f"UPDATE Products SET productName={response_obj['name']} departmentID={response_obj['department']} " \
+                    f"salePrice={response_obj['price']} unitType={response_obj['unitType']} WHERE productID={response_obj['ID']}"
+
+            # Step 2: Send query and access results
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            print("NEWSTUFF:", results)
+
+
+
 
 
 

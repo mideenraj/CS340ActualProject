@@ -71,16 +71,29 @@ def load_customers():
 # Route 3: 'Orders' subpage
 @app.route('/orders')
 def load_orders():
-    # Step 1: Write query
-    query = "SELECT * FROM Orders;"
+    # Step 1: Write queries
+    # --Query 1: order table population
+    query1 = "SELECT * FROM Orders;"
+
+    # --Query 2: Customer selection drop down menu population
+    query2 = "SELECT fName, lName FROM Customers"
+
+
+    # --Query 3: Product selection menu population
 
     # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
+    cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+    cursor2 = db.execute_query(db_connection=db_connection, query=query2)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
+    # Test
+    print("TEST:", cursor2)
+
+    # Step 3: Access result (This returns a tuple of selected rows from query). Then append to payload variable
+    result1 = cursor1.fetchall()
+    result2 = cursor2.fetchall()
     payload = []
-    payload.append(results)
+    payload.append(result1)
+    payload.append(result2)
 
     # Step 4: Print query results if Debugging
     debug = False

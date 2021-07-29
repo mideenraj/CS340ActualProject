@@ -49,6 +49,57 @@
       </table>
     </div>
 
+    <div class="demo_div">
+
+        <!--Sub page title-->
+        <h2>Demo UI - Make an order</h2>
+
+        <!---------- Form ---------->
+        <form action="....">
+          <!--Specify customer-->
+          <label for="customer">Select Customer:</label>
+          <select name="customer" id="customer">
+            {% for row in product_data[1] %}
+                <option value="">row</option>
+            {% endfor %}
+
+            <option value="">Bob Roberts</option>
+            <option value="">Rob Boberts</option>
+            <option value="">Erma Jaloudi</option>
+            <option value="">Sallie Mae</option>
+            <option value="">Xiaopang Xi</option>
+          </select>
+          <br><br>
+
+          <!--Add items to cart-->
+        <table class="product_table">
+
+            Select produce
+            <tr>
+                <th>Name</td>
+                <th>Price ($)</td>
+                <th>Unit</td>
+                <th>Quantity</td>
+            </tr>
+
+            {% for row in product_data[3] %}
+            <tr>
+                <td>{{row['productName']}}</td>
+                <td>{{row['salePrice']}}</td>
+                <td>{{row['unitType']}}</td>
+                <td><input value="0"></input></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+          <br><br>
+          <input id="place_order_button" type="submit" value="Place Order">
+        </form>
+
+    </div>
+
 
  </body>
 </html>

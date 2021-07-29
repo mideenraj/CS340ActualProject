@@ -2,7 +2,7 @@
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("TEST")
+    console.log("TEST !!!")
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
 

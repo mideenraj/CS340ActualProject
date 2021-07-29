@@ -71,29 +71,33 @@ def load_customers():
 # Route 3: 'Orders' subpage
 @app.route('/orders')
 def load_orders():
-    # Step 1: Write queries
-    # --Query 1: order table population
-    query1 = "SELECT * FROM Orders;"
-
-    # --Query 2: Customer selection drop down menu population
-    query2 = "SELECT fName, lName FROM Customers;"
-
-
-    # --Query 3: Product selection menu population
-
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor1 = db.execute_query(db_connection=db_connection, query=query1)
-    cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-
-
-    # Step 3: Access result (This returns a tuple of selected rows from query). Then append to payload variable
-    result1 = cursor1.fetchall()
-    result2 = cursor2.fetchall()
-    print("TEST_1:", result1)
-    print("TEST_2:", result2)
+    # Step 1: Initialize payload
     payload = []
+
+    # Step 2: Write Query 1 (order table population) and append to payload
+    query1 = "SELECT * FROM Orders;"
+    cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+    result1 = cursor1.fetchall()
     payload.append(result1)
+    payload.append(result1)
+
+    # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
+    query2 = "SELECT fName, lName FROM Customers;"
+    cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+    result2 = cursor2.fetchall()
+
+    print("TEST:", result2)
     payload.append(result2)
+
+
+
+
+    # Step 3: Write Query 3 (Product selection menu) and append to payload
+
+
+
+
+
 
     # Step 4: Print query results if Debugging
     debug = False

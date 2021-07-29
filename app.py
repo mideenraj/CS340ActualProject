@@ -89,7 +89,7 @@ def load_orders():
     for name in result2:
         customer_id = f"ID.{name['customerID']}"
         full_name = name["fName"] + " " + name['lName']
-        customer_info = (customer_id + "  " + full_name)
+        customer_info = customer_id + "  " + full_name
 
         full_names.append(customer_info)
     payload.append(full_names)

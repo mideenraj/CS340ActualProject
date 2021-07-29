@@ -2,7 +2,7 @@
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("TEST !!!")
+    console.log("TEST_1 !!!")
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
 
@@ -31,7 +31,7 @@ async function update_product (){
     }
 
     // Step 2: xxx
-    rowToEdit.style.backgroundcolor = 'yellow'
+    rowToEdit.style.backgroundcolor = "2px solid red"
 
 
 

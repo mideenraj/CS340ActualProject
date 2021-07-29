@@ -134,7 +134,7 @@ def load_products():
     elif request.method == 'POST':
         # ---- Access request Payload
         response_obj = request.json
-        # print(response_obj)          # For Debugging
+        print("TEST_1", response_obj)          # For Debugging
 
         # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
@@ -146,7 +146,7 @@ def load_products():
             # Step 2: Send query and access results
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
-            print("NEWSTUFF:", results)
+            print("TEST_2:", results)
 
 
 

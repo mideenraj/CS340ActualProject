@@ -79,7 +79,6 @@ def load_orders():
     cursor1 = db.execute_query(db_connection=db_connection, query=query1)
     result1 = cursor1.fetchall()
     payload.append(result1)
-    payload.append(result1)
 
     # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
     query2 = "SELECT customerID, fName, lName FROM Customers;"

@@ -168,7 +168,7 @@ def load_products():
             # print("TEST_3", results)  # For debugging
 
             # Step 2: Send bogus response
-            return {"Status":"Complete"}
+            return {"Status": "Complete"}
 
         # ---- If this is a POST request for Inserting a new product into the database
         elif response_obj["action"] == 'insert':
@@ -178,7 +178,9 @@ def load_products():
                     f"('{response_obj['name']}', '{response_obj['price']}', '{response_obj['department']}', '{response_obj['unit']}');"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
-            print("TEST_4:", results)
+
+            # Step 2: Send bogus response
+            return {"Status": "Complete"}
 
 
 

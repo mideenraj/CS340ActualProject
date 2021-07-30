@@ -86,3 +86,7 @@ button{
 #search_button{
   width: 100%;
 }
+
+#searchResultTable{
+  margin-top: 20px;
+}

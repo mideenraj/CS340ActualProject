@@ -123,7 +123,8 @@ def load_orders():
         query1 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
         result1 = cursor1.fetchall()
-        print("TEST:", result1)
+        seasonID = result1[0]['seasonID']
+        print("TEST:", seasonID)
 
 
         # Step 2: Execute the order

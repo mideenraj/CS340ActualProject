@@ -270,7 +270,7 @@ async function add_product(){
 
         // --Create Modify cell (Buttons)
     var button_cell = document.createElement('td')
-    button_cell.style.height = "100%"
+    button_cell.setAttribute('width', "100%")
 
     var update_butt = document.createElement('button')
     update_butt.setAttribute('class', 'update_button')

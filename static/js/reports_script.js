@@ -18,6 +18,9 @@ var seasons_subpage = baseURL + "seasons"
 // Master event listener (On page Load)
 document.addEventListener('DOMContentLoaded', async () => {
 
+    // 'Cancel' button event listener
+    document.querySelectorAll(".cancelItem").forEach(item => {item.addEventListener('click', cancelOrder)});
+
     
 
 });
@@ -26,4 +29,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // ----------------------------------------------- Function(s) block -----------------------------------------------
-// Function 1: xxx
+// Function 1: cancel an order
+async function cancelOrder(){
+
+    // ---Step 1: Access the OrderID and productID of cancelling item
+    var parentNode = this.parentNode
+    console.log("Test_3:", parentNode)
+
+
+}

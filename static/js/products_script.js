@@ -1,7 +1,7 @@
 
 
 // Global variable
-var baseURL = "http://flip3.engr.oregonstate.edu:1027/"
+var baseURL = "http://flip1.engr.oregonstate.edu:1027/"
 
 
 

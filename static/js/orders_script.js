@@ -57,9 +57,10 @@ async function place_order() {
 
     var response = await fetch(url, fetchdata)
     var data = await response.json()
+    console.log("TEST_2:", data)
 
     // ---Step 4: Use the returned data to display new row in table
-    var rowData = data["lastOrder"][0]
+    var rowData = data["lastOrder"]
     console.log("TEST_1:", rowData)
         // New row
     var newRow = document.createElement('tr')

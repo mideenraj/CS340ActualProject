@@ -1,6 +1,7 @@
 from flask import Flask, render_template, json, request, jsonify
 import os
 import database.db_connector as db
+from GLOBAL_VARIABLES import *
 
 # -------------------- Initialization --------------------
 app = Flask(__name__)
@@ -8,7 +9,6 @@ db_connection = db.connect_to_database()
 
 
 # ------------------- Routes --------------------
-
 # Route 1: Homepage (aka 'Reports')
 @app.route('/')
 def root():
@@ -21,12 +21,15 @@ def root():
     # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
+    # Step 3: append all subpage URLs to payload
     payload = []
+    payload.append(subpages)
+
+    # Step 4: Access result (This returns a tuple of selected rows from query)
+    results = cursor.fetchall()
     payload.append(results)
 
-    # Step 4: Print query results if Debugging
+    # Step 5: Print query results if Debugging
     debug = False
     if debug:
         print("\n")
@@ -36,7 +39,7 @@ def root():
         for row in results:
             print(row)
 
-    # Step x: Render HomePage
+    # Step 6: Render HomePage
     return render_template("index.j2", reports_data=payload)
 
 
@@ -237,6 +240,7 @@ def load_products():
 
     # ---------------------------------------------------------------------------------------------
 
+
 # Route 5: 'Departments' subpage
 @app.route('/departments')
 def load_departments():
@@ -327,5 +331,5 @@ def load_demo():
 
 # -------------------- Listener --------------------
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 1027))
+    port = int(os.environ.get('PORT', port_num))
     app.run(port=port, debug=True)

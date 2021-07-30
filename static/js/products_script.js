@@ -275,13 +275,13 @@ async function add_product(){
     update_butt.setAttribute('class', 'update_button')
     update_butt.setAttribute('id', data['productID'])
     button_cell.append(update_butt)
-    //update_butt.style.width = "50%"
+    update_butt.style.width = "50%"
     //update_butt.style.height = "100%"
 
     var delete_butt = document.createElement('button')
     delete_butt.setAttribute('class', 'delete_button')
     delete_butt.setAttribute('id', data['productID'])
-    //delete_butt.style.width = "50%"
+    delete_butt.style.width = "50%"
     //delete_butt.style.height = "100%"
     button_cell.append(delete_butt)
 

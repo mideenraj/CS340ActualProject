@@ -163,16 +163,15 @@ def load_orders():
             query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
             db.execute_query(db_connection=db_connection, query=query5)
 
-
         # Step 6: Access the latest row
         query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
         cursor5 = db.execute_query(db_connection=db_connection, query=query5)
         last_insert = cursor5.fetchall()
         last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
-        print("TEST_1:", last_insert)
 
-        # Step 7: Return
-        return {"lastOrder": last_insert[0]}
+        # Step 7: Return the row
+        print("TEST_1:", last_insert)
+        return {last_insert[0]}
 
 
 

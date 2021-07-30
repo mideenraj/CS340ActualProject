@@ -32,7 +32,6 @@ def root():
         query1 = "SELECT productID FROM Products;"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
         productIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-        print("TEST_1:", productIDs)
 
         # --SubStep 2: Determine current season by cross-referencing date-of-purchase with seasonal dates
         date_of_purchase = str(datetime.datetime.today()).split()[0]
@@ -47,6 +46,7 @@ def root():
         cursor3 = db.execute_query(db_connection=db_connection, query=query3)
         result3 = cursor3.fetchall()
         seasonalGross = float(result3[0]['totalCost'])
+        print("TEST_1:", seasonalGross)
 
         # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
         query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \

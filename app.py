@@ -132,7 +132,7 @@ def load_orders():
             total += int(prod[0]) * int(prod[1])
 
         # Step 3: Execute the order (aka insert into 'Orders')
-        query2 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}';)"
+        query2 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
         cursor2 = db.execute_query(db_connection=db_connection, query=query2)
         result2 = cursor2.fetchall()
         print("TEST_4:", result2)

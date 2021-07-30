@@ -382,7 +382,7 @@ async function search_product(){
     }
 
         // Second, populate table
-    for (var row of data){
+    for (var row of data[0]){
         var new_row = document.createElement('tr')
         var id_cell = document.createElement('td')
         id_cell.textContent = row['productID']

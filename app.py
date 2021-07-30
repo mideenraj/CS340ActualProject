@@ -57,7 +57,7 @@ def root():
         for prod in result4:
             prod['Quantity'] = float(prod['Quantity'])
             prod['Total'] = float(prod['Total'])
-            prod['Percent'] = (prod['Total']/seasonalGross)*100
+            prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
             print(prod)
 
 

@@ -20,9 +20,4 @@ var seasons_subpage = baseUrl + "seasons"
 
 
 // ---Step 3: export variables
-export const baseURL = baseURL
-export const customers_subpage = customers_subpage
-export const orders_subpage = orders_subpage
-export const products_subpage = products_subpage
-export const departments_subpage = departments_subpage
-export const seasons_subpage = seasons_subpage
+module.exports = baseURL, customers_subpage, orders_subpage, products_subpage, products_subpage, departments_subpage, seasons_subpage;

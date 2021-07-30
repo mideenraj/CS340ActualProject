@@ -1,7 +1,7 @@
 
 
 // Import global variable(s)       -(Specify which variables you want to import)
-import {products_subpage} from './GLOBAL_VARIABLES.js'
+var gloVars = require('./GLOBAL_VARIABLES.js')
 
 
 
@@ -150,7 +150,7 @@ async function submit_edit(){
 
 
     // -------- Step 2: Formulate request and sent it
-    var url = products_subpage
+    var url = gloVars[products_subpage]
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -193,7 +193,7 @@ async function cancel_edit(){
 async function delete_product(){
 
     // -------- Step 1: Make request to delete row from databse
-    var url = products_subpage
+    var url = gloVars[products_subpage]
     var payload = {"rowToDelete": this.id, "action":"delete"}
     var fetchdata = {
         method: 'POST',
@@ -221,7 +221,7 @@ async function add_product(){
     console.log("TRIGERED")
 
     // -------- Step 1: Formulate and make request
-    var url = products_subpage
+    var url = gloVars[products_subpage]
     var payload = {
         "action" : "insert",
         "name" : document.getElementById("new_name").value,
@@ -297,17 +297,9 @@ async function add_product(){
     document.getElementById("new_price").value = ""
     document.getElementById("new_unit").value = ""
 
-
-
-
-
-
-
-
-
-
-
 }
+
+
 
 // Function 6: 'Search' buttons' callback function
 async function search_product(){
@@ -319,7 +311,7 @@ async function search_product(){
 
 
     // ----- Step 2: Sent reqeust based on conditionals
-    var url = products_subpage
+    var url = gloVars[products_subpage]
 
     if (idSearch.value != ""){
         var payload = {

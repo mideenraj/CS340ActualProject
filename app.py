@@ -189,7 +189,7 @@ def load_products():
             return payload
 
         # ---- If this is a POST request for Searching a product
-        elif response_obj["action"] == 'insert':
+        elif response_obj["action"] == 'search':
 
             # Step 1: Write query
             if response_obj["searchBy"] == "id":
@@ -205,8 +205,6 @@ def load_products():
             # Step 3: Access result (This returns a tuple of selected rows from query)
             results = cursor.fetchall()
             print("TEST_3:", results)
-            payload = []
-            payload.append(results)
 
             # Step 4:
             return

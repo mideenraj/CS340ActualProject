@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: cancel an order
 async function cancelOrder(){
 
-    // ---Step 1: Access the OrderID and productID of cancelling item
+    // ---Step 1: Access the details of cancelling item
     var parentRow = this.parentNode.parentNode
     var kidCells = parentRow.children
     var p_ID = kidCells.item(0).textContent
@@ -40,7 +40,26 @@ async function cancelOrder(){
     var season = kidCells.item(2).textContent
     var quantity = kidCells.item(3).textContent
     var itemTotal = kidCells.item(4).textContent
-    console.log(kidCells, p_ID, o_ID, season, quantity, itemTotal)
+    //console.log(p_ID, o_ID, season, quantity, itemTotal)      // For debugging
+
+    
+    // ---Step 2: Send request to remove item from OrderProducts
+    var payload = {
+        "productID": p_ID,
+        "orderID": o_ID,
+        "seasonID": season,
+        "quantitySold": quantity,
+        "productTotal": itemTotal
+    }
+    var url = baseURL
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
 
     
 

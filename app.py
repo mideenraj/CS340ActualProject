@@ -11,37 +11,72 @@ db_connection = db.connect_to_database()
 
 # ------------------- Routes --------------------
 # Route 1: Homepage (aka 'Reports')
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def root():
 
-    # Step 1: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
+    # If initial page load...
+    if request.method == 'GET':
+        # Step 1: append all subpage URLs to payload
+        payload = []
+        payload.append(subpages)
 
-    # Step 2: Write query
-    # --Query 1: Access 'Sell log' table data
-    query = "SELECT * FROM OrderProducts;"
-    # -- ** Insert queries to populate other tables here
+        # Step 2: Write query
+        # --Query 1: Access 'Sell log' table data
+        query = "SELECT * FROM OrderProducts;"
+        # -- ** Insert queries to populate other tables here
 
-    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
+        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 4: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
-    payload.append(results)
+        # Step 4: Access result (This returns a tuple of selected rows from query)
+        results = cursor.fetchall()
+        payload.append(results)
 
-    # Step 5: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
+        # Step 5: Print query results if Debugging
+        debug = False
+        if debug:
+            print("\n")
+            print(f"Type:{type(results)}")
+            print(f"Length: {len(results)}")
+            print("Result:")
+            for row in results:
+                print(row)
 
-    # Step 6: Render HomePage
-    return render_template("index.j2", reports_data=payload)
+        # Step 6: Render HomePage
+        return render_template("index.j2", reports_data=payload)
+
+    # If request for an order cancellation...
+    elif request.method == 'POST':
+        response_obj = request.json
+
+        # ---Step 1: delete order log from OrderProducts
+        query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
+                 f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
+        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+
+        # ---Step 2: subtract the amount from 'Orders' entry
+        # First, access the total order price
+        query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
+        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        price = cursor2.fetchall()[0]
+        print("TEST_1:", price)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Route 2: 'Customers' subpage

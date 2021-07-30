@@ -168,7 +168,7 @@ def load_orders():
         query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
         cursor5 = db.execute_query(db_connection=db_connection, query=query5)
         last_insert = cursor5.fetchall()
-        #last_insert[0]['totalCost'] = float(last_insert['totalCost'])
+        #last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
         print("TEST_1:", last_insert)
 
         # Step 7: Return

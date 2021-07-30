@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Event listener for 'Place Order' Button
     document.querySelector("#place_order_button").addEventListener('click', place_order)
-
 });
-
 
 
 
@@ -92,17 +90,5 @@ async function place_order() {
     for (var pro of allProducts){
         pro.value = 0
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

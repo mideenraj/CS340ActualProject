@@ -273,11 +273,15 @@ async function add_product(){
     var delete_butt = document.createElement('button')
     delete_butt.setAttribute('class', 'delete_button')
     delete_butt.setAttribute('id', data['productID'])
+    delete_butt.style.width = "50%"
+    delete_butt.style.height = "100%"
     button_cell.append(delete_butt)
     var update_butt = document.createElement('button')
     update_butt.setAttribute('class', 'update_button')
     update_butt.setAttribute('id', data['productID'])
     button_cell.append(update_butt)
+    update_butt.style.width = "50%"
+    update_butt.style.height = "100%"
     new_row.append(button_cell)
         // --Append row to table
     input_row.insertAdjacentElement('beforebegin', new_row)
@@ -288,17 +292,8 @@ async function add_product(){
     update_butt.addEventListener('click', update_product)
 
 
-    /*
-    var updateButtons = document.querySelectorAll('.update_button')
-    for (var u_butt of updateButtons){
-        if (u_butt.id == data['productID']){
-            u_butt.addEventListener('click', )
-        }
-    }
-
         // --Delete button
-    var deleteButtons = document.querySelectorAll('.update_button')
-    */
+    delete_butt.addEventListener('click', delete_product)
 
 
 

@@ -59,7 +59,7 @@ async function place_order() {
     var data = await response.json()
 
     // ---Step 4: Use the returned data to display new row in table
-    var rowData = data["lastOrder"]
+    var rowData = data["lastOrder"][0]
     console.log("TEST_1:", rowData)
         // New row
     var newRow = document.createElement('tr')

@@ -188,6 +188,29 @@ def load_products():
             payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
             return payload
 
+        # ---- If this is a POST request for Searching a product
+        elif response_obj["action"] == 'insert':
+
+            # Step 1: Write query
+            if response_obj["searchBy"] == "id":
+                query = f"SELECT * FROM Products WHERE productID='{response_obj['id']}';"
+            elif response_obj["searchBy"] == "name":
+                query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}';"
+            elif response_obj["searchBy"] == "price":
+                query = f"SELECT * FROM Products WHERE salePrice<='{response_obj['price']}';"
+
+            # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+
+            # Step 3: Access result (This returns a tuple of selected rows from query)
+            results = cursor.fetchall()
+            print("TEST_3:", results)
+            payload = []
+            payload.append(results)
+
+            # Step 4:
+            return
+
 
 
 

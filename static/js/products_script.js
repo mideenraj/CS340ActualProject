@@ -316,4 +316,59 @@ async function add_product(){
 // Function 6: 'Search' buttons' callback function
 async function search_product(){
 
+    // ----- Step 1: Access each input box
+    var idSearch = document.getElementById('searchByID')
+    var nameSearch = document.getElementById('searchByName')
+    var priceSearch = document.getElementById('searchByPrice')
+
+    // ----- Step 2: Sent reqeust based on conditionals
+    var url = baseURL + "products"
+
+    if (idSearch.value != ""){
+        var payload = {
+            "action" : "search",
+            "searchBy" : "id",
+            "id" : idSearch.value
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+    } elif (nameSearch.value != ""){
+        var payload = {
+            "action" : "search",
+            "searchBy" : "name",
+            "name" : nameSearch.value
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+
+    } elif (priceSearch.value != ""){
+        var payload = {
+            "action" : "search",
+            "searchBy" : "price",
+            "name" : priceSearch.value
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+
+    }
+
+    // ----- Step 3: Access search results from server
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+    console.log("TEST_1:", data)        // Debugging
+
+
+    // ----- Step 4: Display results
+
+
+
 }

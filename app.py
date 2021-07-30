@@ -55,6 +55,9 @@ def root():
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         result4 = cursor4.fetchall()
         for prod in result4:
+            prod['Quantity'] = float(prod['Quantity'])
+            prod['Total'] = float(prod['Total'])
+            prod['Percent'] = prod['Total']/seasonalGross
             print(prod)
 
 

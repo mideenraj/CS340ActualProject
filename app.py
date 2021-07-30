@@ -43,16 +43,20 @@ def root():
 
         # --SubStep 2: get cumulative revenue for current season
         date_of_purchase = str(datetime.datetime.today()).split()[0]
-        query2 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
-        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-        result2 = cursor2.fetchall()
-        print("TEST_4:", result2)
-        seasonID = float(result2[0]['totalCost'])
-        print("TEST_5:", seasonID)
+        query3 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
+        cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+        result3 = cursor3.fetchall()
+        seasonalGross = float(result3[0]['totalCost'])
 
-        # --SubStep 3: get stats for every product
-        for eachP in productIDs:
-            pid = eachP['productID']
+        # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
+        query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
+                 f"SUM(op.quantitySold) as Quantity, SUM(op.productTotal) as Total FROM OrderProducts " \
+                 f"op WHERE op.seasonID = '{seasonID}' GROUP BY op.productID;"
+        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        result4 = cursor4.fetchall()
+        productStats = float(result4[0]['totalCost'])
+        for prod in productStats:
+            print(prod)
 
 
 

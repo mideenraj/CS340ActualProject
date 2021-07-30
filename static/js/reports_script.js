@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function cancelOrder(){
 
     // ---Step 1: Access the OrderID and productID of cancelling item
-    var parentNode = this.parentNode
+    var parentNode = this.parentNode.parentNode
     console.log("Test_3:", parentNode)
 
 

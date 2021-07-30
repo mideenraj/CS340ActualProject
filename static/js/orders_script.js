@@ -86,7 +86,13 @@ async function place_order() {
 
 
     
-    // ---Step 5: Clear all input boxes
+    // ---Step 5: Clear all input boxes (default to 0)
+    var allProducts = document.querySelectorAll(".product_quantity")
+    selectedProducts = []
+    for (var pro of allProducts){
+        pro.value = 0
+    }
+
 
 
 

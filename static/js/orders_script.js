@@ -30,8 +30,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: 'Place Order' button's callback function
 async function place_order() {
 
-    var x = document.querySelector("#customer").value
-    console.log("TEST_1:", x)
+    // ---Step 1: Get customer ID of customer making the purchase
+    var customerID = document.querySelector("#customer").value        
+    
+    // ---Step 2: Get products and their respective quantities being purchased
+    var allProducts = document.querySelectorAll(".product_quantity")
+    selectedProducts = []
+    for (var pro of allProducts){
+        if (pro.value != 0){
+            var p_data = (pro.id, pro.value)
+            selectedProducts.push(p_data)
+        }
+    }
+
+    console.log("TEST_2", p_data)
+
+
 
 
 

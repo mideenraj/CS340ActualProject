@@ -27,13 +27,39 @@ def root():
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         payload.append(results)
 
-        # -----Step 3: Query for populating 'Current seasons (summer 2021)'
-        # --SubStep 1: get stats for every product
+        # -----Step 3: Query(s) for populating 'Current seasons (summer 2021)'
+        # --SubStep 1: get ID of every product
         query1 = "SELECT productID FROM Products;"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
-        results = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-        print("TEST_1:", results)
-        
+        productIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+        print("TEST_1:", productIDs)
+
+        # --SubStep 2: Determine current season by cross-referencing date-of-purchase with seasonal dates
+        date_of_purchase = str(datetime.datetime.today()).split()[0]
+        query2 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
+        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        result2 = cursor2.fetchall()
+        seasonID = result2[0]['seasonID']
+
+        # --SubStep 2: get cumulative revenue for current season
+        date_of_purchase = str(datetime.datetime.today()).split()[0]
+        query2 = f"SELECT SUM(totalCost) FROM Orders WHERE seasonID='{seasonID}';"
+        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        result2 = cursor2.fetchall()
+        seasonID = float(result2[0]['totalCost'])
+        print("TEST_5:", seasonID)
+
+        # --SubStep 3: get stats for every product
+        for eachP in productIDs:
+            pid = eachP['productID']
+
+
+
+
+
+
+
+
 
 
 

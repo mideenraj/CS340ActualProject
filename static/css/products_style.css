@@ -89,3 +89,5 @@ button{
 
 #searchResultTable{
   margin-top: 20px;
+  display: none;
+}

@@ -175,7 +175,7 @@ def load_products():
 
             # Step 1: Send query
             query = f"INSERT INTO Products (productName, salePrice, departmentID, unitType) VALUES " \
-                    f"({response_obj['name']}, {response_obj['department']}, {response_obj['price']}, {response_obj['unit']};"
+                    f"({response_obj['name']}, {response_obj['price']}, {response_obj['department']}, {response_obj['unit']};"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
             print("TEST_4:", results)

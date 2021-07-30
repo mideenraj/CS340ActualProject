@@ -129,7 +129,6 @@ async function update_product (){
     document.getElementById(cancelChange.id).addEventListener('click', cancel_edit)
 };
 
-
 // Function 2: 'Change' button's callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
@@ -185,12 +184,10 @@ async function submit_edit(){
 
 }
 
-
 // Function 3:'Cancel' button's callback function (Cancels an edit)
 async function cancel_edit(){
     document.getElementById("editBlock").remove()
 }
-
 
 // Function 4: 'Delete' button's callback function (deletes a row)
 async function delete_product(){
@@ -218,7 +215,6 @@ async function delete_product(){
         }       
     }
 }
-
 
 // Function 5: 'Add Product' button's callback function (Adds a new product to database)
 async function add_product(){
@@ -412,8 +408,6 @@ async function search_product(){
     document.getElementById("searchByID").value = ""
     document.getElementById("searchByName").value = ""
     document.getElementById("searchByPrice").value = ""
-    
-    
 
 
 

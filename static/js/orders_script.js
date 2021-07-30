@@ -80,7 +80,8 @@ async function place_order() {
     newRow.appendChild(total)
 
         //Append row to table
-    document.querySelector("#product_table").appendChild(newRow)
+    document.querySelector(".product_table").appendChild(newRow)
+
 
     
     // ---Step 5: Clear all input boxes

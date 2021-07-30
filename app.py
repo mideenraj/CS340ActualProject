@@ -54,8 +54,7 @@ def root():
                  f"op WHERE op.seasonID = '{seasonID}' GROUP BY op.productID;"
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         result4 = cursor4.fetchall()
-        productStats = float(result4[0]['totalCost'])
-        for prod in productStats:
+        for prod in result4:
             print(prod)
 
 

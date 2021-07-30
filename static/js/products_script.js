@@ -237,7 +237,61 @@ async function add_product(){
     var response = await fetch(url, fetchdata)
     var data = response.data
 
-    // -------- Step 2: app
-    
+    // -------- Step 2: Append data to table (By creating new row with the returned response)
+    var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted
+    var new_row = document.createElement("tr")
+    new_row.setAttribute('class', 'product_row')
+    new_row.setAttribute('id', data['productID'])
+        // --Create productID cell
+    var id_cell = document.createElement('td')
+    id_cell.textContent = data['productID']
+    new_row.appendChild(id_cell)
+        // --Create productName cell
+    var name_cell = document.createElement('td')
+    name_cell.textContent = data['productName']
+    new_row.appendChild(name_cell)
+
+        // --Create departmentID cell
+    var department_cell = document.createElement('td')
+    department_cell.textContent = data['departmentID']
+    new_row.appendChild(department_cell)
+
+        // --Create salePrice cell
+    var price_cell = document.createElement('td')
+    price_cell.textContent = data['salePrice']
+    new_row.appendChild(price_cell)
+
+        // --Create unitType cell
+    var unit_cell = document.createElement('td')
+    unit_cell.textContent = data['unitType']
+    new_row.appendChild(unit_cell)
+
+        // --Create Modify cell (Buttons)
+    var button_cell = document.createElement('td')
+    var delete_butt = document.createElement('button')
+    delete_butt.setAttribute('class', 'delete_button')
+    delete_butt.setAttribute('id', data['productID'])
+    button_cell.append(delete_butt)
+    var update_butt = document.createElement('button')
+    update_butt.setAttribute('class', 'update_button')
+    update_butt.setAttribute('id', data['productID'])
+    button_cell.append(update_butt)
+        // --Append row to table
+    input_row.insertAdjacentElement('beforebegin', new_row)
+
+
+    // -------- Step 3: Add event listeners for the new buttons
+
+    // -------- Step 4: Clear input boxes
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -59,7 +59,35 @@ async function place_order() {
     var data = await response.json()
 
     // ---Step 4: Use the returned data to display new row in table
+    var rowData = data["lastOrder"]
+        // New row
+    var newRow = document.createElement('tr')
+        // order ID data cell
+    var oID = document.createElement('td')
+    oID.textContent = rowData['orderID']
+    newRow.appendChild(oID)
+        // customer ID data cell
+    var cID = document.createElement('td')
+    cID.textContent = rowData['customerID']
+    newRow.appendChild(cID)
+        // season ID data cell
+    var sID = document.createElement('td')
+    sID.textContent = rowData['seasonID']
+    newRow.appendChild(sID)
+        // total cost data cell
+    var total = document.createElement('td')
+    total.textContent = rowData['totalCost']
+    newRow.appendChild(total)
+
+        //Append row to table
+    document.querySelector("#product_table").appendChild(newRow)
+
     
+    // ---Step 5: Clear all input boxes
+
+
+
+
 
 
 

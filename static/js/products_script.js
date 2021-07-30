@@ -321,6 +321,7 @@ async function search_product(){
     var nameSearch = document.getElementById('searchByName')
     var priceSearch = document.getElementById('searchByPrice')
 
+
     // ----- Step 2: Sent reqeust based on conditionals
     var url = baseURL + "products"
 
@@ -335,7 +336,8 @@ async function search_product(){
             body: JSON.stringify(payload),
             headers: {'Content-Type' : 'application/json'}
         }
-    } elif (nameSearch.value != ""){
+
+    } else if (nameSearch.value != ""){
         var payload = {
             "action" : "search",
             "searchBy" : "name",
@@ -347,7 +349,7 @@ async function search_product(){
             headers: {'Content-Type' : 'application/json'}
         }
 
-    } elif (priceSearch.value != ""){
+    } else if (priceSearch.value != ""){
         var payload = {
             "action" : "search",
             "searchBy" : "price",
@@ -358,8 +360,8 @@ async function search_product(){
             body: JSON.stringify(payload),
             headers: {'Content-Type' : 'application/json'}
         }
-
     }
+
 
     // ----- Step 3: Access search results from server
     var response = await fetch(url, fetchdata)

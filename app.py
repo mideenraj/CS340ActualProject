@@ -43,9 +43,10 @@ def root():
 
         # --SubStep 2: get cumulative revenue for current season
         date_of_purchase = str(datetime.datetime.today()).split()[0]
-        query2 = f"SELECT SUM(totalCost) FROM Orders WHERE seasonID='{seasonID}';"
+        query2 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
         cursor2 = db.execute_query(db_connection=db_connection, query=query2)
         result2 = cursor2.fetchall()
+        print("TEST_4:", result2)
         seasonID = float(result2[0]['totalCost'])
         print("TEST_5:", seasonID)
 

@@ -136,13 +136,36 @@ def load_orders():
 
         # Step 3: Execute the order (aka insert into 'Orders')
         query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
-        cursor3 = db.execute_query(db_connection=db_connection, query=query3)
-        result3 = cursor3.fetchall()
+        db.execute_query(db_connection=db_connection, query=query3)
 
-        query3 = f"SELECT LAST_INSERT_ID();"
-        cursor3 = db.execute_query(db_connection=db_connection, query=query3)
-        result3 = cursor3.fetchall()
-        print("TEST_5:", result3)
+        # Step 4: Access ID of last inserted row
+        query4 = f"SELECT LAST_INSERT_ID();"
+        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        orderID = cursor4.fetchall()
+
+        # Step 5: Populate orderProducts
+        for eachItem in response_obj["purchases"]:
+            # First, Access the price for each product
+            query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
+            cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+            result5 = cursor5.fetchall()
+            price = float(result5[0]['salePrice'])  # Since salePrice is of Decimal Type, change it to str
+
+            # Second, variablize each column value
+            productID = eachItem[0]
+            orderID = orderID                # Constant
+            seasonID = seasonID              # Constant
+            quantity = eachItem[1]
+            productTotal = price * int(quantity)
+
+            # Third, insert into OrderProducts
+            query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
+            cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+            xxx = cursor5.fetchall()
+
+        # Step 6: Return
+        return {"order": "complete"}
+
 
 
 

@@ -235,7 +235,7 @@ async function add_product(){
         headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
-    var data = response.json()
+    var data = await response.json()
     console.log("TEST_1:", data)        // Debugging
 
     // -------- Step 2: Append data to table (By creating new row with the returned response)
@@ -247,6 +247,7 @@ async function add_product(){
     var id_cell = document.createElement('td')
     id_cell.textContent = data['productID']
     new_row.appendChild(id_cell)
+
         // --Create productName cell
     var name_cell = document.createElement('td')
     name_cell.textContent = data['productName']

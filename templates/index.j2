@@ -71,16 +71,16 @@
                     <tr>
                         <td>Produce</td>
                         <td>Quantity</td>
+                        <td>Total ($)</td>
                         <td>% of Total</td>
-                        <td>Total revenue</td>
                     </tr>
 
                     {% for row in reports_data[2] %}
                     <tr>
-                        <th>{{row[0]}}</td>
-                        <td>{{row[1]}}</td>
-                        <td>{{row[2]}}</td>
-                        <td>{{row[3]}}</td>
+                        <th>{{row['Product']}}</td>
+                        <td>{{row['Quantity']}}</td>
+                        <td>{{row['Total']}}</td>
+                        <td>{{row['Percent']}}</td>
                     </tr>
                     {% endfor %}
 

@@ -16,23 +16,43 @@ def root():
 
     # If initial page load...
     if request.method == 'GET':
-        # Step 1: append all subpage URLs to payload
+        # -----Step 1: append all subpage URLs to payload
         payload = []
         payload.append(subpages)
 
-        # Step 2: Write query
-        # --Query 1: Access 'Sell log' table data
+        # -----Step 2: Query for populating 'Sales log'
+        # Query 1: Access 'Sell log' table data
         query = "SELECT * FROM OrderProducts;"
-        # -- ** Insert queries to populate other tables here
-
-        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
         cursor = db.execute_query(db_connection=db_connection, query=query)
-
-        # Step 4: Access result (This returns a tuple of selected rows from query)
-        results = cursor.fetchall()
+        results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         payload.append(results)
 
-        # Step 5: Print query results if Debugging
+        # -----Step 3: Query for populating 'Current seasons (summer 2021)'
+        # --SubStep 1: get stats for every product
+        query1 = "SELECT productID FROM Products;"
+        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        results = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+        print("TEST_1:", results)
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # -----Step 4: Print query results if Debugging
         debug = False
         if debug:
             print("\n")
@@ -42,7 +62,7 @@ def root():
             for row in results:
                 print(row)
 
-        # Step 6: Render HomePage
+        # -----Step 5: Render HomePage
         return render_template("index.j2", reports_data=payload)
 
     # If request for an order cancellation...
@@ -74,27 +94,6 @@ def root():
 
         # ---Step 3: return
         return {"status":"complete"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Route 2: 'Customers' subpage
@@ -225,7 +224,6 @@ def load_orders():
         # Step 7: Return the row
         print("TEST_1:", last_insert)
         return {"lastOrder": last_insert[0]}
-
 
 
 # Route 4: 'Products' subpage
@@ -431,37 +429,6 @@ def load_seasons():
     # Step 6: The specified file is rendered with the queried data
     return render_template("seasons_subpage.j2", season_data=payload)
 
-
-# Route 6: 'Demo UI' subpage
-@app.route('/demoUI')
-def load_demo():
-
-    # Step 1: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
-
-    # Step 2: Write query
-    query = "SELECT * FROM Products;"
-
-    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-
-    # Step 4: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
-    payload.append(results)
-
-    # Step 5: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
-
-    # Step 6: The specified file is rendered with the queried data
-    return render_template("DemoUI_subpage.j2", demo_data=payload)
 
 
 

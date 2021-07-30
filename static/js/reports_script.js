@@ -42,7 +42,7 @@ async function cancelOrder(){
     var itemTotal = kidCells.item(4).textContent
     //console.log(p_ID, o_ID, season, quantity, itemTotal)      // For debugging
 
-    
+
     // ---Step 2: Send request to remove item from OrderProducts
     var payload = {
         "productID": p_ID,
@@ -60,6 +60,10 @@ async function cancelOrder(){
 
     var response = await fetch(url, fetchdata)
     var data = await response.json()
+
+    // ---Step 2: Delete the row
+    parentRow.remove()
+
 
     
 

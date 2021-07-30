@@ -204,11 +204,12 @@ def load_products():
 
             # Step 3: Access result (This returns a tuple of selected rows from query)
             results = cursor.fetchall()
-            payload = {}
+            row_list =
             for val in results:
                 val["salePrice"] = str(val["salePrice"])  # Since salePrice is of Decimal Type, change it to str
+                row_list.append(val)
 
-            payload = {"rows": results}
+            payload = {"rows": row_list}
             print(payload)
 
             # Step 4: return JSON object consisting on queried rows

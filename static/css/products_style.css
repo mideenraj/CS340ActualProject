@@ -91,3 +91,8 @@ button{
   margin-top: 20px;
   display: none;
 }
+
+.search_div{
+  width: 1200px;
+  margin: 0 auto;
+}

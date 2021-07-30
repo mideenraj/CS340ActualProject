@@ -372,18 +372,15 @@ async function search_product(){
 
     // ----- Step 4: Display results
         // First, delete any existing rows in search display table
-    var searchtableRows = document.querySelector("#searchResultTable")
-    var tableChildren = searchtableRows.childNodes
-    console.log(tableChildren)
-    for (var tr of tableChildren){
-        if (tr.className != "doNotDelete"){
-            tr.remove()
-        }
+    var existingSearchResults = document.querySelectorAll(".searchResult")
+    for (var tr of existingSearchResults){
+        tr.remove()
     }
 
         // Second, populate table
     for (var row of data["rows"]){
         var new_row = document.createElement('tr')
+        new_row.setAttribute('class', 'searchResult')
         var id_cell = document.createElement('td')
         id_cell.textContent = row['productID']
         new_row.appendChild(id_cell)
@@ -400,6 +397,7 @@ async function search_product(){
         unit_cell.textContent = row['unitType']
         new_row.appendChild(unit_cell)
 
+        var searchtableRows = document.querySelector("#searchResultTable")
         searchtableRows.appendChild(new_row)
     }
     

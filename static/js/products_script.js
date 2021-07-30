@@ -286,7 +286,7 @@ async function add_product(){
     button_cell.append(delete_butt)
 
     new_row.append(button_cell)
-    
+
         // --Append row to table
     input_row.insertAdjacentElement('beforebegin', new_row)
 
@@ -301,10 +301,11 @@ async function add_product(){
 
 
 
-
-
-
     // -------- Step 4: Clear input boxes
+    document.getElementById("new_name").textContent = "new_name"
+    document.getElementById("new_name").textContent = "new_department"
+    document.getElementById("new_name").textContent = "new_price"
+    document.getElementById("new_name").textContent = "new_unit"
 
 
 

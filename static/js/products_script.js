@@ -309,8 +309,6 @@ async function add_product(){
 
 }
 
-
-
 // Function 6: 'Search' buttons' callback function
 async function search_product(){
 

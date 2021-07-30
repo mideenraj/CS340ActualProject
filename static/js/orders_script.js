@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: 'Place Order' button's callback function
 async function place_order() {
 
-    var x = document.querySelector("#customer").value
+    var x = document.querySelector("#customer").textContent
     console.log("TEST_1:", x)
 
 

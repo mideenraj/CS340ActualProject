@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-// ---------------------------------- Function(s) block ----------------------------------
+// ----------------------------------------------- Function(s) block -----------------------------------------------
 // Function 1: 'Update' button callback function
 async function update_product (){
 
@@ -127,7 +127,6 @@ async function update_product (){
 };
 
 
-
 // Function 2: 'Change' button's callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
@@ -183,6 +182,7 @@ async function submit_edit(){
 
 }
 
+
 // Function 3:'Cancel' button's callback function (Cancels an edit)
 async function cancel_edit(){
     document.getElementById("editBlock").remove()
@@ -215,6 +215,7 @@ async function delete_product(){
         }       
     }
 }
+
 
 // Function 5: 'New Product' callback function (Adds a new product to database)
 async function add_product(){
@@ -270,35 +271,26 @@ async function add_product(){
 
         // --Create Modify cell (Buttons)
     var button_cell = document.createElement('td')
-
+        // --Update Button
     var update_butt = document.createElement('button')
     update_butt.setAttribute('class', 'update_button')
     update_butt.setAttribute('id', data['productID'])
     update_butt.textContent = "Update"
     button_cell.append(update_butt)
-
+        // --Delete Button
     var delete_butt = document.createElement('button')
     delete_butt.setAttribute('class', 'delete_button')
     delete_butt.setAttribute('id', data['productID'])
     delete_butt.textContent = "Delete"
-
     button_cell.append(delete_butt)
 
     new_row.append(button_cell)
 
-        // --Append row to table
-    input_row.insertAdjacentElement('beforebegin', new_row)
-
+    input_row.insertAdjacentElement('beforebegin', new_row)  // --Append row to table
 
     // -------- Step 3: Add event listeners for the new buttons
-        // --Update button
     update_butt.addEventListener('click', update_product)
-
-
-        // --Delete button
     delete_butt.addEventListener('click', delete_product)
-
-
 
     // -------- Step 4: Clear input boxes
     document.getElementById("new_name").value = ""

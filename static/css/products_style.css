@@ -82,3 +82,7 @@ table {
 button{
   background-color: white;
 }
+
+#search_button{
+  width: 100%;
+}

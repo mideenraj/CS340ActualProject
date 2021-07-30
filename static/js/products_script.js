@@ -400,6 +400,15 @@ async function search_product(){
         var searchtableRows = document.querySelector("#searchResultTable")
         searchtableRows.appendChild(new_row)
     }
+
+        // Third, Make table visible (Its hidden by default)
+    document.getElementById("searchResultTable").style.display = "block"
+
+        // Fourth, Erase all input box values
+    document.getElementById("searchByID").value = ""
+    document.getElementById("searchByName").value = ""
+    document.getElementById("searchByPrice").value = ""
+    
     
 
 

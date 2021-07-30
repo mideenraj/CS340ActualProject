@@ -278,11 +278,32 @@ async function add_product(){
     update_butt.setAttribute('class', 'update_button')
     update_butt.setAttribute('id', data['productID'])
     button_cell.append(update_butt)
+    new_row.append(button_cell)
         // --Append row to table
     input_row.insertAdjacentElement('beforebegin', new_row)
 
 
     // -------- Step 3: Add event listeners for the new buttons
+        // --Update button
+    update_butt.addEventListener('click', update_product)
+
+
+    /*
+    var updateButtons = document.querySelectorAll('.update_button')
+    for (var u_butt of updateButtons){
+        if (u_butt.id == data['productID']){
+            u_butt.addEventListener('click', )
+        }
+    }
+
+        // --Delete button
+    var deleteButtons = document.querySelectorAll('.update_button')
+    */
+
+
+
+
+
 
     // -------- Step 4: Clear input boxes
 

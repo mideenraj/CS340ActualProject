@@ -208,7 +208,7 @@ def load_products():
             for val in results:
                 val["salePrice"] = str(val["salePrice"])  # Since salePrice is of Decimal Type, change it to str
 
-            payload = {"rows":results}
+            payload = {"rows": results}
             print(payload)
 
             # Step 4: return JSON object consisting on queried rows

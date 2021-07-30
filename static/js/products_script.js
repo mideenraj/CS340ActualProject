@@ -353,7 +353,7 @@ async function search_product(){
         var payload = {
             "action" : "search",
             "searchBy" : "price",
-            "name" : priceSearch.value
+            "price" : priceSearch.value
         }
         var fetchdata = {
             method: 'POST',
@@ -370,6 +370,17 @@ async function search_product(){
 
 
     // ----- Step 4: Display results
+        // First, delete any existing rows in search display table
+    var searchtableRows = document.querySelectorAll("#searchResultTable").childNodes
+    for (var tr of searchtableRows){
+        if (tr.className != "doNotDelete"){
+            tr.remove()
+        }
+    }
+
+
+
+
 
 
 

@@ -38,8 +38,7 @@ async function place_order() {
     selectedProducts = []
     for (var pro of allProducts){
         if (pro.value != 0){
-            var p_data = (pro.id, pro.value)
-            console.log("TEST_3", pro.id)
+            var p_data = [pro.id, pro.value]
             selectedProducts.push(p_data)
         }
     }

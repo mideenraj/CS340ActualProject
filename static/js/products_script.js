@@ -1,7 +1,17 @@
 
 
-// Import global variable(s)       -(Specify which variables you want to import)
-const gloVars = require('./GLOBAL_VARIABLES.js');
+// ----------------- Site URL construction -----------------
+// ---Step 1: Specify server and port number
+var flip_server = 1     // Choose the server you're using (1, 2, or 3)
+var port_num = 1027     // Choose a port number of your choice
+
+// ---Step 2: initialize variables (Don't change any of these)
+var baseURL = `http://flip${flip_server}.engr.oregonstate.edu:${port_num}/`
+var customers_subpage = baseUrl + "customers"
+var orders_subpage = baseUrl + "orders"
+var products_subpage = baseUrl + "products"
+var departments_subpage = baseUrl + "departments"
+var seasons_subpage = baseUrl + "seasons"
 
 
 
@@ -150,7 +160,7 @@ async function submit_edit(){
 
 
     // -------- Step 2: Formulate request and sent it
-    var url = gloVars.products_subpage
+    var url = products_subpage
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -193,7 +203,7 @@ async function cancel_edit(){
 async function delete_product(){
 
     // -------- Step 1: Make request to delete row from databse
-    var url = gloVars.products_subpage
+    var url = products_subpage
     var payload = {"rowToDelete": this.id, "action":"delete"}
     var fetchdata = {
         method: 'POST',
@@ -221,7 +231,7 @@ async function add_product(){
     console.log("TRIGERED")
 
     // -------- Step 1: Formulate and make request
-    var url = gloVars.products_subpage
+    var url = products_subpage
     var payload = {
         "action" : "insert",
         "name" : document.getElementById("new_name").value,
@@ -311,7 +321,7 @@ async function search_product(){
 
 
     // ----- Step 2: Sent reqeust based on conditionals
-    var url = gloVars.products_subpage
+    var url = products_subpage
 
     if (idSearch.value != ""){
         var payload = {

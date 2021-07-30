@@ -1,7 +1,7 @@
 
 
-// Global variable
-var baseURL = "http://flip1.engr.oregonstate.edu:1027/"
+// Import global variable(s)       -(Specify which variables you want to import)
+import {products_subpage} from './GLOBAL_VARIABLES.js'
 
 
 
@@ -150,7 +150,7 @@ async function submit_edit(){
 
 
     // -------- Step 2: Formulate request and sent it
-    var url = baseURL + "products"
+    var url = products_subpage
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -193,7 +193,7 @@ async function cancel_edit(){
 async function delete_product(){
 
     // -------- Step 1: Make request to delete row from databse
-    var url = baseURL + 'products'
+    var url = products_subpage
     var payload = {"rowToDelete": this.id, "action":"delete"}
     var fetchdata = {
         method: 'POST',
@@ -221,7 +221,7 @@ async function add_product(){
     console.log("TRIGERED")
 
     // -------- Step 1: Formulate and make request
-    var url = baseURL + "products"
+    var url = products_subpage
     var payload = {
         "action" : "insert",
         "name" : document.getElementById("new_name").value,
@@ -319,7 +319,7 @@ async function search_product(){
 
 
     // ----- Step 2: Sent reqeust based on conditionals
-    var url = baseURL + "products"
+    var url = products_subpage
 
     if (idSearch.value != ""){
         var payload = {

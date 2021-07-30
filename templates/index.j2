@@ -40,6 +40,7 @@
                     <th>seasonID</th>
                     <th>quantitySold</th>
                     <th>productTotal</th>
+                    <th>Modify</th>
                 </tr>
 
                 <!--Table data-->
@@ -50,6 +51,7 @@
                     <td>{{row['seasonID']}}</td>
                     <td>{{row['quantitySold']}}</td>
                     <td>{{row['productTotal']}}</td>
+                    <td><button class="cancelItem" id={{row['orderID']}} value="Cancel"></button></td>
                 </tr>
                 {% endfor %}
 
@@ -185,14 +187,9 @@
                     </tr>
                 </table>
             </div>
-
         </div>
-
     </div>
 
-
-
-
-
+    <script src="static/js/reports_script.js"></script>
  </body>
 </html>

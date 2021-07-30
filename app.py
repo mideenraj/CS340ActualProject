@@ -2,6 +2,7 @@ from flask import Flask, render_template, json, request, jsonify
 import os
 import database.db_connector as db
 from GLOBAL_VARIABLES import *
+import datetime
 
 # -------------------- Initialization --------------------
 app = Flask(__name__)
@@ -91,7 +92,6 @@ def load_orders():
         result1 = cursor1.fetchall()
         payload.append(result1)
 
-
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"
         cursor2 = db.execute_query(db_connection=db_connection, query=query2)
@@ -116,9 +116,17 @@ def load_orders():
 
     # For making an order...
     elif request.method == 'POST':
-        pass
 
-        # Step 1:
+        # Step 1: Determine current by cross-referencing date-of-purchase with seasonal dates
+        date_of_purchase = str(datetime.datetime.today()).split()[0]
+        query1 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
+        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        result1 = cursor1.fetchall()
+        print("TEST:", result1)
+
+
+        # Step 2: Execute the order
+        query = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', )"
 
         # Step 2:
         # Step 3:

@@ -43,7 +43,20 @@ async function place_order() {
         }
     }
 
-    console.log("TEST_2", selectedProducts)
+    // ---Step 3: Store the data and sent request
+    var payload = {}
+    payload["customer"] = customerID
+    payload["purchases"] = selectedProducts         // 'selectedProducts' will be a list of lists [[productID, quantity], [....]]
+
+    var url = orders_subpage
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
 
 
 

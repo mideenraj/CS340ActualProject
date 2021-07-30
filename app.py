@@ -59,7 +59,6 @@ def load_customers():
 
     # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
-    payload = []
     payload.append(results)
 
     # Step 5: Print query results if Debugging
@@ -79,8 +78,9 @@ def load_customers():
 # Route 3: 'Orders' subpage
 @app.route('/orders')
 def load_orders():
-    # Step 1: Initialize payload
+    # Step 1: append all subpage URLs to payload
     payload = []
+    payload.append(subpages)
 
     # Step 2: Write Query 1 (order table population) and append to payload
     query1 = "SELECT * FROM Orders;"
@@ -114,18 +114,21 @@ def load_products():
 
     # For loading page
     if request.method == 'GET':
-        # Step 1: Write query
+        # Step 1: append all subpage URLs to payload
+        payload = []
+        payload.append(subpages)
+
+        # Step 2: Write query
         query = "SELECT * FROM Products;"
 
-        # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
         cursor = db.execute_query(db_connection=db_connection, query=query)
 
-        # Step 3: Access result (This returns a tuple of selected rows from query)
+        # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
-        payload = []
         payload.append(results)
 
-        # Step 4: Print query results if Debugging
+        # Step 5: Print query results if Debugging
         debug = False
         if debug:
             print("\n")
@@ -135,7 +138,7 @@ def load_products():
             for row in results:
                 print(row)
 
-        # Step 5: The specified file is rendered with the queried data
+        # Step 6: The specified file is rendered with the queried data
         return render_template("products_subpage.j2", product_data=payload)
 
     # For taking commands (Update, delete, or insert)
@@ -249,18 +252,21 @@ def load_products():
 @app.route('/departments')
 def load_departments():
 
-    # Step 1: Write query
+    # Step 1: append all subpage URLs to payload
+    payload = []
+    payload.append(subpages)
+
+    # Step 2: Write query
     query = "SELECT * FROM Departments;"
 
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
+    # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
-    payload = []
     payload.append(results)
 
-    # Step 4: Print query results if Debugging
+    # Step 5: Print query results if Debugging
     debug = False
     if debug:
         print("\n")
@@ -270,7 +276,7 @@ def load_departments():
         for row in results:
             print(row)
 
-    # Step 5: The specified file is rendered with the queried data
+    # Step 6: The specified file is rendered with the queried data
     return render_template("departments_subpage.j2", department_data=payload)
 
 
@@ -278,18 +284,21 @@ def load_departments():
 @app.route('/seasons')
 def load_seasons():
 
-    # Step 1: Write query
+    # Step 1: append all subpage URLs to payload
+    payload = []
+    payload.append(subpages)
+
+    # Step 2: Write query
     query = "SELECT * FROM Seasons;"
 
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
+    # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
-    payload = []
     payload.append(results)
 
-    # Step 4: Print query results if Debugging
+    # Step 5: Print query results if Debugging
     debug = False
     if debug:
         print("\n")
@@ -299,7 +308,7 @@ def load_seasons():
         for row in results:
             print(row)
 
-    # Step 5: The specified file is rendered with the queried data
+    # Step 6: The specified file is rendered with the queried data
     return render_template("seasons_subpage.j2", season_data=payload)
 
 
@@ -307,18 +316,21 @@ def load_seasons():
 @app.route('/demoUI')
 def load_demo():
 
-    # Step 1: Write query
+    # Step 1: append all subpage URLs to payload
+    payload = []
+    payload.append(subpages)
+
+    # Step 2: Write query
     query = "SELECT * FROM Products;"
 
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
+    # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
-    payload = []
     payload.append(results)
 
-    # Step 4: Print query results if Debugging
+    # Step 5: Print query results if Debugging
     debug = False
     if debug:
         print("\n")
@@ -328,7 +340,7 @@ def load_demo():
         for row in results:
             print(row)
 
-    # Step 5: The specified file is rendered with the queried data
+    # Step 6: The specified file is rendered with the queried data
     return render_template("DemoUI_subpage.j2", demo_data=payload)
 
 

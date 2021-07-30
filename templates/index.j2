@@ -74,38 +74,15 @@
                         <td>% of Total</td>
                         <td>Total revenue</td>
                     </tr>
-                    <tr>
-                        <th>Apples</td>
-                        <td>200</td>
-                        <td>20%</td>
-                        <td>$598</td>
-                    </tr>
-                    <tr>
-                        <th>Bananas</th>
-                        <td>150</td>
-                        <td>15%</td>
-                        <td>$898.5</td>
 
-                    </tr>
+                    {% for row in reports_data[2] %}
                     <tr>
-                        <th>Cucumbers</th>
-                        <td>150</td>
-                        <td>15%</td>
-                        <td>$598.5</td>
+                        <th>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                    </tr>
 
-                    </tr>
-                    <tr>
-                        <th>Oranges</th>
-                        <td>300</td>
-                        <td>30%</td>
-                        <td>$597</td>
-                    </tr>
-                    <tr>
-                        <th id="top_seller">Tulip</th>
-                        <td>200</td>
-                        <td>200%</td>
-                        <td>$1,598</td>
-                    </tr>
                 </table>
             </div>
 

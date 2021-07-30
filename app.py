@@ -112,6 +112,7 @@ def load_orders():
 
     # For making an order...
     elif request.method == 'POST':
+        pass
 
         # Step 1:
 

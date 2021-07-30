@@ -116,6 +116,7 @@ def load_orders():
 
     # For making an order...
     elif request.method == 'POST':
+        response_obj = request.json
 
         # Step 1: Determine current by cross-referencing date-of-purchase with seasonal dates
         date_of_purchase = str(datetime.datetime.today()).split()[0]

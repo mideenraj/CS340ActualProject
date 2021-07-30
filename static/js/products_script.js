@@ -402,12 +402,13 @@ async function search_product(){
     }
 
         // Third, Make table visible (Its hidden by default)
-    document.getElementById("searchResultTable").style.display = "inline"
+    document.getElementById("searchResultTable").style.display = "inline-block"
 
         // Fourth, Erase all input box values
     document.getElementById("searchByID").value = ""
     document.getElementById("searchByName").value = ""
     document.getElementById("searchByPrice").value = ""
+    
     
     
 

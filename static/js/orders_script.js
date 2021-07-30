@@ -54,9 +54,12 @@ async function place_order() {
         body: JSON.stringify(payload),
         headers: {'Content-Type' : 'application/json'}
     }
-    
+
     var response = await fetch(url, fetchdata)
     var data = await response.json()
+
+    // ---Step 4: Use the returned data to display new row in table
+    
 
 
 

@@ -43,7 +43,8 @@ async function place_order() {
         }
     }
 
-    console.log("TEST_2", p_data)
+    console.log("TEST_2", selectedProducts)
+
 
 
 

@@ -10,12 +10,12 @@
     <!-------- Nav bar -------->
     <div id="nav_bar">
       <ul id="nav_bar_list">
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/">Reports</a></li>
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/customers">Customers</a></li>
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/orders">Orders</a></li>
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/products">Products</a></li>
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/departments">Departments</a></li>
-        <li id="nav_bar_elem"><a href="http://flip3.engr.oregonstate.edu:1027/seasons">Seasons</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][0]}}>Reports</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][1]}}>Customers</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][2]}}>Orders</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][3]}}>Products</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][4]}}>Departments</a></li>
+        <li id="nav_bar_elem"><a href={{order_data[0][5]}}>Seasons</a></li>
       </ul>
     </div>
 
@@ -36,7 +36,7 @@
         </tr>
 
         <!-- Sample Data -->
-        {% for row in order_data[0] %}
+        {% for row in order_data[1] %}
         <tr>
           <td>{{row['orderID']}}</td>
           <td>{{row['customerID']}}</td>
@@ -58,7 +58,7 @@
           <!--Specify customer-->
           <label for="customer">Select Customer:</label>
           <select name="customer" id="customer">
-            {% for row in order_data[1] %}
+            {% for row in order_data[2] %}
                 <option value="">{{row}}</option>
             {% endfor %}
 
@@ -75,7 +75,7 @@
                 <th>Quantity</td>
             </tr>
 
-            {% for row in order_data[2] %}
+            {% for row in order_data[3] %}
             <tr>
                 <td>{{row['productName']}}</td>
                 <td>{{row['salePrice']}}</td>

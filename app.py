@@ -13,17 +13,17 @@ db_connection = db.connect_to_database()
 @app.route('/')
 def root():
 
-    # Step 1: Write query
+    # Step 1: append all subpage URLs to payload
+    payload = []
+    payload.append(subpages)
+
+    # Step 2: Write query
     # --Query 1: Access 'Sell log' table data
     query = "SELECT * FROM OrderProducts;"
     # -- ** Insert queries to populate other tables here
 
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
-
-    # Step 3: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
 
     # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
@@ -47,18 +47,22 @@ def root():
 @app.route('/customers')
 def load_customers():
 
-    # Step 1: Write query
+    # Step 1: append all subpage URLs to payload
+    payload = []
+    payload.append(subpages)
+
+    # Step 2: Write query
     query = "SELECT * FROM Customers;"
 
-    # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
     cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 3: Access result (This returns a tuple of selected rows from query)
+    # Step 4: Access result (This returns a tuple of selected rows from query)
     results = cursor.fetchall()
     payload = []
     payload.append(results)
 
-    # Step 4: Print query results if Debugging
+    # Step 5: Print query results if Debugging
     debug = False
     if debug:
         print("\n")
@@ -68,7 +72,7 @@ def load_customers():
         for row in results:
             print(row)
 
-    # Step 5: The specified file is rendered with the queried data
+    # Step 6: The specified file is rendered with the queried data
     return render_template("customers_subpage.j2", customer_data=payload)
 
 

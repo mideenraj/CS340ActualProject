@@ -56,9 +56,9 @@
         <!---------- Form ---------->
           <!--Specify customer-->
           <label for="customer">Select Customer:</label>
-          <select name="customer" id="customer">
+          <select name="customer">
             {% for row in order_data[2] %}
-                <option value="">{{row}}</option>
+                <option id="customer" value={{row}}>{{row}}</option>
             {% endfor %}
 
           </select>

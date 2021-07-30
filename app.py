@@ -165,7 +165,7 @@ def load_orders():
 
 
         # Step 6: Access the latest row
-        query5 = f"SELECT * FROM Products WHERE productID='{orderID}';"
+        query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
         cursor5 = db.execute_query(db_connection=db_connection, query=query5)
         last_insert = cursor5.fetchall()
         print("TEST_1:", last_insert)

@@ -399,6 +399,8 @@ async function search_product(){
         var unit_cell = document.createElement('td')
         unit_cell.textContent = row['unitType']
         new_row.appendChild(unit_cell)
+
+        searchtableRows.appendChild(new_row)
     }
     
 

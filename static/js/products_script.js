@@ -7,11 +7,11 @@ var port_num = 1027     // Choose a port number of your choice
 
 // ---Step 2: initialize variables (Don't change any of these)
 var baseURL = `http://flip${flip_server}.engr.oregonstate.edu:${port_num}/`
-var customers_subpage = baseUrl + "customers"
-var orders_subpage = baseUrl + "orders"
-var products_subpage = baseUrl + "products"
-var departments_subpage = baseUrl + "departments"
-var seasons_subpage = baseUrl + "seasons"
+var customers_subpage = baseURL + "customers"
+var orders_subpage = baseURL + "orders"
+var products_subpage = baseURL + "products"
+var departments_subpage = baseURL + "departments"
+var seasons_subpage = baseURL + "seasons"
 
 
 

@@ -125,6 +125,7 @@ def load_orders():
         result1 = cursor1.fetchall()
         seasonID = result1[0]['seasonID']
 
+
         # Step 2: Calculate total cost
         total = 0
         for prod in response_obj["purchases"]:
@@ -142,6 +143,7 @@ def load_orders():
         query4 = f"SELECT LAST_INSERT_ID();"
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         orderID = cursor4.fetchall()
+        print("TEST_12": orderID)
 
         # Step 5: Populate orderProducts
         for eachItem in response_obj["purchases"]:

@@ -179,8 +179,15 @@ def load_products():
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
 
-            # Step 2: Send bogus response
-            return {"Status": "Complete"}
+            # Step 2: Access new row through query and sent it back as a response
+            query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}' departmentID='{response_obj['department']}', " \
+                    f"salePrice='{response_obj['price']}' unitType='{response_obj['unit']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            payload = results[0]
+            payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
+            return payload
+
 
 
 

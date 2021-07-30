@@ -236,4 +236,6 @@ async function add_product(){
     }
     var response = await fetch(url, fetchdata)
     var data = response.data
+
+    // -------- Step 2: app
 }

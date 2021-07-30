@@ -238,4 +238,6 @@ async function add_product(){
     var data = response.data
 
     // -------- Step 2: app
+    
+
 }

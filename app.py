@@ -58,7 +58,7 @@ def root():
         # First, access the total order price
         query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
         cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-        price = cursor2.fetchall()[0]
+        price = float(cursor2.fetchall()[0]['totalCost'])
         print("TEST_1:", price)
 
 

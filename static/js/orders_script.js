@@ -60,6 +60,7 @@ async function place_order() {
 
     // ---Step 4: Use the returned data to display new row in table
     var rowData = data["lastOrder"]
+    console.log("TEST_1:", rowData)
         // New row
     var newRow = document.createElement('tr')
         // order ID data cell

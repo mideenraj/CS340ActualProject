@@ -131,9 +131,9 @@ def load_orders():
             query2 = f"SELECT salePrice FROM Products WHERE productID='{prod[0]}';"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
             result2 = cursor2.fetchall()
-            price = result2[0]['salePrice']
-            total += (price * prod[1])
-        
+            price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
+            total += (price * int(prod[1]))
+
 
 
         # Step 3: Execute the order (aka insert into 'Orders')

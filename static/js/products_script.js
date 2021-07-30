@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll(".delete_button").forEach(item => {item.addEventListener('click', delete_product)});
 
     //'Add product' button event listener
-    document.querySelector("#add_product").addEventListener('click', add_product);
+    document.querySelector("#insert_product").addEventListener('click', add_product);
 
 });
 

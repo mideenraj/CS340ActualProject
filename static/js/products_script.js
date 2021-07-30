@@ -5,7 +5,7 @@ var baseURL = "http://flip3.engr.oregonstate.edu:1027/"
 
 
 
-// Master event listener (Page Load)
+// Master event listener (On page Load)
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("TEST_2 !!!")
 
@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //'Add product' button event listener
     document.querySelector("#insert_product").addEventListener('click', add_product);
+
+    //'Search' button evet listener
+    document.querySelector('.search_button').addEventListener('click', search_product);
 
 });
 
@@ -217,7 +220,7 @@ async function delete_product(){
 }
 
 
-// Function 5: 'New Product' callback function (Adds a new product to database)
+// Function 5: 'Add Product' button's callback function (Adds a new product to database)
 async function add_product(){
     console.log("TRIGERED")
 
@@ -307,5 +310,10 @@ async function add_product(){
 
 
 
+
+}
+
+// Function 6: 'Search' buttons' callback function
+async function search_product(){
 
 }

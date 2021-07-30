@@ -7,10 +7,10 @@ flip_server = 1         # Choose your flip server (1, 2, or 3)
 port_num = 1027         # Choose a port number of your choice
 
 # Step 2: initialize variables (Don't change any of these)
-home_subpage = f"http://flip{flip_server}.engr.oregonstate.edu:{port_num}/"
+baseUrl = f"http://flip{flip_server}.engr.oregonstate.edu:{port_num}/"
 customers_subpage = baseUrl + "customers"
 orders_subpage = baseUrl + "orders"
 products_subpage = baseUrl + "products"
 departments_subpage = baseUrl + "departments"
 seasons_subpage = baseUrl + "seasons"
-subpages = [home_subpage, customers_subpage, orders_subpage, products_subpage, departments_subpage, seasons_subpage]
+subpages = [baseUrl, customers_subpage, orders_subpage, products_subpage, departments_subpage, seasons_subpage]

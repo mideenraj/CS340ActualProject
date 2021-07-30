@@ -60,6 +60,7 @@ def root():
             prod['Total'] = float(prod['Total'])
             prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
             currentSeasonalStats.append(prod)
+            print(prod)
         payload.append(currentSeasonalStats)
 
 

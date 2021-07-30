@@ -40,7 +40,7 @@ async function cancelOrder(){
     var season = kidCells.item(2).textContent
     var quantity = kidCells.item(3).textContent
     var itemTotal = kidCells.item(4).textContent
-    console.log(kidCells, p_ID, o_id, season, quantity, itemTotal)
+    console.log(kidCells, p_ID, o_ID, season, quantity, itemTotal)
 
     
 

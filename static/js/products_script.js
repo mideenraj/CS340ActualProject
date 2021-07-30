@@ -373,6 +373,7 @@ async function search_product(){
     // ----- Step 4: Display results
         // First, delete any existing rows in search display table
     var searchtableRows = document.querySelector("#searchResultTable").children
+    console.log(searchtableRows)
     for (var tr of searchtableRows){
         if (tr.className != "doNotDelete"){
             tr.remove()

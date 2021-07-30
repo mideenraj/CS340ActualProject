@@ -143,7 +143,8 @@ def load_orders():
         query4 = f"SELECT LAST_INSERT_ID();"
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         orderID = cursor4.fetchall()
-        print("TEST_12", orderID)
+        orderID = str(orderID[0]['LAST_INSERT_ID()'])
+        
 
         # Step 5: Populate orderProducts
         for eachItem in response_obj["purchases"]:

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector("#insert_product").addEventListener('click', add_product);
 
     //'Search' button evet listener
-    document.querySelector('.search_button').addEventListener('click', search_product);
+    document.querySelector('#search_button').addEventListener('click', search_product);
 
 });
 

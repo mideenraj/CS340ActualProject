@@ -171,7 +171,7 @@ def load_orders():
 
         # Step 7: Return the row
         print("TEST_1:", last_insert)
-        return {last_insert[0]}
+        return {"lastOrder": last_insert[0]}
 
 
 

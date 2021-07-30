@@ -124,16 +124,24 @@ def load_orders():
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
         result1 = cursor1.fetchall()
         seasonID = result1[0]['seasonID']
-        print("TEST:", seasonID)
 
 
-        # Step 2: Execute the order
-        query = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', )"
+        # Step 2: Calculate today cost
+        total = 0
+        for prod in response_obj["purchases"]:
+            total += int(prod[0]) * int(prod[1])
+
+        # Step 3: Execute the order (aka insert into 'Orders')
+        query2 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}';)"
+        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        result2 = cursor2.fetchall()
+        print("TEST_4:", result2)
 
         # Step 2:
         # Step 3:
         # Step 4:
         # Step 5:
+
 
 
 

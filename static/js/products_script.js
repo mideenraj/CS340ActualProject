@@ -302,10 +302,10 @@ async function add_product(){
 
 
     // -------- Step 4: Clear input boxes
-    document.getElementById("new_name").textContent = ""
-    document.getElementById("new_department").textContent = ""
-    document.getElementById("new_price").textContent = ""
-    document.getElementById("new_unit").textContent = ""
+    document.getElementById("new_name").value = ""
+    document.getElementById("new_department").value = ""
+    document.getElementById("new_price").value = ""
+    document.getElementById("new_unit").value = ""
 
 
 

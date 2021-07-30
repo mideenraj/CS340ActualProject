@@ -82,7 +82,7 @@ async function place_order() {
     newRow.appendChild(total)
 
         //Append row to table
-    document.querySelector(".order_table").appendChild(newRow)
+    document.querySelector(".orders").appendChild(newRow)
 
 
     

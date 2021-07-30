@@ -180,8 +180,8 @@ def load_products():
             results = cursor.fetchall()
 
             # Step 2: Access new row through query and sent it back as a response
-            query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
-                    f"salePrice='{response_obj['price']}', unitType='{response_obj['unit']}';"
+            query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}' AND departmentID='{response_obj['department']}' " \
+                    f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
             payload = results[0]

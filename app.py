@@ -69,34 +69,43 @@ def root():
         query1 = "SELECT seasonID FROM Seasons;"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
         seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-        print("Test_1:", seasonIDs)
         sids = []
         for val in seasonIDs:
             sids.append(val['seasonID'])
 
         # --SubStep 2: xxx
-        currentAnnualStatus = []
+        currentAnnualStats = []
         for each_id in sids:
 
-            # Get Name of season
+            # --Get Name of season
             query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
             seasonName = cursor2.fetchall()[0]["seasonName"]
 
-            # Get all products and their total sales
+            # --Get all products and their total sales
             query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as " \
                      f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             productData = cursor3.fetchall()
             # print("TEST_2:", productData)
 
-            # Determine product with highest sale
+            # --Determine product with highest sale
             totals = []
             for val in productData:
-                totals.append(float(productData['Total']))
-
+                totals.append(float(val['Total']))
             maxTotal = max(totals)
             print("MAX:", maxTotal)
+
+            # --Choose top seller
+            for each in productData:
+                if float(each['Total']) == maxTotal:
+                    currentAnnualStats.append(each)
+
+        print("STATS:" currentAnnualStats)
+
+
+
+
 
 
 

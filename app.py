@@ -78,7 +78,7 @@ def root():
         currentAnnualStatus = []
         for each_id in sids:
             # Get Name of season
-            query2 = f"SELECT seasonName FROM FROM Seasons WHERE seasonID={each_id};"
+            query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
             seasonName = cursor2.fetchall()[0]["seasonName"]
 

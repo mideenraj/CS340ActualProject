@@ -115,7 +115,7 @@ def root():
                 productName = cursor3.fetchall()[0]["productName"]
                 print("THIS:", productName)
                 eachPS['productName'] = productName
-                del eachPS['productID']
+                del eachPS['ProductID']
             print("STATS:", currentAnnualStats)
 
 

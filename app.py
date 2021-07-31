@@ -27,7 +27,7 @@ def root():
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         payload.append(results)
 
-        # -----Step 3: Query(s) for populating 'Current seasons (summer 2021)'
+        # -----Step 3: Query(s) for populating 'Current seasons'
         # --SubStep 1: get ID of every product
         query1 = "SELECT productID FROM Products;"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
@@ -64,6 +64,13 @@ def root():
         payload.append(currentSeasonalStats)
 
 
+        # -----Step 4: Query(s) for populating 'Current year top sellers'
+        # --SubStep 1: get ID of every season
+        query1 = "SELECT seasonID FROM Seasons;"
+        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+
+        # --SubStep 2:
 
 
 

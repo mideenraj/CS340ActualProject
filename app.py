@@ -76,7 +76,7 @@ def root():
         # --SubStep 2: xxx
         currentAnnualStats = []
         for each_id in sids:
-            print("Each_id:", each_id)
+            # print("Each_id:", each_id)
             # --Get Name of season
             query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
@@ -87,7 +87,7 @@ def root():
                      f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             productData = cursor3.fetchall()
-            print("TEST_2:", productData)
+            # print("TEST_2:", productData)
             if productData == ():
                 break
 
@@ -96,11 +96,14 @@ def root():
             for val in productData:
                 totals.append(float(val['Total']))
             maxTotal = max(totals)
-            print("MAX:", maxTotal)
+            # print("MAX:", maxTotal)
 
             # --Choose top seller
             for each in productData:
                 if float(each['Total']) == maxTotal:
+                    each['Season'] = each_id
+                    each['Quantity'] = int(each['Quantity'])
+                    each['Total'] = float(each['Total'])
                     currentAnnualStats.append(each)
 
         print("STATS:", currentAnnualStats)

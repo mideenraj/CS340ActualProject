@@ -69,8 +69,13 @@ def root():
         query1 = "SELECT seasonID FROM Seasons;"
         cursor1 = db.execute_query(db_connection=db_connection, query=query1)
         seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+        print("Test_3:", seasonIDs)
+        sids = []
+        for val in seasonIDs:
+            sids.append(val['seasonID'])
 
         # --SubStep 2:
+
 
 
 

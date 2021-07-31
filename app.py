@@ -77,7 +77,7 @@ def root():
         # --SubStep 2: xxx
         currentAnnualStatus = []
         for each_id in sids:
-            print("TEST_3:", each_id)
+
             # Get Name of season
             query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
@@ -88,10 +88,16 @@ def root():
                      f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             productData = cursor3.fetchall()
-            print("TEST_3:", productData)
+            # print("TEST_2:", productData)
 
             # Determine product with highest sale
             totals = []
+            for val in productData:
+                totals.append(float(productData['Total']))
+
+            maxTotal = max(totals)
+            print("MAX:", maxTotal)
+
 
 
 

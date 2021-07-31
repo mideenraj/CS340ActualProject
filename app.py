@@ -46,7 +46,6 @@ def root():
         cursor3 = db.execute_query(db_connection=db_connection, query=query3)
         result3 = cursor3.fetchall()
         seasonalGross = float(result3[0]['totalCost'])
-        print("TEST_1:", seasonalGross)
 
         # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
         query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
@@ -60,7 +59,6 @@ def root():
             prod['Total'] = float(prod['Total'])
             prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
             currentSeasonalStats.append(prod)
-            print(prod)
         payload.append(currentSeasonalStats)
 
 
@@ -290,7 +288,6 @@ def load_orders():
         last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
 
         # Step 7: Return the row
-        print("TEST_1:", last_insert)
         return {"lastOrder": last_insert[0]}
 
 
@@ -406,7 +403,6 @@ def load_products():
                 row_list.append(val)
 
             payload = {"rows": row_list}
-            print(payload)
 
             # Step 4: return JSON object consisting on queried rows
             return payload

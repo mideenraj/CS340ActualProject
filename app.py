@@ -88,6 +88,8 @@ def root():
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             productData = cursor3.fetchall()
             print("TEST_2:", productData)
+            if productData == ():
+                break
 
             # --Determine product with highest sale
             totals = []

@@ -94,15 +94,18 @@
                     <tr>
                         <td>Season</td>
                         <td>Produce</td>
+                        <td>Units Sold</td>
                         <td>Total ($)</td>
                     </tr>
 
-
+                    {% for row in reports_data[3] %}
                     <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
+                        <th>{{row['season'}}</th>
+                        <td>{{row['product'}}</td>
+                        <td>{{row['quantity'}}</td>
+                        <td>{{row['total'}}</td>
                     </tr>
+                    {% endfor %}
 
 
                 </table>

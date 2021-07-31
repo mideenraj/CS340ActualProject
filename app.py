@@ -113,6 +113,7 @@ def root():
                 query3 = f"SELECT productName FROM Products WHERE productID={eachPS['ProductID']};"
                 cursor3 = db.execute_query(db_connection=db_connection, query=query3)
                 productName = cursor3.fetchall()[0]["productName"]
+                print("THIS:", productName)
                 eachPS['productName'] = productName
                 del eachPS['productID']
             print("STATS:", currentAnnualStats)

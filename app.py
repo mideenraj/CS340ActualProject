@@ -87,7 +87,7 @@ def root():
                      f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             productData = cursor3.fetchall()
-            # print("TEST_2:", productData)
+            print("TEST_2:", productData)
 
             # --Determine product with highest sale
             totals = []

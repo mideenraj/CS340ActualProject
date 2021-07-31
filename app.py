@@ -101,7 +101,7 @@ def root():
                 if float(each['Total']) == maxTotal:
                     currentAnnualStats.append(each)
 
-        print("STATS:" currentAnnualStats)
+        print("STATS:", currentAnnualStats)
 
 
 

@@ -101,12 +101,22 @@ def root():
             # --Choose top seller
             for each in productData:
                 if float(each['Total']) == maxTotal:
-                    each['Season'] = each_id
+                    each['Season'] = seasonName
                     each['Quantity'] = int(each['Quantity'])
                     each['Total'] = float(each['Total'])
                     currentAnnualStats.append(each)
 
-        print("STATS:", currentAnnualStats)
+            #print("STATS:", currentAnnualStats)
+
+            # --Convert productID to productName
+            for eachPS in currentAnnualStats:
+                query3 = f"SELECT productName FROM Products WHERE productID={eachPS['ProductID']};"
+                cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+                productName = cursor3.fetchall()[0]["productName"]
+                eachPS['productName'] = productName
+                del eachPS['productID']
+            print("STATS:", currentAnnualStats)
+
 
 
 

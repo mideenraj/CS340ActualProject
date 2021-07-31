@@ -76,7 +76,7 @@ def root():
         # --SubStep 2: xxx
         currentAnnualStats = []
         for each_id in sids:
-
+            print("Each_id:", each_id)
             # --Get Name of season
             query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)

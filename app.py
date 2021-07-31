@@ -108,8 +108,10 @@ def root():
 
             #print("STATS:", currentAnnualStats)
 
+
             # --Convert productID to productName
             for eachPS in currentAnnualStats:
+                print("TEST_32:", eachPS['ProductID'])
                 query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
                 cursor3 = db.execute_query(db_connection=db_connection, query=query3)
                 productName = cursor3.fetchall()[0]["productName"]

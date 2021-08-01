@@ -215,7 +215,7 @@ def load_customers():
             # Step 4: Return response
             return payload
 
-        # Elif delete request
+        # If delete request...
         elif response_obj["action"] == 'delete':
 
             # Step 1: Send query to delete chosen row
@@ -226,6 +226,24 @@ def load_customers():
 
             # Step 2: Send bogus response
             return {"Status": "Complete"}
+
+        # If insert request...
+        elif response_obj["action"] == 'insert':
+
+            # Step 1: Send query
+            query = f"INSERT INTO Customers (fName, lName, birthDate, zipCode) VALUES " \
+                    f"('{response_obj['fName']}', '{response_obj['lName']}', '{response_obj['birthDate']}', '{response_obj['zipCode']}');"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+
+            # Step 2: Access new row through query and sent it back as a response
+            query = f"SELECT * FROM Customers WHERE fName='{response_obj['fName']}' AND lName='{response_obj['lName']}' " \
+                    f"AND birthDate='{response_obj['birthDate']}' AND zipCode='{response_obj['zipCode']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            payload = results[0]
+            payload["birthDate"] = response_obj['birthDate']  # Since dob is of date Type, change it to str
+            return payload
 
 
 

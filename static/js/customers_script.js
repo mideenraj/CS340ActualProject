@@ -178,7 +178,84 @@ async function deleteCustomer(){
 // Function 2: 'Submit' button's callback function
 async function insertCustomer(){
 
-    // Step 1: 
+    // -------- Step 1: Formulate and make request
+    var url = products_subpage
+    var payload = {
+        "action" : "insert",
+        "name" : document.getElementById("fName").value,
+        "department" : document.getElementById("lName").value,
+        "price" : document.getElementById("dob").value,
+        "unit" : document.getElementById("zipCode").value
+    }
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+    
+    // -------- Step 2: Append data to table (By creating new row with the returned response)
+    var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted
+    var new_row = document.createElement("tr")
+    new_row.setAttribute('class', 'customer_row')
+    new_row.setAttribute('id', data['customerID'])
+        // --Create customerID cell
+    var id_cell = document.createElement('td')
+    id_cell.textContent = data['customerID']
+    new_row.appendChild(id_cell)
+
+        // --Create first name cell
+    var fname_cell = document.createElement('td')
+    fname_cell.textContent = data['fName']
+    new_row.appendChild(fname_cell)
+
+        // --Create last name cell
+    var lname_cell = document.createElement('td')
+    lname_cell.textContent = data['lName']
+    new_row.appendChild(lname_cell)
+
+        // --Create dob cell
+    var dob_cell = document.createElement('td')
+    dob_cell.textContent = data['birthDate']
+    new_row.appendChild(dob_cell)
+
+        // --Create unitType cell
+    var zip_cell = document.createElement('td')
+    zip_cell.textContent = data['zipCode']
+    new_row.appendChild(zip_cell)
+
+        // --Create Modify cell (Buttons)
+    var button_cell = document.createElement('td')
+        // --Update Button
+    var update_butt = document.createElement('button')
+    update_butt.setAttribute('class', 'updateCustomer')
+    update_butt.setAttribute('id', data['customerID'])
+    update_butt.textContent = "Update"
+    button_cell.append(update_butt)
+        // --Delete Button
+    var delete_butt = document.createElement('button')
+    delete_butt.setAttribute('class', 'deleteCustomer')
+    delete_butt.setAttribute('id', data['customerID'])
+    delete_butt.textContent = "Delete"
+    button_cell.append(delete_butt)
+
+    new_row.append(button_cell)
+
+    input_row.insertAdjacentElement('beforebegin', new_row)  // --Append row to table
+
+    // -------- Step 3: Add event listeners for the new buttons
+    update_butt.addEventListener('click', updateCustomer)
+    delete_butt.addEventListener('click', deleteCustomer)
+
+    // -------- Step 4: Clear input boxes
+    document.getElementById("fName").value = ""
+    document.getElementById("lName").value = ""
+    document.getElementById("dob").value = ""
+    document.getElementById("zipCode").value = ""
+
+
+
 
 }
 

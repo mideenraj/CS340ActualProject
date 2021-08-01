@@ -228,7 +228,6 @@ async function delete_product(){
 
 // Function 5: 'Add Product' button's callback function (Adds a new product to database)
 async function add_product(){
-    console.log("TRIGERED")
 
     // -------- Step 1: Formulate and make request
     var url = products_subpage

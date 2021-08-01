@@ -61,7 +61,6 @@ def root():
             currentSeasonalStats.append(prod)
         payload.append(currentSeasonalStats)
 
-
         # -----Step 4: Query(s) for populating 'Current year top sellers'
         # --SubStep 1: get ID of every season
         query1 = "SELECT seasonID FROM Seasons;"
@@ -114,9 +113,6 @@ def root():
 
         # --SubStep 3: append data to payload
         payload.append(currentAnnualStats)
-
-
-
 
         # -----Step 4: Print query results if Debugging
         debug = False

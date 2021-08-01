@@ -205,6 +205,13 @@ def load_customers():
 
 
 
+
+
+
+
+
+
+
 # Route 3: 'Orders' subpage
 @app.route('/orders', methods=['POST', 'GET'])
 def load_orders():

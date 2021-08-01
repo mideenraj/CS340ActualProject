@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
+
+
 // ----------------------------------------------- Function(s) block -----------------------------------------------
 // Function 1: 'Update' button's callback function
 async function updateCustomer(){

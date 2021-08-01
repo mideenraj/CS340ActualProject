@@ -159,35 +159,49 @@ def root():
 
 
 # Route 2: 'Customers' subpage
-@app.route('/customers')
+@app.route('/customers', methods=['POST', 'GET'])
 def load_customers():
 
-    # Step 1: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
+    # If request for page load....
+    if request.method == 'GET':
+        # Step 1: append all subpage URLs to payload
+        payload = []
+        payload.append(subpages)
 
-    # Step 2: Write query
-    query = "SELECT * FROM Customers;"
+        # Step 2: Write query
+        query = "SELECT * FROM Customers;"
 
-    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
+        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 4: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
-    payload.append(results)
+        # Step 4: Access result (This returns a tuple of selected rows from query)
+        results = cursor.fetchall()
+        payload.append(results)
 
-    # Step 5: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
+        # Step 5: Print query results if Debugging
+        debug = False
+        if debug:
+            print("\n")
+            print(f"Type:{type(results)}")
+            print(f"Length: {len(results)}")
+            print("Result:")
+            for row in results:
+                print(row)
 
-    # Step 6: The specified file is rendered with the queried data
-    return render_template("customers_subpage.j2", customer_data=payload)
+        # Step 6: The specified file is rendered with the queried data
+        return render_template("customers_subpage.j2", customer_data=payload)
+
+    elif request.method == 'POST':
+        
+
+
+
+
+
+
+
+
+
 
 
 # Route 3: 'Orders' subpage

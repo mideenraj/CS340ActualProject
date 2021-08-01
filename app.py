@@ -192,7 +192,25 @@ def load_customers():
         return render_template("customers_subpage.j2", customer_data=payload)
 
     elif request.method == 'POST':
-        pass
+
+        if response_obj["action"] == 'update':
+            # Step 1: Sent query and access result
+            query = f"UPDATE Customers SET productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
+                    f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+
+            # Step 2: Access updated row from database
+            query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query2)
+            results = cursor.fetchall()
+
+            # Step 3: create payload with returned data
+            payload = results[0]
+            payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
+            # print("!!! Payload response: ", payload)          # For Debugging
+
+            # Step 4: Return response
+            return payload
 
 
 

@@ -132,7 +132,10 @@ async function updateCustomer(){
         // --Append row to Table (right underneath the row that is being edited)
     rowToEdit.insertAdjacentElement('afterend', editRow)
 
-    
+
+    // -------- Step 5: Assign listener to 'Change' and 'Cancel' Buttons
+    document.getElementById(makeChange.id).addEventListener('click', submit_edit)
+    document.getElementById(cancelChange.id).addEventListener('click', cancel_edit)
 
 }
 
@@ -149,4 +152,65 @@ async function insertCustomer(){
 
     // Step 1: 
 
+}
+
+
+// Function 2: 'Change' button's callback function
+async function submit_edit(){
+    // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
+    // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
+
+    // -------- Step 1: access modified values and initialze layload
+    var payload = {};
+    payload.action = "update"
+    if (this.id.length == 12){          // If ID is 1 digit
+        payload.ID = this.id[this.id.length - 1]
+    } else {                            // If ID is 2 digits
+        payload.ID = this.id.slice(11, 13)
+    }
+                
+    payload.fname = document.getElementById("new_fname").value
+    payload.lname = document.getElementById("new_lname").value
+    payload.dob = document.getElementById("new_dob").value
+    payload.zip = document.getElementById("new_zip").value
+
+
+    // -------- Step 2: Formulate request and sent it
+    var url = customers_subpage
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+    // console.log("!!! Server response:", data)       // For debugging
+
+    // -------- Step 3: Update the displayed data
+        // -- First, access the row to update
+    all_rows = document.querySelectorAll(".customer_row")
+    for (var row of all_rows){
+        if (row.id == productID){
+            rowToEdit = row
+            break
+        }       
+    }
+    // -- Second, edit the row
+    rowCells = rowToEdit.children
+    rowCells.item(0).textContent = data['productID']
+    rowCells.item(1).textContent = data['productName']
+    rowCells.item(2).textContent = data['departmentID']
+    rowCells.item(3).textContent = data['salePrice']
+    rowCells.item(4).textContent = data['unitType']
+
+
+    // -------- Step 4: Delete the Edit row
+    document.getElementById("editBlock").remove()
+
+
+}
+
+// Function 3:'Cancel' button's callback function (Cancels an edit)
+async function cancel_edit(){
+    document.getElementById("editBlock").remove()
 }

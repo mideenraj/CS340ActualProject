@@ -113,7 +113,7 @@ async function updateCustomer(){
     editRow.appendChild(zip_editcell)
         // --6. Make 'Change' Button
     var makeChange = document.createElement('button')
-    makeChange.id = "submit_edit" + productID           // Store ID of edit row at end of row
+    makeChange.id = "submit_edit" + customerID           // Store ID of edit row at end of row
     makeChange.textContent = "Change"
     makeChange.style.backgroundColor = "yellow"
     makeChange.style.width = "50%"

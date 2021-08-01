@@ -130,7 +130,7 @@ async function updateCustomer(){
 
     
 
-
+}
 
 
 // Function 1: 'Delete' button's callback function

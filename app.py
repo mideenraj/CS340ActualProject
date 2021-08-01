@@ -197,7 +197,7 @@ def load_customers():
 
         if response_obj["action"] == 'update':
             # Step 1: Sent query and access result
-            query = f"UPDATE Customers SET fName='{response_obj['fname']}', lName='{response_obj['lName']}', " \
+            query = f"UPDATE Customers SET fName='{response_obj['fname']}', lName='{response_obj['lname']}', " \
                     f"birthDate='{response_obj['dob']}', zipCode='{response_obj['zip']}' WHERE customerID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connection, query=query)
 

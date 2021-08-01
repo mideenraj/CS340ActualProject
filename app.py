@@ -193,6 +193,8 @@ def load_customers():
 
     elif request.method == 'POST':
 
+        response_obj = request.json
+
         if response_obj["action"] == 'update':
             # Step 1: Sent query and access result
             query = f"UPDATE Customers SET fName='{response_obj['fname']}', lName='{response_obj['lName']}', " \

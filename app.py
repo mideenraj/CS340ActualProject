@@ -195,6 +195,7 @@ def load_customers():
 
         response_obj = request.json
 
+        # If update request...
         if response_obj["action"] == 'update':
             # Step 1: Sent query and access result
             query = f"UPDATE Customers SET fName='{response_obj['fname']}', lName='{response_obj['lname']}', " \
@@ -208,12 +209,23 @@ def load_customers():
 
             # Step 3: create payload with returned data
             payload = results[0]
-            print("TEST:", payload)
+            #print("TEST_1:", payload)          # For Debugging
             payload["birthDate"] = response_obj['dob'] # Since salePrice is of Date Type, change it to str
-            # print("!!! Payload response: ", payload)          # For Debugging
 
             # Step 4: Return response
             return payload
+
+        # Elif delete request
+        elif response_obj["action"] == 'delete':
+
+            # Step 1: Send query to delete chosen row
+            query = f"DELETE FROM Customers WHERE customerID ='{response_obj['rowToDelete']}';"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+            # print("TEST_3", results)  # For debugging
+
+            # Step 2: Send bogus response
+            return {"Status": "Complete"}
 
 
 

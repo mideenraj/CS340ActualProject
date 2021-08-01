@@ -143,11 +143,39 @@ async function updateCustomer(){
 // Function 1: 'Delete' button's callback function
 async function deleteCustomer(){
 
-    // Step 1: 
+    // -------- Step 1: Make request to delete row from databse
+    var url = customers_subpage
+    var payload = {"rowToDelete": this.id, "action":"delete"}
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+    console.log(data)
+
+
+    // -------- Step 2: Delete row from HTML
+    all_rows = document.querySelectorAll(".customer_row")
+    for (var row of all_rows){
+        if (row.id == this.id){
+            rowToDelete = row
+            rowToDelete.remove()
+            break
+        }       
+    }
+
+
+
+
+
+
+
 
 }
 
-// Function 3: 'Submit' button's callback function
+// Function 2: 'Submit' button's callback function
 async function insertCustomer(){
 
     // Step 1: 
@@ -155,7 +183,15 @@ async function insertCustomer(){
 }
 
 
-// Function 2: 'Change' button's callback function
+
+
+
+
+
+
+
+
+// Function x: 'Change' button's callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
     // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
@@ -209,7 +245,7 @@ async function submit_edit(){
 
 }
 
-// Function 3:'Cancel' button's callback function (Cancels an edit)
+// Function x:'Cancel' button's callback function (Cancels an edit)
 async function cancel_edit(){
     document.getElementById("editBlock").remove()
 }

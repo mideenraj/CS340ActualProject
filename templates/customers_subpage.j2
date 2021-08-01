@@ -39,13 +39,13 @@
 
         <!-- Sample data -->
         {% for row in customer_data[1] %}
-        <tr>
+        <tr class="customer_row" id={{row['customerID']}}>
             <td>{{row['customerID']}}</td>
             <td>{{row['fName']}}</td>
             <td>{{row['lName']}}</td>
             <td>{{row['birthDate']}}</td>
             <td>{{row['zipCode']}}</td>
-            <td><button>Update</button><button>Delete</button></td>
+            <td><button class="updateCustomer">Update</button><button class="deleteCustomer">Delete</button></td>
         </tr>
         {% endfor %}
 

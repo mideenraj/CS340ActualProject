@@ -60,7 +60,6 @@ async function update_product (){
         }       
     }
 
-
     // -------- Step 4: Create and display the edit block
     // --Access current value of respective rows in selected row
     rowCells = rowToEdit.children

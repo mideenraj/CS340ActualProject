@@ -190,23 +190,22 @@ async function submit_edit(){
         // -- First, access the row to update
     all_rows = document.querySelectorAll(".customer_row")
     for (var row of all_rows){
-        if (row.id == productID){
+        if (row.id == payload.ID){
             rowToEdit = row
             break
-        }       
+        }
     }
     // -- Second, edit the row
     rowCells = rowToEdit.children
-    rowCells.item(0).textContent = data['productID']
-    rowCells.item(1).textContent = data['productName']
-    rowCells.item(2).textContent = data['departmentID']
-    rowCells.item(3).textContent = data['salePrice']
-    rowCells.item(4).textContent = data['unitType']
+    rowCells.item(0).textContent = data['customerID']
+    rowCells.item(1).textContent = data['fName']
+    rowCells.item(2).textContent = data['lName']
+    rowCells.item(3).textContent = data['birthDate']
+    rowCells.item(4).textContent = data['zipCode']
 
 
     // -------- Step 4: Delete the Edit row
     document.getElementById("editBlock").remove()
-
 
 }
 

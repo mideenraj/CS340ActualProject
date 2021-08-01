@@ -4,7 +4,7 @@
 # ----------------- Site URL construction -----------------
 # ---Step 1: Specify server and port number (!!! Change these to match your server and port)
 flip_server = 3         # Choose your flip server (1, 2, or 3)
-port_num = 1028        # Choose a port number of your choice
+port_num = 10027        # Choose a port number of your choice
 
 
 # ---Step 2: initialize variables (!!! Don't change any of these)

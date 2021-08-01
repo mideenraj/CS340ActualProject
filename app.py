@@ -192,6 +192,7 @@ def load_customers():
         return render_template("customers_subpage.j2", customer_data=payload)
 
     elif request.method == 'POST':
+        pass
 
 
 

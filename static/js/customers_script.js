@@ -51,6 +51,7 @@ async function updateCustomer(){
     // -------- Step 3: Determine row to edit
     all_rows = document.querySelectorAll(".customer_row")
     for (var row of all_rows){
+        console.log("THIS:", row.id)
         if (row.id == customerID){
             console.log("TRIG")
             rowToEdit = row

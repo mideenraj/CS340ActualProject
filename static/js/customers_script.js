@@ -46,12 +46,13 @@ async function updateCustomer(){
     }
 
     // -------- Step 2: store ID of row to edit
-    productID = this.id
+    customerID = this.id
 
     // -------- Step 3: Determine row to edit
     all_rows = document.querySelectorAll(".customer_row")
     for (var row of all_rows){
-        if (row.id == productID){
+        if (row.id == customerID){
+            console.log("TRIG")
             rowToEdit = row
             break
         }       

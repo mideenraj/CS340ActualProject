@@ -209,7 +209,7 @@ def load_customers():
             # Step 3: create payload with returned data
             payload = results[0]
             print("TEST:", payload)
-            payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
+            payload["birthDate"] = response_obj['fname'] # Since salePrice is of Date Type, change it to str
             # print("!!! Payload response: ", payload)          # For Debugging
 
             # Step 4: Return response

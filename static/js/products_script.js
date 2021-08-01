@@ -149,10 +149,8 @@ async function submit_edit(){
     payload.action = "update"
     if (this.id.length == 12){          // If ID is 1 digit
         payload.ID = this.id[this.id.length - 1]
-        var productID = this.id[this.id.length - 1]
     } else {                            // If ID is 2 digits
         payload.ID = this.id.slice(11, 13)
-        var productID = this.id.slice(11, 13)
     }
                 
     payload.name = document.getElementById("newName").value
@@ -176,7 +174,7 @@ async function submit_edit(){
         // -- First, access the row to update
     all_rows = document.querySelectorAll(".product_row")
     for (var row of all_rows){
-        if (row.id == productID){
+        if (row.id == payload.ID){
             rowToEdit = row
             break
         }       

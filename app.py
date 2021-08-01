@@ -408,10 +408,6 @@ def load_products():
             return payload
 
 
-
-    # ---------------------------------------------------------------------------------------------
-
-
 # Route 5: 'Departments' subpage
 @app.route('/departments')
 def load_departments():

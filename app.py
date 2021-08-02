@@ -579,7 +579,7 @@ def load_seasons():
             results = cursor3.fetchall()
             payload = results[0]
             print("TESTING_1:", payload)
-            payload['startDate'] = tuple(payload['startDate'])
+            payload['startDate'] = str(payload['startDate'])
             print("TESTING_2:", payload)
 
 

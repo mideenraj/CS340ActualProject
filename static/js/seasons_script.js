@@ -65,12 +65,12 @@ async function addSeason(){
     new_row.appendChild(name_cell)
 
         // --Create Start date cell
-    var department_cell = document.createElement('td')
+    var start_cell = document.createElement('td')
     start_cell.textContent = data['startDate']
     new_row.appendChild(start_cell)
 
         // --Create End Date cell
-    var price_cell = document.createElement('td')
+    var end_cell = document.createElement('td')
     end_cell.textContent = data['endDate']
     new_row.appendChild(end_cell)
 
@@ -107,6 +107,4 @@ async function addSeason(){
     document.getElementById("eDate").value = ""
 
     
-
-
 }

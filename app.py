@@ -234,20 +234,6 @@ def root():
             # result = cursor1.fetchall()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Route 2: 'Customers' subpage
 @app.route('/customers', methods=['POST', 'GET'])
 def load_customers():

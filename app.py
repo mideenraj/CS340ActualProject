@@ -562,7 +562,7 @@ def load_seasons():
         if response_obj["action"] == 'insert':
             # Step 1: Send query
             query = f"INSERT INTO Seasons (name, startDate, endDate) VALUES " \
-                    f"('{response_obj['sName']}', '{response_obj['sDate']}', '{response_obj['eDate']}');"
+                    f"('{response_obj['name']}', '{response_obj['start']}', '{response_obj['end']}');"
             cursor = db.execute_query(db_connection=db_connection, query=query)
             results = cursor.fetchall()
 

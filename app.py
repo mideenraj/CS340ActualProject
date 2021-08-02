@@ -130,7 +130,7 @@ def root():
         payload.append(products)
 
         # -Second, get all Order ID and store to payload
-        query4 = f"SELECT orderID FROM Orders;"
+        query5 = f"SELECT orderID FROM Orders;"
         cursor5 = db.execute_query(db_connection=db_connection, query=query5)
         orderIDs = cursor5.fetchall()
         # -Store in list, and finally attach to payload
@@ -140,7 +140,7 @@ def root():
         payload.append(orders)
 
         # -Second, get all Order ID and store to payload
-        query4 = f"SELECT seasonID FROM Seasons;"
+        query6 = f"SELECT seasonID FROM Seasons;"
         cursor6 = db.execute_query(db_connection=db_connection, query=query6)
         seasonInfo = cursor6.fetchall()
         # -Store in list, and finally attach to payload

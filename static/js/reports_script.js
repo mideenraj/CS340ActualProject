@@ -270,9 +270,20 @@ async function addItem(){
     total_cell.textContent = response['total']
     newRow.appendChild(total_cell)
 
+        // cancel button
+    var cancel_cell = document.createElement('td')
+    cancelOrder.setAttribute('class', 'cancelItem')
+    cancelOrder.setAttribute('id', response['oid'])
+    cancel_cell.textContent = 'Cancel'
+    newRow.appendChild(cancel_cell)
+    cancel_cell.addEventListener('click', cancelOrder)
+
     // Find input row
     var input_row = document.querySelector("#input_row")
     input_row.insertAdjacentElement('beforebegin', newRow)  // --Append row to table
+
+
+    //
 
 
 

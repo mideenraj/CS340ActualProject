@@ -213,7 +213,7 @@ def root():
                 "oid": response_obj['oid'],
                 "sid": response_obj['sid'],
                 "quantity": response_obj['quantity'],
-                "total": response_obj['total'],
+                "total": response_obj['total']
             }
 
             # Step 3: return data

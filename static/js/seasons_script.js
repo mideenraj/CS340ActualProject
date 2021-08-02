@@ -32,51 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: Add a season
 async function addSeason(){
 
-    // -------- Step 1: Formulate and make request
-    var url = seasons_subpage
-    var payload = {
-        "action" : "insert",
-        "name" : document.getElementById("sName").value,
-        "start" : document.getElementById("sDate").value,
-        "end" : document.getElementById("eDate").value
-    }
-    var fetchdata = {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {'Content-Type' : 'application/json'}
-    }
-    var response = await fetch(url, fetchdata)
-    var data = await response.json()
 
-    // -------- Step 2: Append data to table (By creating new row with the returned response)
-    var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted
-    var new_row = document.createElement("tr")
-    new_row.setAttribute('class', 'season_row')
-    new_row.setAttribute('id', data['seasonID'])
-
-        // --Create ID cell
-    var id_cell = document.createElement('td')
-    id_cell.textContent = data['seasonID']
-    new_row.appendChild(id_cell)
-
-        // --Create Name cell
-    var name_cell = document.createElement('td')
-    name_cell.textContent = data['seasonName']
-    new_row.appendChild(name_cell)
-
-        // --Create Start date cell
-    var start_cell = document.createElement('td')
-    start_cell.textContent = data['startDate']
-    new_row.appendChild(start_cell)
-
-        // --Create End Date cell
-    var end_cell = document.createElement('td')
-    end_cell.textContent = data['endDate']
-    new_row.appendChild(end_cell)
-
-
-
-    input_row.insertAdjacentElement('beforebegin', new_row)  // --Append row to table
 
 
 

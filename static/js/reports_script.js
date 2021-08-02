@@ -271,7 +271,7 @@ async function addItem(){
     newRow.appendChild(total_cell)
 
         // cancel button
-    var cancel_cell = document.createElement('td')
+    var cancel_cell = document.createElement('button')
     cancel_cell.setAttribute('class', 'cancelItem')
     cancel_cell.setAttribute('id', response['oid'])
     cancel_cell.textContent = 'Cancel'

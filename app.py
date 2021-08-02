@@ -150,9 +150,6 @@ def root():
         payload.append(seasons)
 
 
-
-
-
         # -----Step 5: Render HomePage
         return render_template("index.j2", reports_data=payload)
 

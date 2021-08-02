@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll(".cancelItem").forEach(item => {item.addEventListener('click', cancelOrder)});
 
 
-    // When
+    // When product in dropdown in changed
+    document.querySelector("#select_productID").addEventListener('change', onProductChange)
 
     
 
@@ -75,6 +76,6 @@ async function cancelOrder(){
 
 
 async function onProductChange(){
-
+    console.log("TEST ! ! !")
 }
 

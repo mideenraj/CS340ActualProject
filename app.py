@@ -671,5 +671,5 @@ def load_seasons():
 
 # -------------------- Listener --------------------
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', port_num))
+    port = port_num
     app.run(port=port, debug=True)

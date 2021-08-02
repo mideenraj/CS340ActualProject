@@ -74,37 +74,11 @@ async function addSeason(){
     end_cell.textContent = data['endDate']
     new_row.appendChild(end_cell)
 
-    /*
-        // --Create Modify cell (Buttons)
-    var button_cell = document.createElement('td')
-        // --Update Button
-    var update_butt = document.createElement('button')
-    update_butt.setAttribute('class', 'update_button')
-    update_butt.setAttribute('id', data['productID'])
-    update_butt.textContent = "Update"
-    button_cell.append(update_butt)
-        // --Delete Button
-    var delete_butt = document.createElement('button')
-    delete_butt.setAttribute('class', 'delete_button')
-    delete_butt.setAttribute('id', data['productID'])
-    delete_butt.textContent = "Delete"
-    button_cell.append(delete_butt)
 
-    new_row.append(button_cell)
-    */
 
     input_row.insertAdjacentElement('beforebegin', new_row)  // --Append row to table
 
-    /*
-    // -------- Step 3: Add event listeners for the new buttons
-    update_butt.addEventListener('click', update_product)
-    delete_butt.addEventListener('click', delete_product)
-    */
 
-    // -------- Step 4: Clear input boxes
-    //document.getElementById("sName").value = ""
-    //document.getElementById("sDate").value = ""
-    //document.getElementById("eDate").value = ""
 
     
 }

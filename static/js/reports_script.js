@@ -161,7 +161,6 @@ async function onQuantityChange(key){
 
 // Function 4:
 async function addItem(){
-    console.log("TEST _ 1")
 
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelectorAll("#select_orderID").textContent
@@ -185,6 +184,7 @@ async function addItem(){
     if (existence == false){
         return
     }
+    console.log("TEST _ 1")
 
     // Step 4: Exit if quantity is 0
     var quantity = document.querySelector("#select_quantity").value

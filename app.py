@@ -184,7 +184,7 @@ def root():
             # ---Step 3: return
             return {"status":"complete"}
 
-        # If request for product price
+        # If request for product price...
         elif response_obj["action"] == 'getPrice':
 
             # Step 1: Get price
@@ -192,6 +192,24 @@ def root():
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
             price = float(cursor1.fetchall()[0]['salePrice'])
             return {"salePrice":price}
+
+        # If inserting item...
+        elif response_obj["action"] == 'insertItem':
+
+            # Step 1: Insert into OrderProducts
+            query1 = f"INSERT INTO OrderProducts (productID, orderID, seasonID, quantitySold, productTotal) VALUES" \
+                     f"'{response_obj['pid']}', '{esponse_obj['oid']}', '{esponse_obj['sid']}', " \
+                     f"'{esponse_obj['quantity']}', '{esponse_obj['total']}';"
+            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+
+            # Step 2: return sent data
+            payload = response_obj
+            return payload
+
+
+
+
+
 
 
 

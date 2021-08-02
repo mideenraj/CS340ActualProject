@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // When quantity is changed
     document.querySelector("#select_quantity").addEventListener('keyup', onQuantityChange)
+
+    // When add is clicked
+    document.querySelector("#insertItem").addEventListener('click', addItem)
     
 
 });
@@ -78,7 +81,7 @@ async function cancelOrder(){
 
 }
 
-
+// Function 2:
 async function onProductChange(){
 
     // Step 1: get price of selected product
@@ -110,8 +113,9 @@ async function onProductChange(){
 
 }
 
-
+// Function 3:
 async function onQuantityChange(key){
+
 
     // Continue only if a number key was pressed (Keycode range: [48, 57])
     if (key.keyCode >= 48 && key.keyCode <= 57){
@@ -151,6 +155,125 @@ async function onQuantityChange(key){
     }
 
     
+
+
+}
+
+// Function 4:
+async function addItem(){
+
+    // Step 1: Access choosen order/season IDs
+    var orderID = document.querySelectorAll("#select_orderID").textContent
+    var seasonID = document.querySelectorAll("#select_seasonID").textContent
+
+    // Step 2: check if order/season pair exist in log
+    var existence = false
+    var logs = document.querySelectorAll(".item_row")
+    for (var row of logs){
+        // Get all children of the current row
+        var cells = row.children
+
+        // Compare with selected pair
+        if (cells.item(1) == orderID && cells.item(2) == seasonID){
+            existence = true
+            break
+        }
+    }
+
+    // Step 3: exit if the pair does not exist, else continue
+    if (existence == false){
+        return
+    }
+
+    // Step 4: Exit if quantity is 0
+    var quantity = document.querySelector("#select_quantity").value
+    if (quantity == 0 || quantity == ""){
+        return
+    }
+
+
+    // Step 5: get price of product
+    var url = baseURL
+        payload = {
+            "action":"getPrice",
+            'product': product
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+        var response = await fetch(url, fetchdata)
+        var data = await response.json()
+        console.log(data)
+        var price = data['salePrice']
+
+
+    // Step 5: Insert order into database
+    var pid = document.querySelector("#select_productID").value
+    var oid = document.querySelector("#select_orderID").value
+    var sid = document.querySelector("#select_seasonID").value
+    var quantity = document.querySelector("#select_quantity").value
+    var total = (price*quantity).toFixed(2)
+    var payload = {
+        "action": "insertItem",
+        "pid": pid,
+        "oid": oid,
+        "sid": sid,
+        "quantity": quantity,
+        "total": total
+    }
+    var url = reports
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+
+
+    // Step 6: insert new row into table
+        // row
+    var newRow = document.createElement('tr')
+    newRow.setAttribute('class', 'item_row')
+
+        // pid
+    var pid_cell = document.createElement('td')
+    pid_cell.textContent = response['pid']
+    newRow.appendChild(pid_cell)
+
+        // oid
+    var oid_cell = document.createElement('td')
+    oid_cell.textContent = response['oid']
+    oid_cell.setAttribute('id', 'oID')
+    newRow.appendChild(oid_cell)
+
+        // sid
+    var sid_cell = document.createElement('td')
+    sid_cell.textContent = response['sid']
+    sid_cell.setAttribute('id', 'sID')
+    newRow.appendChild(sid_cell)
+
+        // quantity
+    var quantity_cell = document.createElement('td')
+    quantity_cell.textContent = response['quantity']
+    newRow.appendChild(quantity_cell)
+
+        // total
+    var total_cell = document.createElement('td')
+    total_cell.textContent = response['total']
+    newRow.appendChild(total_cell)
+
+    // Find input row
+    var input_row = document.querySelector("#input_row")
+    input_row.insertAdjacentElement('beforebegin', newRow)  // --Append row to table
+
+
+
+
+    
+
+
 
 
 }

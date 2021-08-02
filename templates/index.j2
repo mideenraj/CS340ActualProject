@@ -45,10 +45,10 @@
 
                 <!--Table data-->
                 {% for row in reports_data[1] %}
-                <tr>
+                <tr class="item_row">
                     <td>{{row['productID']}}</td>
-                    <td>{{row['orderID']}}</td>
-                    <td>{{row['seasonID']}}</td>
+                    <td id="oID">{{row['orderID']}}</td>
+                    <td id="sID">{{row['seasonID']}}</td>
                     <td>{{row['quantitySold']}}</td>
                     <td>{{row['productTotal']}}</td>
                     <td><button class="cancelItem" id={{row['orderID']}}>Cancel</button></td>
@@ -56,7 +56,7 @@
                 {% endfor %}
 
                 <!--Table data-->
-                <tr>
+                <tr id="input_row">
 
                     <!--Product ID-->
                     <td>

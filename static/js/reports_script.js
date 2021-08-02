@@ -120,11 +120,14 @@ async function onQuantityChange(key){
         // Step 1: Access quantity value
         var quantity = document.querySelector("#select_quantity").value
 
+        // Step 2: Access current product
+        var product = document.querySelector("#select_productID").value
+
         // Step 2: Get price of currently selected product
         var url = baseURL
         payload = {
             "action":"getPrice",
-            'product': this.value
+            'product': product
         }
         var fetchdata = {
             method: 'POST',

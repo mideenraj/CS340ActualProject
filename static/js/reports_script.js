@@ -100,7 +100,8 @@ async function onProductChange(){
     var quantity = document.querySelector("#select_quantity").value
     console.log(quantity)
     console.log(price)
-    var total = quantity*price
+    var total = (quantity*price).toFixed(2)
+
     
     // Step 3: display total
     document.querySelector("#totalPrice").textContent = total
@@ -141,7 +142,7 @@ async function onQuantityChange(key){
 
 
         // Step 3: display total
-        var total = quantity*price
+        var total = (quantity*price).toFixed(2)
         document.querySelector("#totalPrice").textContent = total
 
 

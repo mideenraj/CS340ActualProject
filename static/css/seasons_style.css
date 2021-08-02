@@ -62,3 +62,7 @@ a:hover {
   td, th{
     width: 100px;
   }
+
+  #submit_button{
+    width: 100%;
+}

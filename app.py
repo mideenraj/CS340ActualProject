@@ -188,10 +188,11 @@ def root():
         elif response_obj["action"] == 'getPrice':
 
             # Step 1: Get price
+            print("TEST_1:", response_obj['product'])
             query1 = f"SELECT salePrice FROM Products WHERE productName='{response_obj['product']}';"
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
             price = float(cursor1.fetchall()[0]['salePrice'])
-
+            print("TEST_3:", price)
             return {"salePrice":price}
 
 

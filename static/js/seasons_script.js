@@ -102,9 +102,9 @@ async function addSeason(){
     */
 
     // -------- Step 4: Clear input boxes
-    document.getElementById("sName").value = ""
-    document.getElementById("sDate").value = ""
-    document.getElementById("eDate").value = ""
+    //document.getElementById("sName").value = ""
+    //document.getElementById("sDate").value = ""
+    //document.getElementById("eDate").value = ""
 
     
 }

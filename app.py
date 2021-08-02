@@ -229,6 +229,7 @@ def load_customers():
 
         # If insert request...
         elif response_obj["action"] == 'insert':
+            print("!!!!!! !!!!!!!! !!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!")
 
             print("THIS:", response_obj)
 

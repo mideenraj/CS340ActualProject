@@ -85,9 +85,11 @@ async function addDepartment(){
 
     input_row.insertAdjacentElement('beforebegin', new_row)  // --Append row to table
 
+    /*
     // -------- Step 3: Add event listeners for the new buttons
     update_butt.addEventListener('click', update_product)
     delete_butt.addEventListener('click', delete_product)
+    */
 
     // -------- Step 4: Clear input boxes
     document.getElementById("new_name").value = ""

@@ -510,11 +510,11 @@ def load_departments():
             # Step 4: Access ID of last inserted row
             query2 = f"SELECT LAST_INSERT_ID();"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-            orderID = cursor2.fetchall()
-            orderID = str(orderID[0]['LAST_INSERT_ID()'])
+            depID = cursor2.fetchall()
+            depID = str(depID[0]['LAST_INSERT_ID()'])
 
             # Step 2: Access new row through query and sent it back as a response
-            query3 = f"SELECT * FROM Departments WHERE departmentID='{orderID}';"
+            query3 = f"SELECT * FROM Departments WHERE departmentID='{depID}';"
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             results = cursor3.fetchall()
             payload = results[0]
@@ -525,32 +525,59 @@ def load_departments():
 @app.route('/seasons')
 def load_seasons():
 
-    # Step 1: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
+    # If page load...
+    if request.method == 'GET':
+        # Step 1: append all subpage URLs to payload
+        payload = []
+        payload.append(subpages)
 
-    # Step 2: Write query
-    query = "SELECT * FROM Seasons;"
+        # Step 2: Write query
+        query = "SELECT * FROM Seasons;"
 
-    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
+        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 4: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
-    payload.append(results)
+        # Step 4: Access result (This returns a tuple of selected rows from query)
+        results = cursor.fetchall()
+        payload.append(results)
 
-    # Step 5: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
+        # Step 5: Print query results if Debugging
+        debug = False
+        if debug:
+            print("\n")
+            print(f"Type:{type(results)}")
+            print(f"Length: {len(results)}")
+            print("Result:")
+            for row in results:
+                print(row)
 
-    # Step 6: The specified file is rendered with the queried data
-    return render_template("seasons_subpage.j2", season_data=payload)
+        # Step 6: The specified file is rendered with the queried data
+        return render_template("seasons_subpage.j2", season_data=payload)
+
+    # If post req
+    elif request.method == 'POST':
+        response_obj = request.json
+
+        # If insert request...
+        if response_obj["action"] == 'insert':
+            # Step 1: Send query
+            query = f"INSERT INTO Seasons (name, startDate, endDate) VALUES " \
+                    f"('{response_obj['sName']}', '{response_obj['sDate']}', '{response_obj['eDate']}');"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+
+            # Step 4: Access ID of last inserted row
+            query2 = f"SELECT LAST_INSERT_ID();"
+            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            seasonID = cursor2.fetchall()
+            seasonID = str(seasonID[0]['LAST_INSERT_ID()'])
+
+            # Step 2: Access new row through query and sent it back as a response
+            query3 = f"SELECT * FROM Seasons WHERE seasonID='{seasonID}';"
+            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            results = cursor3.fetchall()
+            payload = results[0]
+            return payload
 
 
 

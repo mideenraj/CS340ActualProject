@@ -36,20 +36,21 @@
 
         <!-- Sample Data -->
         {% for row in department_data[1] %}
-        <tr>
+        <tr class="department_row" id={{row['departmentID']}}>
           <td>{{row['departmentID']}}</td>
           <td>{{row['name']}}</td>
         </tr>
         {% endfor %}
 
         <!-- Input Box -->
-        <tr>
+        <tr id="input_row">
           <td></td>
-          <td><input type="text" placeholder="Department Name"></input></td>
+          <td><input id="input_department" type="text" placeholder="Department Name"></input></td>
           <td><button id="submit_button">Submit</button> </td>
         </tr>
       </table>
     </div>
 
+    <script src="static/js/departments_script.js"></script>
  </body>
 </html>

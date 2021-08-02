@@ -38,7 +38,7 @@
 
         <!-- Sample Data -->
         {% for row in season_data[1] %}
-        <tr>
+        <tr class="season_row" id={{row['seasonID']}}>
           <td>{{row['seasonID']}}</td>
           <td>{{row['seasonName']}}</td>
           <td>{{row['startDate']}}</td>
@@ -49,10 +49,10 @@
         <!-- Input Box-->
         <tr id="input_row">
             <td></td>
-            <td><input type="text" placeholder="Season Name"></input></td>
-            <td> <input type="text" placeholder="Start Date (i.e. YYYY-MM-DD)"></input></td>
-            <td> <input type="text" placeholder="End Date (i.e. YYYY-MM-DD)"></input></td>
-            <td><button>Add Season</button> </td>
+            <td><input id="sName" type="text" placeholder="Season Name"></input></td>
+            <td> <input id="sDate" type="text" placeholder="Start Date (i.e. YYYY-MM-DD)"></input></td>
+            <td> <input id="eDate" type="text" placeholder="End Date (i.e. YYYY-MM-DD)"></input></td>
+            <td><button id="submit_button">Add Season</button> </td>
         </tr>
 
 
@@ -61,6 +61,6 @@
 
 
 
-
+    <script src="static/js/seasons_script.js"></script>
  </body>
 </html>

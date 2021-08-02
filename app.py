@@ -249,23 +249,6 @@ def load_customers():
             return payload
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Route 3: 'Orders' subpage
 @app.route('/orders', methods=['POST', 'GET'])
 def load_orders():
@@ -481,35 +464,61 @@ def load_products():
 
 
 # Route 5: 'Departments' subpage
-@app.route('/departments')
+@app.route('/departments', methods=['POST', "GET"])
 def load_departments():
 
-    # Step 1: append all subpage URLs to payload
-    payload = []
-    payload.append(subpages)
+    if request.method == 'GET':
+        # Step 1: append all subpage URLs to payload
+        payload = []
+        payload.append(subpages)
 
-    # Step 2: Write query
-    query = "SELECT * FROM Departments;"
+        # Step 2: Write query
+        query = "SELECT * FROM Departments;"
 
-    # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-    cursor = db.execute_query(db_connection=db_connection, query=query)
+        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
+        cursor = db.execute_query(db_connection=db_connection, query=query)
 
-    # Step 4: Access result (This returns a tuple of selected rows from query)
-    results = cursor.fetchall()
-    payload.append(results)
+        # Step 4: Access result (This returns a tuple of selected rows from query)
+        results = cursor.fetchall()
+        payload.append(results)
 
-    # Step 5: Print query results if Debugging
-    debug = False
-    if debug:
-        print("\n")
-        print(f"Type:{type(results)}")
-        print(f"Length: {len(results)}")
-        print("Result:")
-        for row in results:
-            print(row)
+        # Step 5: Print query results if Debugging
+        debug = False
+        if debug:
+            print("\n")
+            print(f"Type:{type(results)}")
+            print(f"Length: {len(results)}")
+            print("Result:")
+            for row in results:
+                print(row)
 
-    # Step 6: The specified file is rendered with the queried data
-    return render_template("departments_subpage.j2", department_data=payload)
+        # Step 6: The specified file is rendered with the queried data
+        return render_template("departments_subpage.j2", department_data=payload)
+
+    elif request.method == 'POST':
+
+        response_obj = request.json
+
+        # If update request...
+        if response_obj["action"] == 'insert':
+            # Step 1: Send query
+            query = f"INSERT INTO Departments (name) VALUES " \
+                    f"('{response_obj['name']}');"
+            cursor = db.execute_query(db_connection=db_connection, query=query)
+            results = cursor.fetchall()
+
+            # Step 4: Access ID of last inserted row
+            query2 = f"SELECT LAST_INSERT_ID();"
+            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            orderID = cursor2.fetchall()
+            orderID = str(orderID[0]['LAST_INSERT_ID()'])
+
+            # Step 2: Access new row through query and sent it back as a response
+            query3 = f"SELECT * FROM Departments WHERE departmentID='{orderID}';"
+            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            results = cursor3.fetchall()
+            payload = results[0]
+            return payload
 
 
 # Route 6: 'Seasons' subpage

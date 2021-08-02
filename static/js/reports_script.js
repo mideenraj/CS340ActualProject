@@ -237,6 +237,7 @@ async function addItem(){
         headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
+    console.log("TEST:", response)
 
 
     // Step 6: insert new row into table

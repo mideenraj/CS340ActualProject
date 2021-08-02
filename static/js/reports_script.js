@@ -1,4 +1,8 @@
 
+var test = require('./GLOBAL_VARIABLES')
+console.log("TEST_67:", test["customers_subpage"])
+
+
 
 // ----------------- Site URL construction -----------------
 // ---Step 1: Specify server and port number

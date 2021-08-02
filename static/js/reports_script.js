@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector("#select_productID").addEventListener('change', onProductChange)
 
     
+    // When quantity is changed
+    document.querySelector("#select_quantity").addEventListener('change', onQuantityChange)
+    
 
 });
 
@@ -91,7 +94,6 @@ async function onProductChange(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-
     var price = data['salePrice']
 
     // Step 2: calculate total cost using price x quantity
@@ -100,7 +102,6 @@ async function onProductChange(){
     console.log(price)
     var total = quantity*price
     
-
     // Step 3: display total
     document.querySelector("#totalPrice").textContent = total
 
@@ -108,3 +109,7 @@ async function onProductChange(){
 
 }
 
+
+async function onQuantityChange(){
+    console.log("YES")
+}

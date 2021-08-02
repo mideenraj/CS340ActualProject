@@ -4,6 +4,7 @@
 body {
   font-family: Georgia;
   padding: 20px;
+  margin: auto;
   background-color: #FAEBD7;
 }
 
@@ -50,8 +51,8 @@ a:hover {
 /* Order table -------------------------------- */
 .order_table{
   width: 1000px;
-  margin-left: 33% ;
-  margin-right: 33% ;
+  margin: auto;
+  margin-botton: 50px;
 }
 
 
@@ -61,8 +62,7 @@ a:hover {
   text-align: center;
   border: 2px solid black;
   width: 525px;
-  margin-left: 33% ;
-  margin-right: 33% ;
+  margin: auto;
 }
 
 .product_table{
@@ -89,7 +89,7 @@ th, td {
 table {
   border: 2px solid black;
   background-color: #FFFFF0;
-  overflow:  auto;
+  margin: auto;
 
 }
 

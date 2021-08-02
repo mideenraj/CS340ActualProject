@@ -1,0 +1,68 @@
+body {
+  font-family: Georgia;
+  padding: 20px;
+  background-color: #FAEBD7;
+}
+
+th, td {
+  border: 1px solid black;
+  margin: auto;
+  background-color: #FFFAF0;
+}
+
+table {
+  border: 1px solid black;
+  margin: auto;
+  background-color: #FFFFF0;
+  height: 50px;
+  overflow:  auto;
+  text-align: center;
+}
+
+  #title {
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  }
+
+ /* NAVIGATION BAR */
+
+a:link,a:visited {
+  color:#595959;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#000000;
+}
+
+#nav_bar {
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    color: #595959
+}
+
+#nav_bar_elem {
+  display: inline;
+  padding-left: 30px;
+  padding-right: 30px;
+
+}
+
+#nav_bar_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+#page_title{
+    text-align: center;
+    font-family: "Times New Roman";
+    font-size: 40px;
+}
+
+#submit_button{
+    width: 100%;
+}

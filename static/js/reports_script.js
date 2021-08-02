@@ -1,7 +1,7 @@
 
 var test = require('./GLOBAL_VARIABLES')
 console.log("TEST_67:", test["customers_subpage"])
-console.log("TEST_1")
+
 
 
 
@@ -22,6 +22,10 @@ var seasons_subpage = baseURL + "seasons"
 
 // Master event listener (On page Load)
 document.addEventListener('DOMContentLoaded', async () => {
+
+    console.log("TEST_1")
+    var test = require('./GLOBAL_VARIABLES')
+    console.log("TEST_67:", test["customers_subpage"])
 
     // 'Cancel' button event listener
     document.querySelectorAll(".cancelItem").forEach(item => {item.addEventListener('click', cancelOrder)});

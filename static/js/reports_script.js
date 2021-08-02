@@ -180,11 +180,12 @@ async function addItem(){
         }
     }
 
+    console.log("TEST _ 1")
     // Step 3: exit if the pair does not exist, else continue
     if (existence == false){
         return
     }
-    console.log("TEST _ 1")
+    
 
     // Step 4: Exit if quantity is 0
     var quantity = document.querySelector("#select_quantity").value

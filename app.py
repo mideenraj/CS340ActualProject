@@ -198,8 +198,8 @@ def root():
 
             # Step 1: Insert into OrderProducts
             query1 = f"INSERT INTO OrderProducts (productID, orderID, seasonID, quantitySold, productTotal) VALUES" \
-                     f"'{response_obj['pid']}', '{response_obj['oid']}', '{response_obj['sid']}', " \
-                     f"'{response_obj['quantity']}', '{response_obj['total']}';"
+                     f"('{response_obj['pid']}', '{response_obj['oid']}', '{response_obj['sid']}', " \
+                     f"'{response_obj['quantity']}', '{response_obj['total']}');"
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
 
             # Step 2: return sent data

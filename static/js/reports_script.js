@@ -133,6 +133,7 @@ async function onQuantityChange(key){
         }
         var response = await fetch(url, fetchdata)
         var data = await response.json()
+        console.log(data)
         var price = data['salePrice']
 
 

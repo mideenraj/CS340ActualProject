@@ -230,6 +230,8 @@ def load_customers():
         # If insert request...
         elif response_obj["action"] == 'insert':
 
+            print("THIS:", response_obj)
+
             # Step 1: Send query
             query = f"INSERT INTO Customers (fName, lName, birthDate, zipCode) VALUES " \
                     f"('{response_obj['fName']}', '{response_obj['lName']}', '{response_obj['birthDate']}', '{response_obj['zipCode']}');"

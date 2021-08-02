@@ -165,7 +165,6 @@ async function addItem(){
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelector("#select_orderID").value
     var seasonID = document.querySelector("#select_seasonID").value
-    console.log("INPUT:", orderID, seasonID)
 
     // Step 2: check if order/season pair exist in log
     var existence = false
@@ -187,7 +186,6 @@ async function addItem(){
     if (existence == false){
         return
     }
-    console.log("TEST _ 1")
     
 
     // Step 4: Exit if quantity is 0
@@ -212,7 +210,6 @@ async function addItem(){
         }
         var response = await fetch(url, fetchdata)
         var data = await response.json()
-        console.log(data)
         var price = data['salePrice']
 
 

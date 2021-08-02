@@ -1,6 +1,7 @@
 
 var test = require('./GLOBAL_VARIABLES')
 console.log("TEST_67:", test["customers_subpage"])
+console.log("TEST_1")
 
 
 

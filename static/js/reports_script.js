@@ -49,6 +49,7 @@ async function cancelOrder(){
 
     // ---Step 2: Send request to remove item from OrderProducts
     var payload = {
+        "action": "cancel",
         "productID": p_ID,
         "orderID": o_ID,
         "seasonID": season,
@@ -77,16 +78,11 @@ async function cancelOrder(){
 
 async function onProductChange(){
 
-    // Step 1: Get product name
-    var product = this.value
-    console.log(product)
-
-
-    // Step 2: get price of selected product
+    // Step 1: get price of selected product
     var url = baseURL
     payload = {
         "action":"getPrice",
-
+        'product': this.value
     }
     var fetchdata = {
         method: 'POST',
@@ -95,6 +91,15 @@ async function onProductChange(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
+
+    var price = data['salePrice']
+
+    // Step 2: calculate total cost using price x quantity
+    var quantity = document.querySelector("#select_quantity")
+    var total = Number(quantity)*Number(price)
+
+    // Step 3: display total
+    document.querySelector("#totalPrice").textContent = total
 
 
 

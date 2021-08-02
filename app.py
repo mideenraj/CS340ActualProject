@@ -114,9 +114,6 @@ def root():
         # --SubStep 3: append data to payload
         payload.append(currentAnnualStats)
 
-
-
-
         # -----Step 4: Access 'Single item Order' and store to payload
 
         # -First get all product names and store to payload
@@ -155,33 +152,56 @@ def root():
 
     # If request for an order cancellation...
     elif request.method == 'POST':
+
         response_obj = request.json
 
-        # ---Step 1: delete order log from OrderProducts
-        query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
-                 f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
-        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        # If cancel request...
+        if response_obj["action"] == 'cancel':
 
-        # ---Step 2: subtract the cancelled amount from 'Orders' entry
+            # ---Step 1: delete order log from OrderProducts
+            query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
+                     f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
+            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
 
-        # -First, access the total order price
-        query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
-        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
-        totalPrice = float(cursor2.fetchall()[0]['totalCost'])
+            # ---Step 2: subtract the cancelled amount from 'Orders' entry
 
-        # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
-        if totalPrice - float(response_obj['productTotal']) == 0:
-            query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
-            db.execute_query(db_connection=db_connection, query=query3)
+            # -First, access the total order price
+            query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
+            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            totalPrice = float(cursor2.fetchall()[0]['totalCost'])
 
-        # -Third, ....Otherwise, simply update the Orders entry with the subtracted price
-        else:
-            updatedPrice = totalPrice - float(response_obj['productTotal'])
-            query4 = f"UPDATE Orders SET totalCost='{updatedPrice}' WHERE orderID='{response_obj['orderID']}';"
-            db.execute_query(db_connection=db_connection, query=query4)
+            # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
+            if totalPrice - float(response_obj['productTotal']) == 0:
+                query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
+                db.execute_query(db_connection=db_connection, query=query3)
 
-        # ---Step 3: return
-        return {"status":"complete"}
+            # -Third, ....Otherwise, simply update the Orders entry with the subtracted price
+            else:
+                updatedPrice = totalPrice - float(response_obj['productTotal'])
+                query4 = f"UPDATE Orders SET totalCost='{updatedPrice}' WHERE orderID='{response_obj['orderID']}';"
+                db.execute_query(db_connection=db_connection, query=query4)
+
+            # ---Step 3: return
+            return {"status":"complete"}
+
+        # If request for product price
+        elif response_obj["action"] == 'getPrice':
+
+            # Step 1: Get price
+            query1 = f"SELECT salePrice FROM Products WHERE productName='{response_obj['product']}';"
+            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            price = float(cursor1.fetchall()[0])
+
+            return {"salePrice":price}
+
+
+
+
+
+
+
+
+
 
 
 # Route 2: 'Customers' subpage

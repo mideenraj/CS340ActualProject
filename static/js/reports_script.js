@@ -198,6 +198,8 @@ async function addItem(){
 
 
     // Step 5: get price of product
+    var product = document.querySelector("#select_productID").value
+
     var url = baseURL
         payload = {
             "action":"getPrice",

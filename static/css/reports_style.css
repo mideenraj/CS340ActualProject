@@ -108,3 +108,7 @@ button{
 option{
   width: 100%;
 }
+
+#totalPrice{
+  border: 4px solid green;
+}

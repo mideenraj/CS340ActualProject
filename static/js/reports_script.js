@@ -276,7 +276,7 @@ async function addItem(){
     button_cancel.setAttribute('id', response['oid'])
     button_cancel.textContent = 'Cancel'
     button_cell.appendChild(button_cancel)
-    newRow.appendChild(button_cancel)
+    newRow.appendChild(button_cell)
     button_cancel.addEventListener('click', cancelOrder)
     console.log("BUTTON:", button_cancel)
 

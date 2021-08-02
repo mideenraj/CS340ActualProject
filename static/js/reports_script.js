@@ -165,6 +165,7 @@ async function addItem(){
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelectorAll("#select_orderID").textContent
     var seasonID = document.querySelectorAll("#select_seasonID").textContent
+    console.log("INPUT:", orderID, seasonID)
 
     // Step 2: check if order/season pair exist in log
     var existence = false
@@ -174,6 +175,7 @@ async function addItem(){
         var cells = row.children
 
         // Compare with selected pair
+        console.log("ROWS:", cells.item(1).textContent, cells.item(2).textContent)
         if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonID){
             existence = true
             break

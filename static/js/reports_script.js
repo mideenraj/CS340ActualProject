@@ -270,13 +270,15 @@ async function addItem(){
     newRow.appendChild(total_cell)
 
         // cancel button
-    var cancel_cell = document.createElement('button')
-    cancel_cell.setAttribute('class', 'cancelItem')
-    cancel_cell.setAttribute('id', response['oid'])
-    cancel_cell.textContent = 'Cancel'
-    newRow.appendChild(cancel_cell)
-    cancel_cell.addEventListener('click', cancelOrder)
-    console.log("BUTTON:", cancel_cell)
+    var button_cell = document.createElement('td')
+    var button_cancel = document.createElement('button')
+    button_cancel.setAttribute('class', 'cancelItem')
+    button_cancel.setAttribute('id', response['oid'])
+    button_cancel.textContent = 'Cancel'
+    button_cell.appendChild(button_cancel)
+    newRow.appendChild(button_cancel)
+    button_cancel.addEventListener('click', cancelOrder)
+    console.log("BUTTON:", button_cancel)
 
 
     // Find input row

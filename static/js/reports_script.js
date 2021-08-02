@@ -114,7 +114,7 @@ async function onQuantityChange(key){
 
     // [48, 57]
 
-    console.log("TEST:", key.code)
+    console.log("TEST:", key.keycode)
 
 
 }

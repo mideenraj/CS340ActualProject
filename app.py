@@ -54,9 +54,11 @@ def root():
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         result4 = cursor4.fetchall()
         currentSeasonalStats = []
+        print("TEST_68:", seasonalGross)
         for prod in result4:
             prod['Quantity'] = float(prod['Quantity'])
             prod['Total'] = float(prod['Total'])
+            print("TEST_total:", prod['Total'])
             prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
             currentSeasonalStats.append(prod)
         payload.append(currentSeasonalStats)

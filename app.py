@@ -11,7 +11,6 @@ def db_connect_function():
     return db_connection
 
 
-
 # ------------------- Routes --------------------
 # Route 1: Homepage (aka 'Reports')
 @app.route('/', methods=['POST', 'GET'])

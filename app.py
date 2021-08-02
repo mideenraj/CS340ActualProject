@@ -114,15 +114,39 @@ def root():
         # --SubStep 3: append data to payload
         payload.append(currentAnnualStats)
 
-        # -----Step 4: Print query results if Debugging
-        debug = False
-        if debug:
-            print("\n")
-            print(f"Type:{type(results)}")
-            print(f"Length: {len(results)}")
-            print("Result:")
-            for row in results:
-                print(row)
+        # -----Step 4: Access 'Single item Order' and store to payload
+
+        # -First get all product names and store to payload
+        query4 = f"SELECT productName FROM Products;"
+        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        productNames = cursor4.fetchall()
+        # -Store in list, and finally attach to payload
+        names = []
+        for name in productNames:
+            names.append(name['productName'])
+        payload.append(names)
+
+        # -First get all product names and store to payload
+        query4 = f"SELECT productName FROM Products;"
+        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        productNames = cursor4.fetchall()
+        # -Store in list, and finally attach to payload
+        names = []
+        for name in productNames:
+            names.append(name['productName'])
+        payload.append(names)
+
+
+
+
+
+
+
+
+
+
+
+
 
         # -----Step 5: Render HomePage
         return render_template("index.j2", reports_data=payload)

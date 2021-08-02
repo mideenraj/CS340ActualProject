@@ -76,6 +76,27 @@ async function cancelOrder(){
 
 
 async function onProductChange(){
-    console.log("TEST ! ! !")
+
+    // Step 1: Get product name
+    var product = this.value
+    console.log(product)
+
+
+    // Step 2: get price of selected product
+    var url = baseURL
+    payload = {
+        "action":"getPrice",
+
+    }
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+
+
+
 }
 

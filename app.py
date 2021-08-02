@@ -199,7 +199,7 @@ def root():
             # Step 1: Get ID of Product
             query0 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
             cursor0 = db.execute_query(db_connection=db_connection, query=query0)
-            pid = float(cursor0.fetchall()[0]['productID'])
+            pid = cursor0.fetchall()[0]['productID']
 
             # Step 2: Insert into OrderProducts
             query1 = f"INSERT INTO OrderProducts (productID, orderID, seasonID, quantitySold, productTotal) VALUES" \
@@ -209,7 +209,7 @@ def root():
 
             # Step 2: load payload
             payload = {
-                "product": response_obj['product'],
+                "product": pid,
                 "oid": response_obj['oid'],
                 "sid": response_obj['sid'],
                 "quantity": response_obj['quantity'],

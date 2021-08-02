@@ -6,7 +6,10 @@ import datetime
 
 # -------------------- Initialization --------------------
 app = Flask(__name__)
-db_connection = db.connect_to_database()
+def db_connect_function():
+    db_connection = db.connect_to_database()
+    return db_connection
+
 
 
 # ------------------- Routes --------------------
@@ -23,27 +26,27 @@ def root():
         # -----Step 2: Query for populating 'Sales log'
         # Query 1: Access 'Sell log' table data
         query = "SELECT * FROM OrderProducts;"
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         payload.append(results)
 
         # -----Step 3: Query(s) for populating 'Current seasons'
         # --SubStep 1: get ID of every product
         query1 = "SELECT productID FROM Products;"
-        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         productIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
 
         # --SubStep 2: Determine current season by cross-referencing date-of-purchase with seasonal dates
         date_of_purchase = str(datetime.datetime.today()).split()[0]
         query2 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
-        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
         result2 = cursor2.fetchall()
         seasonID = result2[0]['seasonID']       # Accurate
 
         # --SubStep 2: get cumulative revenue for current season
         date_of_purchase = str(datetime.datetime.today()).split()[0]
         query3 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
-        cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+        cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
         result3 = cursor3.fetchall()
         seasonalGross = float(result3[0]['totalCost'])      # Accurate
 
@@ -51,7 +54,7 @@ def root():
         query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
                  f"SUM(op.quantitySold) as Quantity, SUM(op.productTotal) as Total FROM OrderProducts " \
                  f"op WHERE op.seasonID = '{seasonID}' GROUP BY op.productID;"
-        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
         result4 = cursor4.fetchall()
         currentSeasonalStats = []
         print("TEST_68:", seasonalGross)
@@ -66,7 +69,7 @@ def root():
         # -----Step 4: Query(s) for populating 'Current year top sellers'
         # --SubStep 1: get ID of every season
         query1 = "SELECT seasonID FROM Seasons;"
-        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
         sids = []
         for val in seasonIDs:
@@ -78,13 +81,13 @@ def root():
             # print("Each_id:", each_id)
             # --Get Name of season
             query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
-            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             seasonName = cursor2.fetchall()[0]["seasonName"]
 
             # --Get all products and their total sales
             query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as " \
                      f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
-            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
             productData = cursor3.fetchall()
             # print("TEST_2:", productData)
             if productData == ():
@@ -108,7 +111,7 @@ def root():
         # --Convert productID to productName
         for eachPS in currentAnnualStats:
             query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
-            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
             productName = cursor3.fetchall()[0]["productName"]
             eachPS['product'] = productName
             del eachPS['ProductID']
@@ -120,7 +123,7 @@ def root():
 
         # -First get all product names and store to payload
         query4 = f"SELECT productName FROM Products;"
-        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
         productNames = cursor4.fetchall()
         # -Store in list, and finally attach to payload
         products = []
@@ -130,7 +133,7 @@ def root():
 
         # -Second, get all Order ID and store to payload
         query5 = f"SELECT orderID FROM Orders;"
-        cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+        cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
         orderIDs = cursor5.fetchall()
         # -Store in list, and finally attach to payload
         orders = []
@@ -140,7 +143,7 @@ def root():
 
         # -Second, get all Order ID and store to payload
         query6 = f"SELECT seasonID FROM Seasons;"
-        cursor6 = db.execute_query(db_connection=db_connection, query=query6)
+        cursor6 = db.execute_query(db_connection=db_connect_function(), query=query6)
         seasonInfo = cursor6.fetchall()
         # -Store in list, and finally attach to payload
         seasons = []
@@ -163,13 +166,13 @@ def root():
             # ---Step 1: delete order log from OrderProducts
             query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
                      f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
-            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
 
             # ---Step 2: subtract the cancelled amount from 'Orders' entry
 
             # -First, access the total order price
             query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
-            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             totalPrice = float(cursor2.fetchall()[0]['totalCost'])
 
 
@@ -178,13 +181,13 @@ def root():
 
                 print("OrderID:", response_obj['orderID'])
                 query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
-                db.execute_query(db_connection=db_connection, query=query3)
+                db.execute_query(db_connection=db_connect_function(), query=query3)
 
             # -Third, ....Otherwise, simply update the Orders entry with the subtracted price
             else:
                 updatedPrice = totalPrice - float(response_obj['productTotal'])
                 query4 = f"UPDATE Orders SET totalCost='{updatedPrice}' WHERE orderID='{response_obj['orderID']}';"
-                db.execute_query(db_connection=db_connection, query=query4)
+                db.execute_query(db_connection=db_connect_function(), query=query4)
 
             # ---Step 3: return
             return {"status":"complete"}

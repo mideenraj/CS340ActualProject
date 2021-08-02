@@ -114,6 +114,9 @@ def root():
         # --SubStep 3: append data to payload
         payload.append(currentAnnualStats)
 
+
+
+
         # -----Step 4: Access 'Single item Order' and store to payload
 
         # -First get all product names and store to payload
@@ -121,28 +124,30 @@ def root():
         cursor4 = db.execute_query(db_connection=db_connection, query=query4)
         productNames = cursor4.fetchall()
         # -Store in list, and finally attach to payload
-        names = []
+        products = []
         for name in productNames:
-            names.append(name['productName'])
-        payload.append(names)
+            products.append(name['productName'])
+        payload.append(products)
 
-        # -First get all product names and store to payload
-        query4 = f"SELECT productName FROM Products;"
-        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
-        productNames = cursor4.fetchall()
+        # -Second, get all Order ID and store to payload
+        query4 = f"SELECT orderID FROM Orders;"
+        cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+        orderIDs = cursor5.fetchall()
         # -Store in list, and finally attach to payload
-        names = []
-        for name in productNames:
-            names.append(name['productName'])
-        payload.append(names)
+        orders = []
+        for name in orderIDs:
+            orders.append(name['orderID'])
+        payload.append(orders)
 
-
-
-
-
-
-
-
+        # -Second, get all Order ID and store to payload
+        query4 = f"SELECT seasonID FROM Seasons;"
+        cursor6 = db.execute_query(db_connection=db_connection, query=query6)
+        seasonInfo = cursor6.fetchall()
+        # -Store in list, and finally attach to payload
+        seasons = []
+        for name in seasonInfo:
+            seasons.append(name['seasonID'])
+        payload.append(seasons)
 
 
 

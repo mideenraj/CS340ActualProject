@@ -58,7 +58,42 @@
                 <!--Table data-->
                 <tr>
 
-           
+                    <!--Product ID-->
+                    <td>
+                        <select id="select_productID">
+                            {% for row in order_data[4] %}
+                                <option value={{row}}>{{row}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <!--Order ID-->
+                    <td>
+                        <select id="select_orderID">
+                            {% for row in order_data[5] %}
+                                <option value={{row}}>{{row}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <!--Season ID-->
+                    <td>
+                        <select id="select_seasonID">
+                            {% for row in order_data[6] %}
+                                <option value={{row}}>{{row}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <!--Quantity-->
+                    <td><input id="select_quantity"></input></td>
+
+                    <!--Item total-->
+                    <td>---</td>
+
+                    <td><button id="insertItem">Add</button></td>
 
                 </tr>
 

@@ -556,6 +556,8 @@ def load_seasons():
 
     # If post req
     elif request.method == 'POST':
+
+        print("TESTT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         response_obj = request.json
 
         # If insert request...

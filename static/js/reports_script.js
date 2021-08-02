@@ -234,6 +234,7 @@ async function addItem(){
         headers: {'Content-Type' : 'application/json'}
     }
     var response = await fetch(url, fetchdata)
+    var response = await response.json()
     console.log("TEST:", response)
 
 

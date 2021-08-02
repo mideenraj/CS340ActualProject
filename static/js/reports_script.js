@@ -174,7 +174,7 @@ async function addItem(){
         var cells = row.children
 
         // Compare with selected pair
-        if (cells.item(1) == orderID && cells.item(2) == seasonID){
+        if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonID){
             existence = true
             break
         }

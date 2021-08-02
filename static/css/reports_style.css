@@ -112,3 +112,7 @@ option{
 #totalPrice{
   border: 4px solid green;
 }
+
+#NoticeBar{
+  margin: 10px;
+}

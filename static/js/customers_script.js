@@ -139,7 +139,6 @@ async function updateCustomer(){
 
 }
 
-
 // Function 1: 'Delete' button's callback function
 async function deleteCustomer(){
 
@@ -179,7 +178,7 @@ async function deleteCustomer(){
 async function insertCustomer(){
 
     // -------- Step 1: Formulate and make request
-    var url = products_subpage
+    var url = customers_subpage
     var payload = {
         "action" : "insert",
         "name" : document.getElementById("new_fName").value,

@@ -159,6 +159,7 @@ def root():
 
         # If cancel request...
         if response_obj["action"] == 'cancel':
+            print("TESTING_1:", response_obj)
 
             # ---Step 1: delete order log from OrderProducts
             query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \

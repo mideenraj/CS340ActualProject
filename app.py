@@ -522,7 +522,7 @@ def load_departments():
 
 
 # Route 6: 'Seasons' subpage
-@app.route('/seasons')
+@app.route('/seasons', methods=['POST', 'GET'])
 def load_seasons():
 
     # If page load...
@@ -557,7 +557,6 @@ def load_seasons():
     # If post req
     elif request.method == 'POST':
 
-        print("TESTT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         response_obj = request.json
 
         # If insert request...

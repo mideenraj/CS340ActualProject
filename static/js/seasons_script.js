@@ -45,7 +45,7 @@ async function addSeason(){
     }
     console.log("TEST")
     var response = await fetch(url, fetchdata)
-    
+    var data = await response.json()
 
 
 

@@ -45,8 +45,6 @@ async function addSeason(){
         body: JSON.stringify(payload),
         headers: {'Content-Type' : 'application/json'}
     }
-    var response = await fetch(url, fetchdata)
-    var data = await response.json()
 
 
 

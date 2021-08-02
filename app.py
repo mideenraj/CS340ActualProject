@@ -578,7 +578,15 @@ def load_seasons():
             cursor3 = db.execute_query(db_connection=db_connection, query=query3)
             results = cursor3.fetchall()
             payload = results[0]
-            print("TESTING:", payload)
+            print("TESTING_1:", payload)
+            payload['startDate'] = tuple(payload['startDate'])
+            print("TESTING_2:", payload)
+
+
+
+
+
+
             payload['startDate'] = response_obj['start']
             payload['endDate'] = response_obj['end']
             return payload

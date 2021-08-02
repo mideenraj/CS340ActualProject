@@ -213,7 +213,7 @@ async function addItem(){
         var price = data['salePrice']
 
 
-    // Step 5: Insert order into database
+    // Step 6: Insert order into database
     var productName = document.querySelector("#select_productID").value
     var oid = document.querySelector("#select_orderID").value
     var sid = document.querySelector("#select_seasonID").value
@@ -286,7 +286,21 @@ async function addItem(){
     input_row.insertAdjacentElement('beforebegin', newRow)  // --Append row to table
 
 
-    //
+    // Step 6: Update order total
+    var payload = {
+        "action": "updateTotal",
+        "oid": oid,
+        "total": total
+    }
+    var url = baseURL
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var response = await response.json()
+
 
 
 

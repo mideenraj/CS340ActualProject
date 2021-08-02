@@ -219,6 +219,20 @@ def root():
             # Step 3: return data
             return payload
 
+        # To update the order total after insertion into OrderProducts....
+        elif response_obj['action'] == 'updateTotal':
+
+            # Step 1: access the current order price
+            query0 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['oid']}';"
+            cursor0 = db.execute_query(db_connection=db_connection, query=query0)
+            totalPrice = float(cursor0.fetchall()[0]['totalCost'])
+
+            # Step 2: update the price
+            updatedTotal = round(totalPrice + float(response_obj['total']), 2)
+            query1 = f"UPDATE Orders SET totalCost='{updatedTotal}' WHERE orderID='{response_obj['oid']}';"
+            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            # result = cursor1.fetchall()
+
 
 
 

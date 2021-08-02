@@ -92,8 +92,7 @@ async function addDepartment(){
     */
 
     // -------- Step 4: Clear input boxes
-    document.getElementById("new_name").value = ""
-    document.getElementById("new_department").value = ""
+    document.getElementById("input_department").value = ""
 
 
     

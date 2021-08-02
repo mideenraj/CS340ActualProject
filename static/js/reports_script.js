@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     
     // When quantity is changed
-    document.querySelector("#select_quantity").addEventListener('change', onQuantityChange)
+    document.querySelector("#select_quantity").addEventListener('keyup', onQuantityChange)
     
 
 });
@@ -110,6 +110,11 @@ async function onProductChange(){
 }
 
 
-async function onQuantityChange(){
-    console.log("YES")
+async function onQuantityChange(key){
+
+    // [48, 57]
+
+    console.log("TEST:", key.code)
+
+
 }

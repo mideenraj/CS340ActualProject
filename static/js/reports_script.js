@@ -97,7 +97,7 @@ async function onProductChange(){
     // Step 2: calculate total cost using price x quantity
     var quantity = document.querySelector("#select_quantity")
     var total = quantity*price
-    console.log(total)
+    console.log(quantity, total)
 
     // Step 3: display total
     document.querySelector("#totalPrice").textContent = total

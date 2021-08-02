@@ -230,7 +230,7 @@ async function addItem(){
         "quantity": quantity,
         "total": total
     }
-    var url = reports
+    var url = baseURL
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

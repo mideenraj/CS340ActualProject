@@ -54,11 +54,6 @@ async function addSeason(){
     new_row.setAttribute('class', 'season_row')
     new_row.setAttribute('id', data['seasonID'])
 
-        // --Create ID cell
-    var id_cell = document.createElement('td')
-    id_cell.textContent = data['seasonID']
-    new_row.appendChild(id_cell)
-
 
 
 

@@ -112,12 +112,37 @@ async function onProductChange(){
 
 async function onQuantityChange(key){
 
-    // [48, 57]
+    // Continue only if a number key was pressed (Keycode range: [48, 57])
     if (key.keyCode >= 48 && key.keyCode <= 57){
         console.log(String.fromCharCode(key.keyCode))
 
-        var quantity = String.fromCharCode(key.keyCode)
-        console.log(quantity*2)
+
+        // Step 1: Access quantity value
+        var quantity = document.querySelector("#select_quantity").value
+
+        // Step 2: Get price of currently selected product
+        var url = baseURL
+        payload = {
+            "action":"getPrice",
+            'product': this.value
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+        var response = await fetch(url, fetchdata)
+        var data = await response.json()
+        var price = data['salePrice']
+
+
+        // Step 3: display total
+        var total = quantity*price
+        document.querySelector("#totalPrice").textContent = total
+
+
+
+
     }
 
     

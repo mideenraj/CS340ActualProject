@@ -171,9 +171,7 @@ def root():
             query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
             totalPrice = float(cursor2.fetchall()[0]['totalCost'])
-            #print("TRIG_0:", totalPrice)
 
-            # -------------Issue start from here downwards....
 
             # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
             if totalPrice - float(response_obj['productTotal']) == 0:
@@ -181,14 +179,12 @@ def root():
                 print("OrderID:", response_obj['orderID'])
                 query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
                 db.execute_query(db_connection=db_connection, query=query3)
-                print("TRIG_1: ORDER DELETED")
 
             # -Third, ....Otherwise, simply update the Orders entry with the subtracted price
             else:
                 updatedPrice = totalPrice - float(response_obj['productTotal'])
                 query4 = f"UPDATE Orders SET totalCost='{updatedPrice}' WHERE orderID='{response_obj['orderID']}';"
                 db.execute_query(db_connection=db_connection, query=query4)
-                print("TRIG_2: ORDER UPDATED")
 
             # ---Step 3: return
             return {"status":"complete"}
@@ -241,6 +237,9 @@ def root():
             query1 = f"UPDATE Orders SET totalCost='{updatedTotal}' WHERE orderID='{response_obj['oid']}';"
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
             # result = cursor1.fetchall()
+
+            # Step 3: return confirmation
+            return {"status":"complete"}
 
 
 # Route 2: 'Customers' subpage

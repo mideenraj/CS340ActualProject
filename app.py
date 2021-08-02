@@ -197,7 +197,7 @@ def root():
 
             # Step 1: Get price
             query1 = f"SELECT salePrice FROM Products WHERE productName='{response_obj['product']}';"
-            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
             price = float(cursor1.fetchall()[0]['salePrice'])
             return {"salePrice":price}
 
@@ -206,14 +206,14 @@ def root():
 
             # Step 1: Get ID of Product
             query0 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
-            cursor0 = db.execute_query(db_connection=db_connection, query=query0)
+            cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             pid = cursor0.fetchall()[0]['productID']
 
             # Step 2: Insert into OrderProducts
             query1 = f"INSERT INTO OrderProducts (productID, orderID, seasonID, quantitySold, productTotal) VALUES" \
                      f"('{pid}', '{response_obj['oid']}', '{response_obj['sid']}', " \
                      f"'{response_obj['quantity']}', '{response_obj['total']}');"
-            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
 
             # Step 2: load payload
             payload = {
@@ -232,13 +232,13 @@ def root():
 
             # Step 1: access the current order price
             query0 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['oid']}';"
-            cursor0 = db.execute_query(db_connection=db_connection, query=query0)
+            cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             totalPrice = float(cursor0.fetchall()[0]['totalCost'])
 
             # Step 2: update the price
             updatedTotal = round(totalPrice + float(response_obj['total']), 2)
             query1 = f"UPDATE Orders SET totalCost='{updatedTotal}' WHERE orderID='{response_obj['oid']}';"
-            cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
             # result = cursor1.fetchall()
 
             # Step 3: return confirmation
@@ -259,7 +259,7 @@ def load_customers():
         query = "SELECT * FROM Customers;"
 
         # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
@@ -287,11 +287,11 @@ def load_customers():
             # Step 1: Sent query and access result
             query = f"UPDATE Customers SET fName='{response_obj['fname']}', lName='{response_obj['lname']}', " \
                     f"birthDate='{response_obj['dob']}', zipCode='{response_obj['zip']}' WHERE customerID='{response_obj['ID']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
             # Step 2: Access updated row from database
             query2 = f"SELECT * FROM Customers WHERE customerID='{response_obj['ID']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query2)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query2)
             results = cursor.fetchall()
 
             # Step 3: create payload with returned data
@@ -307,7 +307,7 @@ def load_customers():
 
             # Step 1: Send query to delete chosen row
             query = f"DELETE FROM Customers WHERE customerID ='{response_obj['rowToDelete']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
             # print("TEST_3", results)  # For debugging
 
@@ -323,13 +323,13 @@ def load_customers():
             # Step 1: Send query
             query = f"INSERT INTO Customers (fName, lName, birthDate, zipCode) VALUES " \
                     f"('{response_obj['fName']}', '{response_obj['lName']}', '{response_obj['birthDate']}', '{response_obj['zipCode']}');"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
 
             # Step 2: Access new row through query and sent it back as a response
             query = f"SELECT * FROM Customers WHERE fName='{response_obj['fName']}' AND lName='{response_obj['lName']}' " \
                     f"AND birthDate='{response_obj['birthDate']}' AND zipCode='{response_obj['zipCode']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
             payload = results[0]
             payload["birthDate"] = response_obj['birthDate']  # Since dob is of date Type, change it to str
@@ -348,13 +348,13 @@ def load_orders():
 
         # Step 2: Write Query 1 (order table population) and append to payload
         query1 = "SELECT * FROM Orders;"
-        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
         payload.append(result1)
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"
-        cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+        cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
         result2 = cursor2.fetchall()
 
         customer_info = []
@@ -367,7 +367,7 @@ def load_orders():
 
         # Step 4: Write Query 3 (Product selection menu) and append to payload
         query3 = "SELECT productID, productName, salePrice, unitType FROM Products;"
-        cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+        cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
         result3 = cursor3.fetchall()
         payload.append(result3)
 
@@ -381,7 +381,7 @@ def load_orders():
         # Step 1: Determine current by cross-referencing date-of-purchase with seasonal dates
         date_of_purchase = str(datetime.datetime.today()).split()[0]
         query1 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
-        cursor1 = db.execute_query(db_connection=db_connection, query=query1)
+        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
         seasonID = result1[0]['seasonID']
 
@@ -389,18 +389,18 @@ def load_orders():
         total = 0
         for prod in response_obj["purchases"]:
             query2 = f"SELECT salePrice FROM Products WHERE productID='{prod[0]}';"
-            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             result2 = cursor2.fetchall()
             price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
             total += (price * int(prod[1]))
 
         # Step 3: Execute the order (aka insert into 'Orders')
         query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
-        db.execute_query(db_connection=db_connection, query=query3)
+        db.execute_query(db_connection=db_connect_function(), query=query3)
 
         # Step 4: Access ID of last inserted row
         query4 = f"SELECT LAST_INSERT_ID();"
-        cursor4 = db.execute_query(db_connection=db_connection, query=query4)
+        cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
         orderID = cursor4.fetchall()
         orderID = str(orderID[0]['LAST_INSERT_ID()'])
 
@@ -408,7 +408,7 @@ def load_orders():
         for eachItem in response_obj["purchases"]:
             # First, Access the price for each product
             query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
-            cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+            cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
             result5 = cursor5.fetchall()
             price = float(result5[0]['salePrice'])  # Since salePrice is of Decimal Type, change it to str
 
@@ -421,11 +421,11 @@ def load_orders():
 
             # Third, insert into OrderProducts
             query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
-            db.execute_query(db_connection=db_connection, query=query5)
+            db.execute_query(db_connection=db_connect_function(), query=query5)
 
         # Step 6: Access the latest row
         query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
-        cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+        cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
         last_insert = cursor5.fetchall()
         last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
 
@@ -447,7 +447,7 @@ def load_products():
         query = "SELECT * FROM Products;"
 
         # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
@@ -478,11 +478,11 @@ def load_products():
             # Step 1: Sent query and access result
             query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{response_obj['department']}', " \
                     f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
             # Step 2: Access updated row from database
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query2)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query2)
             results = cursor.fetchall()
 
             # Step 3: create payload with returned data
@@ -498,7 +498,7 @@ def load_products():
 
             # Step 1: Send query to delete chosen row
             query = f"DELETE FROM Products WHERE productID='{response_obj['rowToDelete']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
             # print("TEST_3", results)  # For debugging
 
@@ -511,13 +511,13 @@ def load_products():
             # Step 1: Send query
             query = f"INSERT INTO Products (productName, salePrice, departmentID, unitType) VALUES " \
                     f"('{response_obj['name']}', '{response_obj['price']}', '{response_obj['department']}', '{response_obj['unit']}');"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
 
             # Step 2: Access new row through query and sent it back as a response
             query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}' AND departmentID='{response_obj['department']}' " \
                     f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
             payload = results[0]
             payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
@@ -535,7 +535,7 @@ def load_products():
                 query = f"SELECT * FROM Products WHERE salePrice<='{response_obj['price']}';"
 
             # Step 2: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
             # Step 3: Access result (This returns a tuple of selected rows from query)
             results = cursor.fetchall()
@@ -563,7 +563,7 @@ def load_departments():
         query = "SELECT * FROM Departments;"
 
         # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
@@ -591,18 +591,18 @@ def load_departments():
             # Step 1: Send query
             query = f"INSERT INTO Departments (name) VALUES " \
                     f"('{response_obj['name']}');"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
 
             # Step 4: Access ID of last inserted row
             query2 = f"SELECT LAST_INSERT_ID();"
-            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             depID = cursor2.fetchall()
             depID = str(depID[0]['LAST_INSERT_ID()'])
 
             # Step 2: Access new row through query and sent it back as a response
             query3 = f"SELECT * FROM Departments WHERE departmentID='{depID}';"
-            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
             results = cursor3.fetchall()
             payload = results[0]
             return payload
@@ -622,7 +622,7 @@ def load_seasons():
         query = "SELECT * FROM Seasons;"
 
         # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
-        cursor = db.execute_query(db_connection=db_connection, query=query)
+        cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
@@ -651,18 +651,18 @@ def load_seasons():
             # Step 1: Send query
             query = f"INSERT INTO Seasons (seasonName, startDate, endDate) VALUES " \
                     f"('{response_obj['name']}', '{response_obj['start']}', '{response_obj['end']}');"
-            cursor = db.execute_query(db_connection=db_connection, query=query)
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
 
             # Step 4: Access ID of last inserted row
             query2 = f"SELECT LAST_INSERT_ID();"
-            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             seasonID = cursor2.fetchall()
             seasonID = str(seasonID[0]['LAST_INSERT_ID()'])
 
             # Step 2: Access new row through query and sent it back as a response
             query3 = f"SELECT * FROM Seasons WHERE seasonID='{seasonID}';"
-            cursor3 = db.execute_query(db_connection=db_connection, query=query3)
+            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
             results = cursor3.fetchall()
             payload = results[0]
             payload['startDate'] = str(payload['startDate'])        # Convert data to string

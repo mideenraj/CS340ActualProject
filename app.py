@@ -197,7 +197,6 @@ def root():
         elif response_obj["action"] == 'insertItem':
 
             # Step 1: Get ID of Product
-            # Step 1: Get price
             query0 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
             cursor0 = db.execute_query(db_connection=db_connection, query=query0)
             pid = float(cursor0.fetchall()[0]['productID'])
@@ -208,8 +207,16 @@ def root():
                      f"'{response_obj['quantity']}', '{response_obj['total']}');"
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
 
-            # Step 2: return sent data
-            payload = response_obj
+            # Step 2: load payload
+            payload = {
+                "product": response_obj['product'],
+                "oid": response_obj['oid'],
+                "sid": response_obj['sid'],
+                "quantity": response_obj['quantity'],
+                "total": response_obj['total'],
+            }
+
+            # Step 3: return data
             return payload
 
 

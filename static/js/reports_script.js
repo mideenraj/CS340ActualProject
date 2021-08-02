@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: cancel an order
 async function cancelOrder(){
 
+    event.stopPropagation()
+
     // ---Step 1: Access the details of cancelling item
     var parentRow = this.parentNode.parentNode
     var kidCells = parentRow.children

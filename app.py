@@ -171,8 +171,8 @@ def root():
             query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
             cursor2 = db.execute_query(db_connection=db_connection, query=query2)
             totalPrice = float(cursor2.fetchall()[0]['totalCost'])
-
             print("TRIG_0:", totalPrice)
+
             # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
             if totalPrice - float(response_obj['productTotal']) == 0:
                 query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"

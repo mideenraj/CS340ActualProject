@@ -235,7 +235,6 @@ async function addItem(){
     }
     var response = await fetch(url, fetchdata)
     var response = await response.json()
-    console.log("TEST:", response)
 
 
     // Step 6: insert new row into table
@@ -277,6 +276,8 @@ async function addItem(){
     cancel_cell.textContent = 'Cancel'
     newRow.appendChild(cancel_cell)
     cancel_cell.addEventListener('click', cancelOrder)
+    console.log("BUTTON:", cancel_cell)
+
 
     // Find input row
     var input_row = document.querySelector("#input_row")

@@ -181,10 +181,10 @@ async function insertCustomer(){
     var url = customers_subpage
     var payload = {
         "action" : "insert",
-        "name" : document.getElementById("new_fName").value,
-        "department" : document.getElementById("new_lName").value,
-        "price" : document.getElementById("new_dob").value,
-        "unit" : document.getElementById("new_zipCode").value
+        "fName" : document.getElementById("new_fName").value,
+        "lName" : document.getElementById("new_lName").value,
+        "birthDate" : document.getElementById("new_dob").value,
+        "zipCode" : document.getElementById("new_zipCode").value
     }
     var fetchdata = {
         method: 'POST',

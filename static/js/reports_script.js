@@ -113,9 +113,14 @@ async function onProductChange(){
 async function onQuantityChange(key){
 
     // [48, 57]
+    if (key.keyCode >= 48 && key.keyCode <= 57){
+        console.log(String.fromCharCode(key.keyCode))
 
-    console.log("TEST:", key.keyCode)
-    console.log(String.fromCharCode(key.keyCode))
+        var quantity = String.fromCharCode(key.keyCode)
+        console.log(quantity*2)
+    }
+
+    
 
 
 }

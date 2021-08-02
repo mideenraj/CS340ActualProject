@@ -161,6 +161,7 @@ async function onQuantityChange(key){
 
 // Function 4:
 async function addItem(){
+    console.log("TEST _ 1")
 
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelectorAll("#select_orderID").textContent

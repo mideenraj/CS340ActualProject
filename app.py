@@ -38,15 +38,14 @@ def root():
         query2 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
         cursor2 = db.execute_query(db_connection=db_connection, query=query2)
         result2 = cursor2.fetchall()
-        seasonID = result2[0]['seasonID']
+        seasonID = result2[0]['seasonID']       # Accurate
 
         # --SubStep 2: get cumulative revenue for current season
-        print("TEST_67:", seasonID)
         date_of_purchase = str(datetime.datetime.today()).split()[0]
         query3 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
         cursor3 = db.execute_query(db_connection=db_connection, query=query3)
         result3 = cursor3.fetchall()
-        seasonalGross = float(result3[0]['totalCost'])
+        seasonalGross = float(result3[0]['totalCost'])      # Accurate
 
         # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
         query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \

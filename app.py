@@ -190,7 +190,7 @@ def root():
             # Step 1: Get price
             query1 = f"SELECT salePrice FROM Products WHERE productName='{response_obj['product']}';"
             cursor1 = db.execute_query(db_connection=db_connection, query=query1)
-            price = float(cursor1.fetchall()[0])
+            price = float(cursor1.fetchall()[0]['salePrice'])
 
             return {"salePrice":price}
 

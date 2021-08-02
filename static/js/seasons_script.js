@@ -48,13 +48,6 @@ async function addSeason(){
     var response = await fetch(url, fetchdata)
     var data = await response.json()
 
-    // -------- Step 2: Append data to table (By creating new row with the returned response)
-    var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted
-    var new_row = document.createElement("tr")
-    new_row.setAttribute('class', 'season_row')
-    new_row.setAttribute('id', data['seasonID'])
-
-
 
 
 

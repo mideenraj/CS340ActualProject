@@ -182,10 +182,10 @@ async function insertCustomer(){
     var url = products_subpage
     var payload = {
         "action" : "insert",
-        "name" : document.getElementById("fName").value,
-        "department" : document.getElementById("lName").value,
-        "price" : document.getElementById("dob").value,
-        "unit" : document.getElementById("zipCode").value
+        "name" : document.getElementById("new_fName").value,
+        "department" : document.getElementById("new_lName").value,
+        "price" : document.getElementById("new_dob").value,
+        "unit" : document.getElementById("new_zipCode").value
     }
     var fetchdata = {
         method: 'POST',
@@ -249,10 +249,10 @@ async function insertCustomer(){
     delete_butt.addEventListener('click', deleteCustomer)
 
     // -------- Step 4: Clear input boxes
-    document.getElementById("fName").value = ""
-    document.getElementById("lName").value = ""
-    document.getElementById("dob").value = ""
-    document.getElementById("zipCode").value = ""
+    document.getElementById("new_fName").value = ""
+    document.getElementById("new_lName").value = ""
+    document.getElementById("new_dob").value = ""
+    document.getElementById("new_zipCode").value = ""
 
 
 

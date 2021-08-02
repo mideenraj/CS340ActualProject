@@ -159,7 +159,6 @@ def root():
 
         # If cancel request...
         if response_obj["action"] == 'cancel':
-            print("TESTING_1:", response_obj)
 
             # ---Step 1: delete order log from OrderProducts
             query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
@@ -168,6 +167,24 @@ def root():
 
             # ---Step 2: subtract the cancelled amount from 'Orders' entry
 
+            # -First, access the total order price
+            query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
+            cursor2 = db.execute_query(db_connection=db_connection, query=query2)
+            totalPrice = float(cursor2.fetchall()[0]['totalCost'])
+
+            print("TRIG_0:", totalPrice)
+            # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
+            if totalPrice - float(response_obj['productTotal']) == 0:
+                query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
+                db.execute_query(db_connection=db_connection, query=query3)
+                print("TRIG_1: ORDER DELETED")
+
+            # -Third, ....Otherwise, simply update the Orders entry with the subtracted price
+            else:
+                updatedPrice = totalPrice - float(response_obj['productTotal'])
+                query4 = f"UPDATE Orders SET totalCost='{updatedPrice}' WHERE orderID='{response_obj['orderID']}';"
+                db.execute_query(db_connection=db_connection, query=query4)
+                print("TRIG_2: ORDER UPDATED")
 
             # ---Step 3: return
             return {"status":"complete"}

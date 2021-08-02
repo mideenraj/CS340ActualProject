@@ -32,6 +32,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Function 1: Add a season
 async function addSeason(){
 
+    // -------- Step 1: Formulate and make request
+    var url = seasons_subpage
+    var payload = {
+        "action" : "insert",
+        "name" : document.getElementById("sName").value,
+        "start" : document.getElementById("sDate").value,
+        "end" : document.getElementById("eDate").value
+    }
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    var data = await response.json()
+
 
 
 

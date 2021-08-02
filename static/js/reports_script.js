@@ -272,8 +272,8 @@ async function addItem(){
 
         // cancel button
     var cancel_cell = document.createElement('td')
-    cancelOrder.setAttribute('class', 'cancelItem')
-    cancelOrder.setAttribute('id', response['oid'])
+    cancel_cell.setAttribute('class', 'cancelItem')
+    cancel_cell.setAttribute('id', response['oid'])
     cancel_cell.textContent = 'Cancel'
     newRow.appendChild(cancel_cell)
     cancel_cell.addEventListener('click', cancelOrder)

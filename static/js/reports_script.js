@@ -163,8 +163,8 @@ async function onQuantityChange(key){
 async function addItem(){
 
     // Step 1: Access choosen order/season IDs
-    var orderID = document.querySelectorAll("#select_orderID").textContent
-    var seasonID = document.querySelectorAll("#select_seasonID").textContent
+    var orderID = document.querySelectorAll("#select_orderID").value
+    var seasonID = document.querySelectorAll("#select_seasonID").value
     console.log("INPUT:", orderID, seasonID)
 
     // Step 2: check if order/season pair exist in log

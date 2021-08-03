@@ -3,7 +3,6 @@
 body {
   background-color: #FAEBD7;
   height: 900px;
-  margin: auto;
 }
 
 /* Title div-------------------------------- */
@@ -45,6 +44,8 @@ a:hover {
 
 #page_title{
   text-align: center;
+  font-family: "Times New Roman";
+  font-size: 40px;
 }
 
 

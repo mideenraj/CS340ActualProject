@@ -27,6 +27,9 @@ def root():
         query = "SELECT * FROM OrderProducts;"
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
+        print("--------------------- TEST_401 ---------------------")
+        for each in results:
+            print(each)
         payload.append(results)
 
         # -----Step 3: Query(s) for populating 'Current seasons'

@@ -36,6 +36,7 @@ async function place_order() {
     selectedProducts = []
     var zeroCount = 0
     for (var pro of allProducts){
+        console.log(pro.value)
         if (pro.value == 0) {
             zeroCount++
             console.log("TRIOSTE")

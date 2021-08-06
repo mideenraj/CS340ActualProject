@@ -131,7 +131,7 @@ def root():
                 cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
                 print("________________ TEST_7 ___________________")
                 cursor4 = db.execute_query(db_connection=db_connect_function(), query=query3)
-                print(cursor4)
+                print(cursor4.fetchall())
                 productName = cursor3.fetchall()[0]["productName"]
                 eachPS['product'] = productName
                 del eachPS['ProductID']

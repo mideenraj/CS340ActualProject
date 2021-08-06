@@ -36,7 +36,6 @@ async function place_order() {
     selectedProducts = []
     var zeroCount = 0
     for (var pro of allProducts){
-        console.log(pro.value)
         if (pro.value == 0) {
             zeroCount++
             console.log("TRIOSTE")
@@ -44,6 +43,12 @@ async function place_order() {
             var p_data = [pro.id, pro.value]
             selectedProducts.push(p_data)
         }
+    }
+
+    // Return if all product quantitie are set to 0
+    if (allProducts.length == zeroCount){
+        console.log("TRIG")
+        return
     }
 
     // ---Step 3: Store the data and sent request

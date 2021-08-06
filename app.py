@@ -30,7 +30,8 @@ def root():
         print("--------------------- TEST_401 ---------------------")
         for eachEntry in results:
             print(eachEntry)
-            if eachEntry['productID'] == 'None':
+            print(type(eachEntry['productID']))
+            if eachEntry['productID'] == 'NULL':
                 print("T R I G")
                 eachEntry['productID'] = 'Discontinued'
         payload.append(results)

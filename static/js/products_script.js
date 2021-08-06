@@ -317,8 +317,8 @@ async function search_product(){
     var priceSearch = document.getElementById('searchByPrice')
 
     // If all search boxes are empty, return
+    console.log(idSearch, nameSearch, priceSearch)
     if (idSearch.length == 0 && nameSearch.length == 0 && priceSearch.length == 0){
-        console.log(":TRI")
         return
     }
 

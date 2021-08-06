@@ -187,6 +187,8 @@ async function insertCustomer(){
         "zipCode" : document.getElementById("new_zipCode").value
     }
 
+    console.log("TEST_3:", payload['birthDate'])
+
 
     // Return if any field was left empty
     if (payload['fName'].length == 0 || payload['lName'].length == 0 || payload['birthDate'].length == 0 || payload['zipCode'].length == 0){

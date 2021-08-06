@@ -627,6 +627,8 @@ def load_departments():
             query2 = f"SELECT * FROM Departments ORDER BY departmentID DESC LIMIT 1;"
             cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             depID = cursor2.fetchall()
+            print("______ test_1 _______")
+            print(depID)
             depID = str(depID[0]['depID'])
 
             # Step 2: Access new row through query and sent it back as a response

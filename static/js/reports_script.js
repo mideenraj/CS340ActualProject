@@ -54,6 +54,9 @@ async function cancelOrder(){
     var quantity = kidCells.item(3).textContent
     var itemTotal = kidCells.item(4).textContent
     //console.log(p_ID, o_ID, season, quantity, itemTotal)      // For debugging
+    if (p_ID == 'Discontinued'){
+        p_ID = 'NULL'
+    }
 
 
     // ---Step 2: Send request to remove item from OrderProducts

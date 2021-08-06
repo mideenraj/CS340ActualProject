@@ -55,8 +55,6 @@ def root():
                  f"AND productID is not NULL;"
         cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
         result3 = cursor3.fetchall()
-        print(" ---------------- Test_1 ----------------")
-        print(result3)
         if result3[0]['totalCost'] is not None:
             EntriesPresent = True
             seasonalGross = float(result3[0]['totalCost'])      # Accurate
@@ -102,8 +100,8 @@ def root():
                 seasonName = cursor2.fetchall()[0]["seasonName"]
 
                 # --Get all products and their total sales
-                query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as " \
-                         f"Total FROM OrderProducts WHERE seasonID='{each_id}' GROUP BY productID;"
+                query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
+                         f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
                 cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
                 productData = cursor3.fetchall()
                 # print("TEST_2:", productData)

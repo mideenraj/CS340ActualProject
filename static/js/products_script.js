@@ -318,7 +318,6 @@ async function search_product(){
 
     // If all search boxes are empty, return
     if (idSearch.value.length == 0 && nameSearch.value.length == 0 && priceSearch.value.length == 0){
-        console.log(idSearch, nameSearch, priceSearch)
         return
     }
 

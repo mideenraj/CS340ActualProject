@@ -18,7 +18,6 @@ var seasons_subpage = baseURL + "seasons"
 
 // Master event listener (On page Load)
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("TEST_2 !!!")
 
     //'Update' button event listener(s)
     document.querySelectorAll(".update_button").forEach(item => {item.addEventListener('click', update_product)});
@@ -239,7 +238,7 @@ async function add_product(){
         "unit" : document.getElementById("new_unit").value
     }
 
-    if (payload['name'] == ''){
+    if (payload['name'].length == 0){
         console.log("TRICK")
         return
     }
@@ -368,7 +367,6 @@ async function search_product(){
     // ----- Step 3: Access search results from server
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log("TEST_1:", data)        // Debugging
 
 
 

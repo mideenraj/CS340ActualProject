@@ -38,16 +38,14 @@ async function place_order() {
     for (var pro of allProducts){
         if (pro.value == 0) {
             zeroCount++
-            console.log("TRIOSTE")
         } else if (pro.value != 0){
             var p_data = [pro.id, pro.value]
             selectedProducts.push(p_data)
         }
     }
 
-    // Return if all product quantitie are set to 0
+    // ---Step 2.5: Return if all product quantitie are set to 0
     if (allProducts.length == zeroCount){
-        console.log("TRIG")
         return
     }
 

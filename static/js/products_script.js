@@ -238,6 +238,13 @@ async function add_product(){
         "price" : document.getElementById("new_price").value,
         "unit" : document.getElementById("new_unit").value
     }
+
+    if (payload['name'] == ''){
+        console.log("TRICK")
+        return
+    }
+
+
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

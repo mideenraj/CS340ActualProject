@@ -39,11 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
 // ----------------------------------------------- Function(s) block -----------------------------------------------
 // Function 1: cancel an order
 async function cancelOrder(){
-
 
     // ---Step 1: Access the details of cancelling item
     var parentRow = this.parentNode.parentNode
@@ -78,11 +76,6 @@ async function cancelOrder(){
 
     // ---Step 2: Delete the row
     parentRow.remove()
-
-
-    
-
-
 }
 
 // Function 2:
@@ -105,16 +98,11 @@ async function onProductChange(){
 
     // Step 2: calculate total cost using price x quantity
     var quantity = document.querySelector("#select_quantity").value
-    console.log(quantity)
-    console.log(price)
     var total = (quantity*price).toFixed(2)
 
-    
+
     // Step 3: display total
     document.querySelector("#totalPrice").textContent = total
-
-
-
 }
 
 // Function 3:
@@ -123,7 +111,6 @@ async function onQuantityChange(key){
 
     // Continue only if a number key was pressed (Keycode range: [48, 57])
     if (key.keyCode >= 48 && key.keyCode <= 57){
-        console.log(String.fromCharCode(key.keyCode))
 
 
         // Step 1: Access quantity value
@@ -145,22 +132,13 @@ async function onQuantityChange(key){
         }
         var response = await fetch(url, fetchdata)
         var data = await response.json()
-        console.log(data)
         var price = data['salePrice']
 
 
         // Step 3: display total
         var total = (quantity*price).toFixed(2)
         document.querySelector("#totalPrice").textContent = total
-
-
-
-
     }
-
-    
-
-
 }
 
 // Function 4:
@@ -185,13 +163,11 @@ async function addItem(){
         }
     }
 
-    
     // Step 3: exit if the pair does not exist, else continue
     if (existence == false){
         return
     }
     
-
     // Step 4: Exit if quantity is 0
     var quantity = document.querySelector("#select_quantity").value
     if (quantity == 0 || quantity == ""){
@@ -304,14 +280,4 @@ async function addItem(){
     }
     var response = await fetch(url, fetchdata)
     var response = await response.json()
-
-
-
-
-
-    
-
-
-
-
 }

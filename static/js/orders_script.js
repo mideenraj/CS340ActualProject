@@ -63,7 +63,6 @@ async function place_order() {
 
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log("TEST_2:", data)
 
     // ---Step 4: Use the returned data to display new row in table
     var rowData = data["lastOrder"]
@@ -98,5 +97,4 @@ async function place_order() {
     for (var pro of allProducts){
         pro.value = 0
     }
-
 }

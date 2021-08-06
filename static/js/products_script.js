@@ -45,10 +45,8 @@ async function update_product (){
         return
     }
 
-
     // -------- Step 2: store ID of row to edit
     productID = this.id
-
 
     // -------- Step 3: Determine row to edit
     all_rows = document.querySelectorAll(".product_row")
@@ -140,8 +138,6 @@ async function update_product (){
 
 // Function 2: 'Change' button's callback function
 async function submit_edit(){
-    // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
-    // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
 
     // -------- Step 1: access modified values and initialze layload
     var payload = {};
@@ -211,7 +207,6 @@ async function delete_product(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log(data)
 
 
     // -------- Step 2: Delete row from HTML
@@ -251,7 +246,6 @@ async function add_product(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log("TEST_1:", data)        // Debugging
 
     // -------- Step 2: Append data to table (By creating new row with the returned response)
     var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted
@@ -363,12 +357,9 @@ async function search_product(){
         }
     }
 
-
     // ----- Step 3: Access search results from server
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-
-
 
     // ----- Step 4: Display results
         // First, delete any existing rows in search display table
@@ -412,7 +403,4 @@ async function search_product(){
     document.getElementById("searchByID").value = ""
     document.getElementById("searchByName").value = ""
     document.getElementById("searchByPrice").value = ""
-
-
-
 }

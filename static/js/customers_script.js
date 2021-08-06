@@ -30,12 +30,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-
-
-
-
-
 // ----------------------------------------------- Function(s) block -----------------------------------------------
 // Function 1: 'Update' button's callback function
 async function updateCustomer(){
@@ -51,9 +45,7 @@ async function updateCustomer(){
     // -------- Step 3: Determine row to edit
     all_rows = document.querySelectorAll(".customer_row")
     for (var row of all_rows){
-        console.log("THIS:", row.id)
         if (row.id == customerID){
-            console.log("TRIG")
             rowToEdit = row
             break
         }       
@@ -139,7 +131,7 @@ async function updateCustomer(){
 
 }
 
-// Function 1: 'Delete' button's callback function
+// Function 2: 'Delete' button's callback function
 async function deleteCustomer(){
 
     // -------- Step 1: Make request to delete row from databse
@@ -152,8 +144,6 @@ async function deleteCustomer(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log(data)
-
 
     // -------- Step 2: Delete row from HTML
     all_rows = document.querySelectorAll(".customer_row")
@@ -164,17 +154,9 @@ async function deleteCustomer(){
             break
         }       
     }
-
-
-
-
-
-
-
-
 }
 
-// Function 2: 'Submit' button's callback function
+// Function 3: 'Submit' button's callback function
 async function insertCustomer(){
 
     // -------- Step 1: Formulate and make request
@@ -187,14 +169,10 @@ async function insertCustomer(){
         "zipCode" : document.getElementById("new_zipCode").value
     }
 
-    console.log("TEST_3:", payload['birthDate'])
-
-
     // Return if any field was left empty
     if (payload['fName'].length == 0 || payload['lName'].length == 0 || payload['birthDate'].length == 0 || payload['zipCode'].length == 0){
         return
     }
-
 
     var fetchdata = {
         method: 'POST',
@@ -262,22 +240,9 @@ async function insertCustomer(){
     document.getElementById("new_lName").value = ""
     document.getElementById("new_dob").value = ""
     document.getElementById("new_zipCode").value = ""
-
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
-// Function x: 'Change' button's callback function
+// Function 4: 'Change' button's callback function
 async function submit_edit(){
     // id of editrow == 'editBlock' (Use this to delete entire row after edit has been made)
     // id of row being edited == last index of event button's id value (Use this to finally change the displayed data)
@@ -306,7 +271,6 @@ async function submit_edit(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    // console.log("!!! Server response:", data)       // For debugging
 
     // -------- Step 3: Update the displayed data
         // -- First, access the row to update
@@ -325,13 +289,12 @@ async function submit_edit(){
     rowCells.item(3).textContent = data['birthDate']
     rowCells.item(4).textContent = data['zipCode']
 
-
     // -------- Step 4: Delete the Edit row
     document.getElementById("editBlock").remove()
 
 }
 
-// Function x:'Cancel' button's callback function (Cancels an edit)
+// Function 5:'Cancel' button's callback function (Cancels an edit)
 async function cancel_edit(){
     document.getElementById("editBlock").remove()
 }

@@ -318,6 +318,7 @@ async function search_product(){
 
     // If all search boxes are empty, return
     if (idSearch.length == 0 && nameSearch.length == 0 && priceSearch.length == 0){
+        console.log(":TRI")
         return
     }
 

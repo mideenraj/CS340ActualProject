@@ -316,6 +316,11 @@ async function search_product(){
     var nameSearch = document.getElementById('searchByName')
     var priceSearch = document.getElementById('searchByPrice')
 
+    // If all search boxes are empty, return
+    if (idSearch.length == 0 && nameSearch.length == 0 && priceSearch.length == 0){
+        return
+    }
+
 
     // ----- Step 2: Sent reqeust based on conditionals
     var url = products_subpage

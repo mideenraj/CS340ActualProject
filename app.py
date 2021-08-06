@@ -629,7 +629,7 @@ def load_departments():
             depID = cursor2.fetchall()
             print("______ test_1 _______")
             print(depID)
-            depID = str(depID[0]['depID'])
+            depID = str(depID[0]['departmentID'])
 
             # Step 2: Access new row through query and sent it back as a response
             query3 = f"SELECT * FROM Departments WHERE departmentID='{depID}';"

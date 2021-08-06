@@ -50,7 +50,11 @@ def root():
         seasonID = result2[0]['seasonID']       # Accurate
 
         # --SubStep 2: get cumulative revenue for current season
-        query3 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
+        # The total is taken from OrderProdcucts and not from Orders since each Orders entry will shows the cumulative
+        # total of purchased items, regardless of if that product was discontinued (removed form database) or not. This
+        # of course, is inaccurate since we only want the total of products that are still available to customers
+        query3 = f"SELECT SUM(productTotal) as totalCost FROM OrderProducts WHERE seasonID='{seasonID}' " \
+                 f"AND productID is not NULL;"
         cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
         result3 = cursor3.fetchall()
         print(" ---------------- Test_1 ----------------")
@@ -61,6 +65,7 @@ def root():
         else:
             noEntries = True
 
+        # All tables only populate if there is at least one entry in OrderProducts. Otherwise, skips to page render
         if not noEntries:
             # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
             query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
@@ -77,8 +82,6 @@ def root():
                 prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
                 currentSeasonalStats.append(prod)
             payload.append(currentSeasonalStats)
-
-
 
 
 

@@ -34,8 +34,12 @@ async function place_order() {
     // ---Step 2: Get products and their respective quantities being purchased
     var allProducts = document.querySelectorAll(".product_quantity")
     selectedProducts = []
+    var zeroCount = 0
     for (var pro of allProducts){
-        if (pro.value != 0){
+        if (pro.value == 0) {
+            zeroCount++
+            console.log("TRIOSTE")
+        } else if (pro.value != 0){
             var p_data = [pro.id, pro.value]
             selectedProducts.push(p_data)
         }

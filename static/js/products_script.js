@@ -238,9 +238,8 @@ async function add_product(){
         "unit" : document.getElementById("new_unit").value
     }
 
-    if (payload['name'].length == 0){
-        console.log("THIS:", payload['name'])
-        console.log("TRICK")
+    // Function returns if any fields were left empty
+    if (payload['name'].length == 0 || payload['department'].length == 0 || payload['price'].length == 0 || payload['unit'].length == 0){
         return
     }
 

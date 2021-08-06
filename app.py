@@ -416,7 +416,7 @@ def load_orders():
         # Step 5: Populate orderProducts
         for eachItem in response_obj["purchases"]:
             print("---------- Test_1 -----------")
-            print(response_obj["purchases"])
+            print(response_obj["purchases"], eachItem[0])
             # First, Access the price for each product
             query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
             cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)

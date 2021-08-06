@@ -30,7 +30,6 @@ def root():
         # Changes the productID column's value to 'Discontinued' for all deleted products
         for eachEntry in results:
             eachEntry['productID'] = str(eachEntry['productID'])
-            print(type(eachEntry['productID']))
             if eachEntry['productID'] == 'None':
                 eachEntry['productID'] = 'Discontinued'
         payload.append(results)     # Append to payload
@@ -416,18 +415,22 @@ def load_orders():
 
         # Step 5: Populate orderProducts
         for eachItem in response_obj["purchases"]:
+            print("---------- Test_1 -----------")
+            print(response_obj["purchases"])
             # First, Access the price for each product
             query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
             cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
             result5 = cursor5.fetchall()
             price = float(result5[0]['salePrice'])  # Since salePrice is of Decimal Type, change it to str
 
-            # Second, variablize each column value
+            # Second, variabilize each column value
             productID = eachItem[0]
             orderID = orderID                # Constant
             seasonID = seasonID              # Constant
             quantity = eachItem[1]
             productTotal = price * int(quantity)
+
+
 
             # Third, insert into OrderProducts
             query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"

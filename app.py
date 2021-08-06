@@ -34,8 +34,6 @@ def root():
                 eachEntry['productID'] = 'Discontinued'
         payload.append(results)     # Append to payload
 
-
-
         # -----Step 3: Query(s) for populating 'Current seasons'
         # --SubStep 1: get ID of every product
         query1 = "SELECT productID FROM Products;"
@@ -60,23 +58,23 @@ def root():
         print(" ---------------- Test_1 ----------------")
         print(result3)
         if result3[0]['totalCost'] is not None:
-            noEntries = False
+            EntriesPresent = True
             seasonalGross = float(result3[0]['totalCost'])      # Accurate
         else:
-            noEntries = True
+            EntriesPresent = False
 
         # All tables only populate if there is at least one entry in OrderProducts. Otherwise, skips to page render
-        if not noEntries:
+        if EntriesPresent:
             # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
             query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
                      f"SUM(op.quantitySold) as Quantity, SUM(op.productTotal) as Total FROM OrderProducts " \
-                     f"op WHERE op.seasonID = '{seasonID}' GROUP BY op.productID;"
+                     f"op WHERE op.seasonID = '{seasonID}' AND productID IS NOT NULL GROUP BY op.productID;"
             cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
             result4 = cursor4.fetchall()
             currentSeasonalStats = []
             print("TEST_68:", seasonalGross)
             for prod in result4:
-                prod['Quantity'] = float(prod['Quantity'])
+                prod['Quantity'] = int(prod['Quantity'])
                 prod['Total'] = float(prod['Total'])
                 print("TEST_total:", prod['Total'])
                 prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)

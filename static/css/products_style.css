@@ -89,7 +89,7 @@ button{
 }
 
 #searchResultTable{
-  margin-top: 20px;
+  margin: auto;
   display: none;
 }
 
@@ -97,3 +97,4 @@ button{
   width: 1200px;
   margin: 0 auto;
 }
+

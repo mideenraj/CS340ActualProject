@@ -29,9 +29,9 @@ def root():
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         print("--------------------- TEST_401 ---------------------")
         for eachEntry in results:
-            print(eachEntry)
+            eachEntry['productID'] = str(eachEntry['productID'])
             print(type(eachEntry['productID']))
-            if eachEntry['productID'] == 'NULL':
+            if eachEntry['productID'] == 'None':
                 print("T R I G")
                 eachEntry['productID'] = 'Discontinued'
         payload.append(results)

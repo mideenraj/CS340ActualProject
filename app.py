@@ -27,14 +27,13 @@ def root():
         query = "SELECT * FROM OrderProducts;"
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
-        print("--------------------- TEST_401 ---------------------")
+        # Changes the productID column's value to 'Discontinued' for all deleted products
         for eachEntry in results:
             eachEntry['productID'] = str(eachEntry['productID'])
             print(type(eachEntry['productID']))
             if eachEntry['productID'] == 'None':
-                print("T R I G")
                 eachEntry['productID'] = 'Discontinued'
-        payload.append(results)
+        payload.append(results)     # Append to payload
 
         # -----Step 3: Query(s) for populating 'Current seasons'
         # --SubStep 1: get ID of every product
@@ -356,7 +355,12 @@ def load_orders():
         query1 = "SELECT * FROM Orders;"
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
-        payload.append(result1)
+        # Change Deleted customer's customerID to 'De-Registered'
+        for eachO in result1:
+            eachO['customerID'] = str(eachO['customerID'])
+            if eachO['customerID'] == 'None':
+                eachO['customerID'] = 'De-Registered'
+        payload.append(result1)     # Append to payload
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"

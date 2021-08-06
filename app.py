@@ -686,10 +686,10 @@ def load_seasons():
             results = cursor.fetchall()
 
             # Step 4: Access ID of last inserted row
-            query2 = f"SELECT LAST_INSERT_ID();"
+            query2 = f"SELECT * FROM Seasons ORDER BY seasonID DESC LIMIT 1;"
             cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             seasonID = cursor2.fetchall()
-            seasonID = str(seasonID[0]['LAST_INSERT_ID()'])
+            seasonID = str(seasonID[0]['seasonID'])
 
             # Step 2: Access new row through query and sent it back as a response
             query3 = f"SELECT * FROM Seasons WHERE seasonID='{seasonID}';"

@@ -239,6 +239,7 @@ async function add_product(){
     }
 
     if (payload['name'].length == 0){
+        console.log("THIS:", payload['name'])
         console.log("TRICK")
         return
     }

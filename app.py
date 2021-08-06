@@ -408,7 +408,8 @@ def load_orders():
         db.execute_query(db_connection=db_connect_function(), query=query3)
 
         # Step 4: Access ID of last inserted row
-        query4 = f"SELECT LAST_INSERT_ID() FROM Orders;"
+        #query4 = f"SELECT LAST_INSERT_ID() FROM Orders;"
+        query4 = "SELECT * FROM Orders ORDER BY orderID DESC LIMIT 1;"
         cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
         orderID = cursor4.fetchall()
         print("---------- Test_0 -----------")

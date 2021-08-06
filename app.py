@@ -34,13 +34,15 @@ def root():
                 eachEntry['productID'] = 'Discontinued'
         payload.append(results)     # Append to payload
 
+
+
         # -----Step 3: Query(s) for populating 'Current seasons'
         # --SubStep 1: get ID of every product
         query1 = "SELECT productID FROM Products;"
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         productIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
 
-        # --SubStep 2: Determine current season by cross-referencing date-of-purchase with seasonal dates
+        # --SubStep 2: Determine current season by cross-referencing current date with seasonal dates
         date_of_purchase = str(datetime.datetime.today()).split()[0]
         query2 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
         cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
@@ -48,10 +50,11 @@ def root():
         seasonID = result2[0]['seasonID']       # Accurate
 
         # --SubStep 2: get cumulative revenue for current season
-        date_of_purchase = str(datetime.datetime.today()).split()[0]
         query3 = f"SELECT SUM(totalCost) as totalCost FROM Orders WHERE seasonID='{seasonID}';"
         cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
         result3 = cursor3.fetchall()
+        print(" ---------------- Test_1 ----------------")
+        print(result3)
         seasonalGross = float(result3[0]['totalCost'])      # Accurate
 
         # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
@@ -69,6 +72,11 @@ def root():
             prod['Percent'] = round((prod['Total']/seasonalGross)*100, 1)
             currentSeasonalStats.append(prod)
         payload.append(currentSeasonalStats)
+
+
+
+
+
 
         # -----Step 4: Query(s) for populating 'Current year top sellers'
         # --SubStep 1: get ID of every season

@@ -29,6 +29,7 @@ def root():
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
         print("--------------------- TEST_401 ---------------------")
         for eachEntry in results:
+            print(eachEntry)
             if eachEntry['productID'] == 'None':
                 print("T R I G")
                 eachEntry['productID'] = 'Discontinued'

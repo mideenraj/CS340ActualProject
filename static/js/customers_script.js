@@ -186,6 +186,14 @@ async function insertCustomer(){
         "birthDate" : document.getElementById("new_dob").value,
         "zipCode" : document.getElementById("new_zipCode").value
     }
+
+
+    // Return if any field was left empty
+    if (payload['fName'].length == 0 || payload['lName'].length == 0 || payload['birthDate'].length == 0 || payload['zipCode'].length == 0){
+        return
+    }
+
+
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

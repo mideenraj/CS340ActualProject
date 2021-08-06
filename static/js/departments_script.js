@@ -39,6 +39,12 @@ async function addDepartment(){
         "name" : document.getElementById("input_department").value
 
     }
+
+    // Return if any field was left empty
+    if (payload['name'].length == 0){
+        return
+    }
+
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

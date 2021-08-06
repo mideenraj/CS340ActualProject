@@ -40,6 +40,12 @@ async function addSeason(){
         "start" : document.getElementById("sDate").value,
         "end" : document.getElementById("eDate").value
     }
+
+    // Return if any field was left empty
+    if (payload['name'].length == 0 || payload['start'].length == 0 || payload['end'].length == 0){
+        return
+    }
+
     var fetchdata = {
         method: 'POST',
         body: JSON.stringify(payload),

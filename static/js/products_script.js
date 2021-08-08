@@ -14,8 +14,6 @@ var departments_subpage = baseURL + "departments"
 var seasons_subpage = baseURL + "seasons"
 
 
-
-
 // Master event listener (On page Load)
 document.addEventListener('DOMContentLoaded', async () => {
 

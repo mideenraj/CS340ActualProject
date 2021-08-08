@@ -315,6 +315,7 @@ async function updateDataReport(){
     var t1_kids = table1.children
     console.log(t1_kids)
     for (var row of t1_kids){
+        console.log(row)
         console.log("Class Test:", row.class)
         if (row.class == "csStatRow"){
             row.remove

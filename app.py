@@ -485,6 +485,7 @@ def load_products():
             cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
             depName = cursor1.fetchall()[0]['name']
             eachP['departmentName'] = depName
+            print("TEST:", eachP)
         payload.append(results)     # Append rows to payload
 
         # Step 5: Print query results if Debugging

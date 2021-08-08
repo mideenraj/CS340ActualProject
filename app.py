@@ -80,7 +80,6 @@ def root():
             payload.append(currentSeasonalStats)
 
 
-
             # -----Step 4: Query(s) for populating 'Current year top sellers'
             # --SubStep 1: get ID of every season
             query1 = "SELECT seasonID FROM Seasons;"
@@ -308,62 +307,62 @@ def root():
                     prod['Percent'] = round((prod['Total'] / seasonalGross) * 100, 1)
                     payload['seasonal'].append(prod)
 
-                # -----Step 4: Query(s) for populating 'Current year top sellers'
-                # --SubStep 1: get ID of every season
-                query1 = "SELECT seasonID FROM Seasons;"
-                cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-                seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-                sids = []
-                for val in seasonIDs:
-                    sids.append(val['seasonID'])
+            # -----Step 4: Query(s) for populating 'Current year top sellers'
+            # --SubStep 1: get ID of every season
+            query1 = "SELECT seasonID FROM Seasons;"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+            sids = []
+            for val in seasonIDs:
+                sids.append(val['seasonID'])
 
-                # --SubStep 2: xxx
-                for each_id in sids:
-                    # print("Each_id:", each_id)
-                    # --Get Name of season
-                    query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
-                    cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
-                    seasonName = cursor2.fetchall()[0]["seasonName"]
+            # --SubStep 2: xxx
+            for each_id in sids:
+                # print("Each_id:", each_id)
+                # --Get Name of season
+                query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
+                cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                seasonName = cursor2.fetchall()[0]["seasonName"]
 
-                    # --Get all products and their total sales
-                    query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
-                             f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
-                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-                    productData = cursor3.fetchall()
-                    # print("TEST_2:", productData)
-                    if productData == ():
-                        break
+                # --Get all products and their total sales
+                query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
+                         f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
+                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                productData = cursor3.fetchall()
+                # print("TEST_2:", productData)
+                if productData == ():
+                    break
 
-                    # --Determine product with highest sale
-                    totals = []
-                    for val in productData:
-                        totals.append(float(val['Total']))
-                    maxTotal = max(totals)
-                    # print("MAX:", maxTotal)
+                # --Determine product with highest sale
+                totals = []
+                for val in productData:
+                    totals.append(float(val['Total']))
+                maxTotal = max(totals)
+                # print("MAX:", maxTotal)
 
-                    # --Choose top seller
-                    for each in productData:
-                        if float(each['Total']) == maxTotal:
-                            each['season'] = seasonName
-                            each['quantity'] = int(each['Quantity'])
-                            each['total'] = float(each['Total'])
-                            payload['annual'].append(each)
+                # --Choose top seller
+                for each in productData:
+                    if float(each['Total']) == maxTotal:
+                        each['season'] = seasonName
+                        each['quantity'] = int(each['Quantity'])
+                        each['total'] = float(each['Total'])
+                        payload['annual'].append(each)
 
-                # --Convert productID to productName
-                for eachPS in payload['annual']:
-                    query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
-                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-                    productName = cursor3.fetchall()[0]["productName"]
-                    eachPS['Quantity'] = int(eachPS['Quantity'])
-                    eachPS['Total'] = float(eachPS['Total'])
-                    eachPS['product'] = productName
-                    del eachPS['ProductID']
+            # --Convert productID to productName
+            for eachPS in payload['annual']:
+                query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
+                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                productName = cursor3.fetchall()[0]["productName"]
+                eachPS['Quantity'] = int(eachPS['Quantity'])
+                eachPS['Total'] = float(eachPS['Total'])
+                eachPS['product'] = productName
+                del eachPS['ProductID']
 
-                for val in payload:
-                    for val2 in payload[val]:
-                        print(val2)
-                    print("")
-                return payload
+            for val in payload:
+                for val2 in payload[val]:
+                    print(val2)
+                print("")
+            return payload
 
 
 

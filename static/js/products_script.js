@@ -263,6 +263,7 @@ async function add_product(){
         // --Create departmentID cell
     var department_cell = document.createElement('td')
     department_cell.textContent = document.getElementById("new_department").textcontent
+    console.log("TEST_2:", department_cell.textContent)
     new_row.appendChild(department_cell)
 
         // --Create salePrice cell

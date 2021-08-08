@@ -359,6 +359,7 @@ async function updateDataReport(){
         }
 
     // -Second, populate with updated info
+    var table2 = document.querySelector("#cyTable")
     var annualData = data['annual']
     for (var dataSet of annualData){
         //Create a new row

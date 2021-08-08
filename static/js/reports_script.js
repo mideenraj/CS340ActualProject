@@ -312,7 +312,7 @@ async function updateDataReport(){
     // Step 2: Update Current seasonal stat table
     // -First, delete all existing rows
     var table1 = document.querySelector("#csTable")
-    var t1_kids = table1.children
+    var t1_kids = table1.childNodes
     console.log(t1_kids)
     for (var row of t1_kids){
         if (row.id != "headerRow"){

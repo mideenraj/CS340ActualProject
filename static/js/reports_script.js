@@ -359,6 +359,7 @@ async function updateDataReport(){
     var t2_kids = table2.children
     for (var row of t2_kids){
         if (row.id == "cyStatRow"){
+            console.log("TRIGSter")
             row.remove
         }
     }

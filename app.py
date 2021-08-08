@@ -559,9 +559,9 @@ def load_products():
             results = cursor.fetchall()
 
             # Step 2: Access new row through query and sent it back as a response
-            query = f"SELECT productID, productName, departmentID, salePrice, unitType, name FROM Products P " \
+            query = f"SELECT productID, productName, P.departmentID, salePrice, unitType, D.name FROM Products P " \
                         f"INNER JOIN Departments D ON P.departmentID=D.departmentID WHERE productName=" \
-                        f"'{response_obj['name']}' AND departmentID='{response_obj['department']}' " \
+                        f"'{response_obj['name']}' AND P.departmentID='{response_obj['department']}' " \
                     f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
             #query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}' AND departmentID='{response_obj['department']}' " \
                     #f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"

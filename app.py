@@ -359,6 +359,7 @@ def root():
                     productName = cursor3.fetchall()[0]["productName"]
                     eachPS['product'] = productName
                     del eachPS['ProductID']
+                print(payload)
 
                 return payload
 

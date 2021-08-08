@@ -484,7 +484,6 @@ def load_products():
             query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
             cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
             depName = cursor1.fetchall()[0]['name']
-            print("TEST_61:", depName)
             eachP['departmentName'] = depName
         payload.append(results)     # Append rows to payload
 

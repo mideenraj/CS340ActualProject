@@ -315,7 +315,7 @@ async function updateDataReport(){
     var t1_kids = table1.childNodes
     console.log(t1_kids)
     for (var row of t1_kids){
-        if (row.id == "csStatRow"){
+        if (row.class == "csStatRow"){
             row.remove
         }
     }
@@ -358,7 +358,7 @@ async function updateDataReport(){
     var table2 = document.querySelector("#cyTable")
     var t2_kids = table2.children
     for (var row of t2_kids){
-        if (row.id == "cyStatRow"){
+        if (row.class == "cyStatRow"){
             console.log("TRIGSter")
             row.remove
         }

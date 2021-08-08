@@ -60,6 +60,8 @@ def root():
             seasonalGross = float(result3[0]['totalCost'])      # Accurate
         else:
             EntriesPresent = False
+            currentSeasonalStats = []
+            payload.append(currentSeasonalStats)
 
         # All tables only populate if there is at least one entry in OrderProducts. Otherwise, skips to page render
         print("TEST_1 -------------------------------------------------------------------------")

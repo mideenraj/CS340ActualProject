@@ -362,6 +362,7 @@ def root():
                 for val in payload:
                     for val2 in payload[val]:
                         print(val2)
+                    print("")
                 return payload
 
 

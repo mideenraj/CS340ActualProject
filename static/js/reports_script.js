@@ -313,13 +313,13 @@ async function updateDataReport(){
     // -First, delete all existing rows
     var table1 = document.querySelector("#csTable")
     var t1_kids = table1.children
+    console.log(t1_kids)
     for (var row of t1_kids){
         if (row.id != "headerRow"){
             row.remove
         }
     }
 
-    return
 
     // -Second, populate with updated info
     var seasonalData = data['seasonal']
@@ -355,8 +355,8 @@ async function updateDataReport(){
     // Step 3: Update current annual stat table
     // -First, delete all existing rows
     var table2 = document.querySelector("#cyTable")
-    var t1_kids = table2.children
-    for (var row of t1_kids){
+    var t2_kids = table2.children
+    for (var row of t2_kids){
         if (row.id != "headerRow"){
             row.remove
         }

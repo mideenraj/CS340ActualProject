@@ -562,9 +562,7 @@ def load_products():
             query = f"SELECT productID, productName, P.departmentID, salePrice, unitType, D.name FROM Products P " \
                         f"INNER JOIN Departments D ON P.departmentID=D.departmentID WHERE productName=" \
                         f"'{response_obj['name']}' AND P.departmentID='{response_obj['department']}' " \
-                    f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
-            #query = f"SELECT * FROM Products WHERE productName='{response_obj['name']}' AND departmentID='{response_obj['department']}' " \
-                    #f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
+                        f"AND salePrice='{response_obj['price']}' AND unitType='{response_obj['unit']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             results = cursor.fetchall()
             payload = results[0]

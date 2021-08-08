@@ -262,7 +262,9 @@ async function add_product(){
 
         // --Create departmentID cell
     var department_cell = document.createElement('td')
-    department_cell.textContent = document.getElementById("new_department").textcontent
+    department_cell.setAttribute('class', 'department_cell')
+    department_cell.setAttribute('id', data['departmentID'])
+    department_cell.textContent = data['departmentName']
     console.log("TEST_2:", department_cell.textContent)
     new_row.appendChild(department_cell)
 

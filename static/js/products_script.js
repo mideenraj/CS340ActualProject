@@ -176,7 +176,8 @@ async function submit_edit(){
     rowCells = rowToEdit.children
     rowCells.item(0).textContent = data['productID']
     rowCells.item(1).textContent = data['productName']
-    rowCells.item(2).textContent = data['departmentID']
+    rowCells.item(2).textContent = data['depName']
+    rowCells.item(2).setAttribute('id', data['departmentID'])
     rowCells.item(3).textContent = data['salePrice']
     rowCells.item(4).textContent = data['unitType']
 
@@ -244,7 +245,6 @@ async function add_product(){
     }
     var response = await fetch(url, fetchdata)
     var data = await response.json()
-    console.log(data)
 
     // -------- Step 2: Append data to table (By creating new row with the returned response)
     var input_row = document.getElementById("input_row")        // Get the row before which the new row will be inserted

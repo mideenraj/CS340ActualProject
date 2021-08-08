@@ -484,7 +484,7 @@ def load_products():
         for eachP in results:
             query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
             cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-            depName = cursor1.fetchall()[0]['departmentName']
+            depName = cursor1.fetchall()[0]['name']
             print("TEST_61:", depName)
             eachP['departmentName'] = depName
 

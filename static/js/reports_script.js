@@ -306,6 +306,88 @@ async function updateDataReport(){
         var response = await fetch(url, fetchdata)
         var data = await response.json()
 
+    
+    // Step 2: Update Current seasonal stat table
+    // -First, delete all existing rows
+    var table1 = document.querySelector("#csTable")
+    var t1_kids = table1.children
+    for (var row of t1_kids){
+        if (row.id != "headerRow"){
+            row.remove
+        }
+    }
+
+    // -Second, populate with updated info
+    var seasonalData = data['seasonal']
+    for (var dataSet of seasonalData){
+        //Create a new row
+        var new_row = document.createElement("tr")
+
+        // Create header cell w/ season name
+        var produceCell = document.createElement('th')
+        produceCell.textContent = dataSet['Product']
+        new_row.appendChild(produceCell)
+
+        // Create data cell w/ quantity
+        var quantityCell = document.createElement('td')
+        quantityCell.textContent = dataSet['Quantity']
+        new_row.appendChild(quantityCell)
+
+        // Create data cell w/ total
+        var totalCell = document.createElement('td')
+        totalCell.textContent = dataSet['Total']
+        new_row.appendChild(totalCell)
+
+        // Create data cell w/ percent
+        var percentCell = document.createElement('td')
+        percentCell.textContent = dataSet['Percent']
+        new_row.appendChild(percentCell)
+
+        // Append row to table
+        table1.appendChild(new_row)
+    }
+
+
+    // Step 3: Update current annual stat table
+    // -First, delete all existing rows
+    var table1 = document.querySelector("#cyTable")
+    var t1_kids = table1.children
+    for (var row of t1_kids){
+        if (row.id != "headerRow"){
+            row.remove
+        }
+    }
+
+    // -Second, populate with updated info
+    var annualData = data['annual']
+    for (var dataSet of annualData){
+        //Create a new row
+        var new_row = document.createElement("tr")
+
+        // Create header cell w/ season name
+        var seasonCell = document.createElement('th')
+        seasonCell.textContent = dataSet['season']
+        new_row.appendChild(seasonCell)
+
+        // Create data cell w/ product
+        var produceCell = document.createElement('td')
+        produceCell.textContent = dataSet['Product']
+        new_row.appendChild(produceCell)
+
+        // Create data cell w/ quantity
+        var quantityCell = document.createElement('td')
+        quantityCell.textContent = dataSet['Quantity']
+        new_row.appendChild(quantityCell)
+
+        // Create data cell w/ total
+        var totalCell = document.createElement('td')
+        totalCell.textContent = dataSet['Total']
+        new_row.appendChild(totalCell)
+
+        // Append row to table
+        table1.appendChild(new_row)
+    }
+
 
 
 

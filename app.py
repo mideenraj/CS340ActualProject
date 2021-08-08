@@ -302,12 +302,9 @@ def root():
                          f"op WHERE op.seasonID = '{seasonID}' AND productID IS NOT NULL GROUP BY op.productID;"
                 cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
                 result4 = cursor4.fetchall()
-                currentSeasonalStats = []
-                print("TEST_68:", seasonalGross)
                 for prod in result4:
                     prod['Quantity'] = int(prod['Quantity'])
                     prod['Total'] = float(prod['Total'])
-                    print("TEST_total:", prod['Total'])
                     prod['Percent'] = round((prod['Total'] / seasonalGross) * 100, 1)
                     payload['seasonal'].append(prod)
 
@@ -361,7 +358,6 @@ def root():
                     eachPS['Total'] = float(eachPS['Total'])
                     eachPS['product'] = productName
                     del eachPS['ProductID']
-                print(payload)
 
                 return payload
 

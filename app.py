@@ -357,6 +357,8 @@ def root():
                     query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
                     cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
                     productName = cursor3.fetchall()[0]["productName"]
+                    eachPS['Quantity'] = int(eachPS['Quantity'])
+                    eachPS['Total'] = float(eachPS['Total'])
                     eachPS['product'] = productName
                     del eachPS['ProductID']
                 print(payload)

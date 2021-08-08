@@ -79,90 +79,92 @@ def root():
                 currentSeasonalStats.append(prod)
             payload.append(currentSeasonalStats)
 
-        # -----Step 4: Query(s) for populating 'Current year top sellers'
-        # --SubStep 1: get ID of every season
-        query1 = "SELECT seasonID FROM Seasons;"
-        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-        seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-        sids = []
-        for val in seasonIDs:
-            sids.append(val['seasonID'])
 
-        # --SubStep 2: xxx
-        currentAnnualStats = []
-        for each_id in sids:
-            # print("Each_id:", each_id)
-            # --Get Name of season
-            query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
-            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
-            seasonName = cursor2.fetchall()[0]["seasonName"]
 
-            # --Get all products and their total sales
-            query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
-                     f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
-            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-            productData = cursor3.fetchall()
-            # print("TEST_2:", productData)
-            if productData == ():
-                break
+            # -----Step 4: Query(s) for populating 'Current year top sellers'
+            # --SubStep 1: get ID of every season
+            query1 = "SELECT seasonID FROM Seasons;"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+            sids = []
+            for val in seasonIDs:
+                sids.append(val['seasonID'])
 
-            # --Determine product with highest sale
-            totals = []
-            for val in productData:
-                totals.append(float(val['Total']))
-            maxTotal = max(totals)
-            # print("MAX:", maxTotal)
+            # --SubStep 2: xxx
+            currentAnnualStats = []
+            for each_id in sids:
+                # print("Each_id:", each_id)
+                # --Get Name of season
+                query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
+                cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                seasonName = cursor2.fetchall()[0]["seasonName"]
 
-            # --Choose top seller
-            for each in productData:
-                if float(each['Total']) == maxTotal:
-                    each['season'] = seasonName
-                    each['quantity'] = int(each['Quantity'])
-                    each['total'] = float(each['Total'])
-                    currentAnnualStats.append(each)
+                # --Get all products and their total sales
+                query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
+                         f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
+                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                productData = cursor3.fetchall()
+                # print("TEST_2:", productData)
+                if productData == ():
+                    break
 
-        # --Convert productID to productName
-        for eachPS in currentAnnualStats:
-            query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
-            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-            productName = cursor3.fetchall()[0]["productName"]
-            eachPS['product'] = productName
-            del eachPS['ProductID']
+                # --Determine product with highest sale
+                totals = []
+                for val in productData:
+                    totals.append(float(val['Total']))
+                maxTotal = max(totals)
+                # print("MAX:", maxTotal)
 
-        # --SubStep 3: append data to payload
-        payload.append(currentAnnualStats)
+                # --Choose top seller
+                for each in productData:
+                    if float(each['Total']) == maxTotal:
+                        each['season'] = seasonName
+                        each['quantity'] = int(each['Quantity'])
+                        each['total'] = float(each['Total'])
+                        currentAnnualStats.append(each)
 
-        # -----Step 4: Access 'Single item Order' and store to payload
+            # --Convert productID to productName
+            for eachPS in currentAnnualStats:
+                query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
+                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                productName = cursor3.fetchall()[0]["productName"]
+                eachPS['product'] = productName
+                del eachPS['ProductID']
 
-        # -First get all product names and store to payload
-        query4 = f"SELECT productName FROM Products;"
-        cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
-        productNames = cursor4.fetchall()
-        # -Store in list, and finally attach to payload
-        products = []
-        for name in productNames:
-            products.append(name['productName'])
-        payload.append(products)
+            # --SubStep 3: append data to payload
+            payload.append(currentAnnualStats)
 
-        # -Second, get all Order ID and store to payload
-        query5 = f"SELECT orderID FROM Orders;"
-        cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
-        orderIDs = cursor5.fetchall()
-        # -Store in list, and finally attach to payload
-        orders = []
-        for name in orderIDs:
-            orders.append(name['orderID'])
-        payload.append(orders)
+            # -----Step 4: Access 'Single item Order' and store to payload
 
-        # -Second, get all Order ID and store to payload
-        query6 = f"SELECT seasonID FROM Seasons;"
-        cursor6 = db.execute_query(db_connection=db_connect_function(), query=query6)
-        seasonInfo = cursor6.fetchall()
-        # -Store in list, and finally attach to payload
-        seasons = []
-        for name in seasonInfo:
-            seasons.append(name['seasonID'])
-        payload.append(seasons)
+            # -First get all product names and store to payload
+            query4 = f"SELECT productName FROM Products;"
+            cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
+            productNames = cursor4.fetchall()
+            # -Store in list, and finally attach to payload
+            products = []
+            for name in productNames:
+                products.append(name['productName'])
+            payload.append(products)
+
+            # -Second, get all Order ID and store to payload
+            query5 = f"SELECT orderID FROM Orders;"
+            cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
+            orderIDs = cursor5.fetchall()
+            # -Store in list, and finally attach to payload
+            orders = []
+            for name in orderIDs:
+                orders.append(name['orderID'])
+            payload.append(orders)
+
+            # -Second, get all Order ID and store to payload
+            query6 = f"SELECT seasonID FROM Seasons;"
+            cursor6 = db.execute_query(db_connection=db_connect_function(), query=query6)
+            seasonInfo = cursor6.fetchall()
+            # -Store in list, and finally attach to payload
+            seasons = []
+            for name in seasonInfo:
+                seasons.append(name['seasonID'])
+            payload.append(seasons)
 
 
         # -----Step 5: Render HomePage
@@ -306,62 +308,62 @@ def root():
                     prod['Percent'] = round((prod['Total'] / seasonalGross) * 100, 1)
                     payload['seasonal'].append(prod)
 
-            # -----Step 4: Query(s) for populating 'Current year top sellers'
-            # --SubStep 1: get ID of every season
-            query1 = "SELECT seasonID FROM Seasons;"
-            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-            seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
-            sids = []
-            for val in seasonIDs:
-                sids.append(val['seasonID'])
+                # -----Step 4: Query(s) for populating 'Current year top sellers'
+                # --SubStep 1: get ID of every season
+                query1 = "SELECT seasonID FROM Seasons;"
+                cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+                seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+                sids = []
+                for val in seasonIDs:
+                    sids.append(val['seasonID'])
 
-            # --SubStep 2: xxx
-            for each_id in sids:
-                # print("Each_id:", each_id)
-                # --Get Name of season
-                query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
-                cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
-                seasonName = cursor2.fetchall()[0]["seasonName"]
+                # --SubStep 2: xxx
+                for each_id in sids:
+                    # print("Each_id:", each_id)
+                    # --Get Name of season
+                    query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
+                    cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                    seasonName = cursor2.fetchall()[0]["seasonName"]
 
-                # --Get all products and their total sales
-                query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
-                         f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
-                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-                productData = cursor3.fetchall()
-                # print("TEST_2:", productData)
-                if productData == ():
-                    break
+                    # --Get all products and their total sales
+                    query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
+                             f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
+                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                    productData = cursor3.fetchall()
+                    # print("TEST_2:", productData)
+                    if productData == ():
+                        break
 
-                # --Determine product with highest sale
-                totals = []
-                for val in productData:
-                    totals.append(float(val['Total']))
-                maxTotal = max(totals)
-                # print("MAX:", maxTotal)
+                    # --Determine product with highest sale
+                    totals = []
+                    for val in productData:
+                        totals.append(float(val['Total']))
+                    maxTotal = max(totals)
+                    # print("MAX:", maxTotal)
 
-                # --Choose top seller
-                for each in productData:
-                    if float(each['Total']) == maxTotal:
-                        each['season'] = seasonName
-                        each['quantity'] = int(each['Quantity'])
-                        each['total'] = float(each['Total'])
-                        payload['annual'].append(each)
+                    # --Choose top seller
+                    for each in productData:
+                        if float(each['Total']) == maxTotal:
+                            each['season'] = seasonName
+                            each['quantity'] = int(each['Quantity'])
+                            each['total'] = float(each['Total'])
+                            payload['annual'].append(each)
 
-            # --Convert productID to productName
-            for eachPS in payload['annual']:
-                query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
-                cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
-                productName = cursor3.fetchall()[0]["productName"]
-                eachPS['Quantity'] = int(eachPS['Quantity'])
-                eachPS['Total'] = float(eachPS['Total'])
-                eachPS['product'] = productName
-                del eachPS['ProductID']
+                # --Convert productID to productName
+                for eachPS in payload['annual']:
+                    query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
+                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                    productName = cursor3.fetchall()[0]["productName"]
+                    eachPS['Quantity'] = int(eachPS['Quantity'])
+                    eachPS['Total'] = float(eachPS['Total'])
+                    eachPS['product'] = productName
+                    del eachPS['ProductID']
 
-            for val in payload:
-                for val2 in payload[val]:
-                    print(val2)
-                print("")
-            return payload
+                for val in payload:
+                    for val2 in payload[val]:
+                        print(val2)
+                    print("")
+                return payload
 
 
 

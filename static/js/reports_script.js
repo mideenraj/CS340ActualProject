@@ -305,6 +305,8 @@ async function updateDataReport(){
         }
         var response = await fetch(url, fetchdata)
         var data = await response.json()
+    
+    
 
     
     // Step 2: Update Current seasonal stat table
@@ -350,8 +352,8 @@ async function updateDataReport(){
 
     // Step 3: Update current annual stat table
     // -First, delete all existing rows
-    var table1 = document.querySelector("#cyTable")
-    var t1_kids = table1.children
+    var table2 = document.querySelector("#cyTable")
+    var t1_kids = table2.children
     for (var row of t1_kids){
         if (row.id != "headerRow"){
             row.remove
@@ -385,7 +387,7 @@ async function updateDataReport(){
         new_row.appendChild(totalCell)
 
         // Append row to table
-        table1.appendChild(new_row)
+        table2.appendChild(new_row)
     }
 
 

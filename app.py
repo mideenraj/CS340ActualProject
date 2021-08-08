@@ -359,6 +359,9 @@ def root():
                     eachPS['product'] = productName
                     del eachPS['ProductID']
 
+                for val in payload:
+                    for val2 in val:
+                        print(val2)
                 return payload
 
 

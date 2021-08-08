@@ -62,7 +62,9 @@ def root():
             EntriesPresent = False
 
         # All tables only populate if there is at least one entry in OrderProducts. Otherwise, skips to page render
+        print("TEST_1 -------------------------------------------------------------------------")
         if EntriesPresent:
+            print("TEST_2 -------------------------------------------------------------------------")
             # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
             query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
                      f"SUM(op.quantitySold) as Quantity, SUM(op.productTotal) as Total FROM OrderProducts " \

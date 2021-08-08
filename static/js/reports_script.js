@@ -315,6 +315,7 @@ async function updateDataReport(){
     var t1_kids = table1.children
     console.log(t1_kids)
     for (var row of t1_kids){
+        console.log("Class Test:", row.class)
         if (row.class == "csStatRow"){
             row.remove
         }
@@ -378,7 +379,7 @@ async function updateDataReport(){
 
         // Create data cell w/ product
         var produceCell = document.createElement('td')
-        produceCell.textContent = dataSet['Product']
+        produceCell.textContent = dataSet['product']
         new_row.appendChild(produceCell)
 
         // Create data cell w/ quantity

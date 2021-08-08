@@ -478,7 +478,6 @@ def load_products():
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
-        #payload.append(results)
 
         # Step 5: Access the department name for each product
         for eachP in results:
@@ -487,6 +486,7 @@ def load_products():
             depName = cursor1.fetchall()[0]['name']
             print("TEST_61:", depName)
             eachP['departmentName'] = depName
+        payload.append(results)     # Append rows to payload
 
         # Step 5: Print query results if Debugging
         debug = False

@@ -319,6 +319,8 @@ async function updateDataReport(){
         }
     }
 
+    return
+
     // -Second, populate with updated info
     var seasonalData = data['seasonal']
     for (var dataSet of seasonalData){

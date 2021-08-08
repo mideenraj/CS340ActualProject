@@ -313,7 +313,7 @@ async function updateDataReport(){
     // -First, delete all existing rows
     var table1 = document.querySelector("#csTable")
     var t1_kids = table1.children
-    console.log("T1:", t1_kids.item(1))
+    console.log("T1:", t1_kids.item(0))
 
     for (var row of t1_kids){
         console.log("Class Test:", row.class)

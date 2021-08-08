@@ -314,6 +314,7 @@ async function updateDataReport(){
 
     var csRows = document.querySelectorAll(".csStatRow")
     for (var row of csRows){
+        console.log("THIS:", row)
         row.remove
         }
 

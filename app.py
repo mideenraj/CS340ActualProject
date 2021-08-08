@@ -360,7 +360,7 @@ def root():
                     del eachPS['ProductID']
 
                 for val in payload:
-                    for val2 in val:
+                    for val2 in payload[val]:
                         print(val2)
                 return payload
 

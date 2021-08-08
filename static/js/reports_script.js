@@ -314,11 +314,9 @@ async function updateDataReport(){
 
     var csRows = document.querySelectorAll(".csStatRow")
     for (var row of csRows){
-        console.log("THIS:", row)
         row.remove()
         }
 
-    return
 
     // -Second, populate with updated info
     var table1 = document.querySelector("#csTable")
@@ -355,14 +353,10 @@ async function updateDataReport(){
 
     // Step 3: Update current annual stat table
     // -First, delete all existing rows
-    var table2 = document.querySelector("#cyTable")
-    var t2_kids = table2.children
-    for (var row of t2_kids){
-        if (row.class == "cyStatRow"){
-            console.log("TRIGSter")
-            row.remove
+    var cyRows = document.querySelectorAll(".cyStatRow")
+    for (var row of cyRows){
+        row.remove()
         }
-    }
 
     // -Second, populate with updated info
     var annualData = data['annual']

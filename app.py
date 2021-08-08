@@ -478,7 +478,15 @@ def load_products():
 
         # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
-        payload.append(results)
+        #payload.append(results)
+
+        # Step 5: Access the department name for each product
+        for eachP in results:
+            query1 = f"SELECT departmentName FROM Departments WHERE departmentID='{eachP['departmentID']}';"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            depName = cursor1.fetchall()[0]['departmentName']
+            print("TEST_61:", depName)
+            eachP['departmentName'] = depName
 
         # Step 5: Print query results if Debugging
         debug = False

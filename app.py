@@ -369,7 +369,6 @@ def root():
             return payload
 
 
-
 # Route 2: 'Customers' subpage
 @app.route('/customers', methods=['POST', 'GET'])
 def load_customers():

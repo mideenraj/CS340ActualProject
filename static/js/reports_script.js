@@ -315,7 +315,7 @@ async function updateDataReport(){
     var t1_kids = table1.childNodes
     console.log(t1_kids)
     for (var row of t1_kids){
-        if (row.id != "headerRow"){
+        if (row.id == "csStatRow"){
             row.remove
         }
     }
@@ -326,6 +326,7 @@ async function updateDataReport(){
     for (var dataSet of seasonalData){
         //Create a new row
         var new_row = document.createElement("tr")
+        new_row.setAttribute('class', 'csStatRow')
 
         // Create header cell w/ season name
         var produceCell = document.createElement('th')
@@ -357,7 +358,7 @@ async function updateDataReport(){
     var table2 = document.querySelector("#cyTable")
     var t2_kids = table2.children
     for (var row of t2_kids){
-        if (row.id != "headerRow"){
+        if (row.id == "cyStatRow"){
             row.remove
         }
     }
@@ -367,6 +368,7 @@ async function updateDataReport(){
     for (var dataSet of annualData){
         //Create a new row
         var new_row = document.createElement("tr")
+        new_row.setAttribute('class', 'cyStatRow')
 
         // Create header cell w/ season name
         var seasonCell = document.createElement('th')

@@ -493,7 +493,7 @@ def load_products():
         data = cursor2.fetchall()
         departmentData = []
         for eachD in data:
-            dd = (data['departmentID'], data['name'])
+            dd = (eachD['departmentID'], eachD['name'])
             departmentData.append(dd)
         payload.append(departmentData)
 

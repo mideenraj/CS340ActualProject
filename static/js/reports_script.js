@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // When add is clicked
     document.querySelector("#insertItem").addEventListener('click', addItem)
     
-
 });
 
 
@@ -76,6 +75,11 @@ async function cancelOrder(){
 
     // ---Step 2: Delete the row
     parentRow.remove()
+
+    // ---Step 3: Update the data report tables
+    updateDataReport()
+
+
 }
 
 // Function 2:
@@ -280,4 +284,29 @@ async function addItem(){
     }
     var response = await fetch(url, fetchdata)
     var response = await response.json()
+
+
+    // Step 7: Update the data report tables
+    updateDataReport()
+}
+
+// Function 5: 
+async function updateDataReport(){
+
+    // Step 1: Send request to access updated data
+    var url = baseURL
+        payload = {
+            "action":"updateDataReport",
+        }
+        var fetchdata = {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {'Content-Type' : 'application/json'}
+        }
+        var response = await fetch(url, fetchdata)
+        var data = await response.json()
+
+
+
+
 }

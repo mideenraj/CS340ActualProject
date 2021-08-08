@@ -264,6 +264,106 @@ def root():
             return {"status":"complete"}
 
 
+        # To return updated data report summary table data to client
+        elif response_obj['action'] == 'updateDataReport':
+            payload = {"seasonal":[], "annual": []}
+            # -----Step 3: Query(s) for populating 'Current seasons'
+            # --SubStep 1: get ID of every product
+            query1 = "SELECT productID FROM Products;"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            productIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+
+            # --SubStep 2: Determine current season by cross-referencing current date with seasonal dates
+            date_of_purchase = str(datetime.datetime.today()).split()[0]
+            query2 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
+            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+            result2 = cursor2.fetchall()
+            seasonID = result2[0]['seasonID']  # Accurate
+
+            # --SubStep 2: get cumulative revenue for current season
+            # The total is taken from OrderProdcucts and not from Orders since each Orders entry will shows the cumulative
+            # total of purchased items, regardless of if that product was discontinued (removed form database) or not. This
+            # of course, is inaccurate since we only want the total of products that are still available to customers
+            query3 = f"SELECT SUM(productTotal) as totalCost FROM OrderProducts WHERE seasonID='{seasonID}' " \
+                     f"AND productID is not NULL;"
+            cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+            result3 = cursor3.fetchall()
+            if result3[0]['totalCost'] is not None:
+                EntriesPresent = True
+                seasonalGross = float(result3[0]['totalCost'])  # Accurate
+            else:
+                EntriesPresent = False
+
+            # All tables only populate if there is at least one entry in OrderProducts. Otherwise, skips to page render
+            if EntriesPresent:
+                # --SubStep 3: get stats for every product using IDs (that was accessed earlier)
+                query4 = f"SELECT (SELECT productName FROM Products p WHERE p.productID = op.productID) as Product, " \
+                         f"SUM(op.quantitySold) as Quantity, SUM(op.productTotal) as Total FROM OrderProducts " \
+                         f"op WHERE op.seasonID = '{seasonID}' AND productID IS NOT NULL GROUP BY op.productID;"
+                cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
+                result4 = cursor4.fetchall()
+                currentSeasonalStats = []
+                print("TEST_68:", seasonalGross)
+                for prod in result4:
+                    prod['Quantity'] = int(prod['Quantity'])
+                    prod['Total'] = float(prod['Total'])
+                    print("TEST_total:", prod['Total'])
+                    prod['Percent'] = round((prod['Total'] / seasonalGross) * 100, 1)
+                    payload['seasonal'].append(prod)
+
+                # -----Step 4: Query(s) for populating 'Current year top sellers'
+                # --SubStep 1: get ID of every season
+                query1 = "SELECT seasonID FROM Seasons;"
+                cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+                seasonIDs = cursor1.fetchall()  # Access result (This returns a tuple of selected rows from query)
+                sids = []
+                for val in seasonIDs:
+                    sids.append(val['seasonID'])
+
+                # --SubStep 2: xxx
+                for each_id in sids:
+                    # print("Each_id:", each_id)
+                    # --Get Name of season
+                    query2 = f"SELECT seasonName FROM Seasons WHERE seasonID={each_id};"
+                    cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                    seasonName = cursor2.fetchall()[0]["seasonName"]
+
+                    # --Get all products and their total sales
+                    query3 = f"SELECT productID as ProductID, SUM(quantitySold) as Quantity, SUM(productTotal) as Total " \
+                             f"FROM OrderProducts WHERE seasonID='{each_id}' AND productID IS NOT NULL GROUP BY productID;"
+                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                    productData = cursor3.fetchall()
+                    # print("TEST_2:", productData)
+                    if productData == ():
+                        break
+
+                    # --Determine product with highest sale
+                    totals = []
+                    for val in productData:
+                        totals.append(float(val['Total']))
+                    maxTotal = max(totals)
+                    # print("MAX:", maxTotal)
+
+                    # --Choose top seller
+                    for each in productData:
+                        if float(each['Total']) == maxTotal:
+                            each['season'] = seasonName
+                            each['quantity'] = int(each['Quantity'])
+                            each['total'] = float(each['Total'])
+                            payload['annual'].append(each)
+
+                # --Convert productID to productName
+                for eachPS in payload['annual']:
+                    query3 = f"SELECT productName FROM Products WHERE productID='{eachPS['ProductID']}';"
+                    cursor3 = db.execute_query(db_connection=db_connect_function(), query=query3)
+                    productName = cursor3.fetchall()[0]["productName"]
+                    eachPS['product'] = productName
+                    del eachPS['ProductID']
+
+                return payload
+
+
+
 # Route 2: 'Customers' subpage
 @app.route('/customers', methods=['POST', 'GET'])
 def load_customers():

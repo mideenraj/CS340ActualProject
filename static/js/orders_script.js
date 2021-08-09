@@ -75,6 +75,8 @@ async function place_order() {
     var rowData = data["lastOrder"]
         // New row
     var newRow = document.createElement('tr')
+    newRow.setAttribute('class', 'order_row')
+    newRow.setAttribute('id', rowData['orderID'])
         // order ID data cell
     var oID = document.createElement('td')
     oID.textContent = rowData['orderID']

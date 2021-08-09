@@ -1,6 +1,6 @@
 
 
--- Drop tables if exists
+-- Drop table(s) if they exist
 DROP TABLE IF EXISTS `OrderProducts`;
 DROP TABLE IF EXISTS `Orders`;
 DROP TABLE IF EXISTS `Products`;

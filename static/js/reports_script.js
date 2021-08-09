@@ -159,9 +159,6 @@ async function addItem(){
         // Get all children of the current row
         var cells = row.children
 
-        console.log("Test1:", orderID, cells.item(1).textContent)
-        console.log("Test2:", seasonName, cells.item(2).textContent)
-
         // Compare with selected pair
         if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonName){
             existence = true

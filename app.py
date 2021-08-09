@@ -28,6 +28,7 @@ def root():
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
 
+
         print("------------------------------------------------------")
         for each in results:
             print(each)
@@ -51,8 +52,6 @@ def root():
             query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachEntry['seasonID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             result = cursor.fetchall()
-            print("TEST 100:", result)
-            print("TEST 101:", result[0])
             sName = result[0]['seasonName']
             eachEntry['seasonName'] = sName
 
@@ -257,6 +256,8 @@ def root():
 
         # If inserting item...
         elif response_obj["action"] == 'insertItem':
+
+            print("Test27:", response_obj)
 
             # Step 1: Get ID of Product
             query0 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"

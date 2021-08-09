@@ -512,7 +512,7 @@ def load_orders():
 
         # Step 3: Execute the order (aka insert into 'Orders')
         if response_obj['customer'] == 'Guest':
-            query3 = f"INSERT INTO ORDERS (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
+            query3 = f"INSERT INTO Orders (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
         else:
             query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
         db.execute_query(db_connection=db_connect_function(), query=query3)

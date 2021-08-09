@@ -47,7 +47,7 @@ def root():
             result = cursor.fetchall()
             print("TEST 100:", result)
             print("TEST 101:", result[0])
-            sName = result['seasonName']
+            sName = result[0]['seasonName']
             eachEntry['seasonName'] = sName
 
 

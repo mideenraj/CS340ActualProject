@@ -629,31 +629,30 @@ def load_products():
         # ---- If this is a POST request for Updating the database
         if response_obj["action"] == 'update':
 
-            # Step 1: Get department ID using department name
-            if response_obj['department'] == None:
-                print("TEST BEST 1-------------------------")
-
-            if response_obj['department'] == "":
-                print("TEST BEST 2-------------------------")
-            query0 = f"SELECT departmentID FROM Departments WHERE name='{response_obj['department']}';"
-            cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
-            depID = cursor0.fetchall()[0]['departmentID']
+            # Step 1: Get department ID using department name and write query
+            if response_obj['department'] != "":
+                query0 = f"SELECT departmentID FROM Departments WHERE name='{response_obj['department']}';"
+                cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
+                depID = cursor0.fetchall()[0]['departmentID']
+                query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{depID}', " \
+                        f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
+            else:
+                query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID=NULL, " \
+                        f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
 
             # Step 2: Sent query and access result
-            query = f"UPDATE Products SET productName='{response_obj['name']}', departmentID='{depID}', " \
-                    f"salePrice='{response_obj['price']}', unitType='{response_obj['unitType']}' WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
 
             # Step 3: Access updated row from database
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query2)
             results = cursor.fetchall()
+            print("TEST 1 ----------------------", results)
 
             # Step 4: create payload with returned data
             payload = results[0]
             payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
             payload['depName'] = response_obj['department']
-            # print("!!! Payload response: ", payload)          # For Debugging
 
             # Step 5: Return response
             return payload

@@ -264,7 +264,7 @@ def root():
             cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             pid = cursor0.fetchall()[0]['productID']
 
-            # Step 1.1: set seasonName from ID
+            # Step 1.1: set ID of Season
             query0 = f"SELECT seasonID FROM Seasons WHERE seasonName='{response_obj['sname']}';"
             cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             sid = cursor0.fetchall()[0]['seasonID']

@@ -237,7 +237,7 @@ async function addItem(){
     oid_cell.setAttribute('id', 'oID')
     newRow.appendChild(oid_cell)
 
-        // sname
+        // season Name
     var sname_cell = document.createElement('td')
     sname_cell.textContent = response['sname']
     sname_cell.setAttribute('id', 'sID')

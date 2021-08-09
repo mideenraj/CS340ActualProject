@@ -527,6 +527,7 @@ def load_orders():
         print("T2------------------")
         for each in result1:
             print(each)
+        payload.append(result1)
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"
@@ -583,7 +584,6 @@ def load_orders():
             query4 = "SELECT * FROM Orders ORDER BY orderID DESC LIMIT 1;"
             cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
             orderID = cursor4.fetchall()
-            print("TEST ____________________________________", orderID)
             orderID = str(orderID[0]['orderID'])
 
             # Step 5: Populate orderProducts

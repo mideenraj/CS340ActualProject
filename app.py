@@ -174,14 +174,15 @@ def root():
             orders.append(name['orderID'])
         payload.append(orders)
 
-        # -Second, get all Order ID and store to payload
-        query6 = f"SELECT seasonID FROM Seasons;"
+        # -Second, get all season ID and store to payload
+        query6 = f"SELECT seasonID, seasonName FROM Seasons;"
         cursor6 = db.execute_query(db_connection=db_connect_function(), query=query6)
         seasonInfo = cursor6.fetchall()
         # -Store in list, and finally attach to payload
         seasons = []
-        for name in seasonInfo:
-            seasons.append(name['seasonID'])
+        for each in seasonInfo:
+            sData = (each['seasonID'], each['seasonName'])
+            seasons.append(sData)
         payload.append(seasons)
 
 

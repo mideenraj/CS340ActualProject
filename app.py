@@ -509,12 +509,12 @@ def load_orders():
             price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
             total += (price * int(prod[1]))
 
-        # Step 2.1: If payload' customer value is 'Guest' set customer to None
-        if response_obj['customer'] == 'Guest':
-            response_obj['customer'] = None
 
         # Step 3: Execute the order (aka insert into 'Orders')
-        query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
+        if response_obj['customer'] == 'Guest':
+            query3 = f"INSERT INTO ORDERS (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
+        else:
+            query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
         db.execute_query(db_connection=db_connect_function(), query=query3)
 
         # Step 4: Access ID of last inserted row
@@ -522,6 +522,7 @@ def load_orders():
         query4 = "SELECT * FROM Orders ORDER BY orderID DESC LIMIT 1;"
         cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
         orderID = cursor4.fetchall()
+        print("TEST ____________________________________", orderID)
         orderID = str(orderID[0]['orderID'])
 
         # Step 5: Populate orderProducts

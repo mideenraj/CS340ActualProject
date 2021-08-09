@@ -630,6 +630,11 @@ def load_products():
         if response_obj["action"] == 'update':
 
             # Step 1: Get department ID using department name
+            if response_obj['department'] == None:
+                print("TEST BEST 1-------------------------")
+
+            if response_obj['department'] == "":
+                print("TEST BEST 2-------------------------")
             query0 = f"SELECT departmentID FROM Departments WHERE name='{response_obj['department']}';"
             cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             depID = cursor0.fetchall()[0]['departmentID']

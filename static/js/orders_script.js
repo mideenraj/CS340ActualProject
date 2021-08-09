@@ -20,7 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Event listener for 'Place Order' Button
     document.querySelector("#place_order_button").addEventListener('click', place_order)
+
+
+    // Event listener for 'Delete Order' Button
+    document.querySelectorAll(".delete_order").forEach(item => {item.addEventListener('click', delete_order)}
+    
 });
+
 
 
 
@@ -60,7 +66,7 @@ async function place_order() {
         body: JSON.stringify(payload),
         headers: {'Content-Type' : 'application/json'}
     }
-    
+
     var response = await fetch(url, fetchdata)
     var data = await response.json()
 
@@ -95,4 +101,17 @@ async function place_order() {
     for (var pro of allProducts){
         pro.value = 0
     }
+}
+
+
+// Function 2: 'Delete Order' button's callback function
+async function delete_order(){
+
+    var orderToDeleteID = this.id
+    console.log("THIS:", orderToDeleteID)
+
+
+
+
+
 }

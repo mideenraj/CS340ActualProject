@@ -33,6 +33,7 @@
           <th>customerID</th>
           <th>seasonID</th>
           <th>totalCost</th>
+          <th>Modify</th>
         </tr>
 
         <!-- Sample Data -->
@@ -42,6 +43,7 @@
           <td>{{row['customerID']}}</td>
           <td>{{row['seasonID']}}</td>
           <td>{{row['totalCost']}}</td>
+          <td><button id={{row['orderID']}} class="delete_order">Delete Order</button> </td>
         </tr>
         {% endfor %}
 

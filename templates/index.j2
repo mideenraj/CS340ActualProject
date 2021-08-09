@@ -35,11 +35,11 @@
 
                 <!--Table header-->
                 <tr>
-                    <th>product</th>
-                    <th>orderID</th>
-                    <th>seasonID</th>
-                    <th>quantitySold</th>
-                    <th>productTotal</th>
+                    <th>Product</th>
+                    <th>Order ID</th>
+                    <th>Season</th>
+                    <th>Quantity Sold</th>
+                    <th>Product Total</th>
                     <th>Modify</th>
                 </tr>
 
@@ -48,7 +48,7 @@
                 <tr class="item_row">
                     <td>{{row['productName']}}</td>
                     <td id="oID">{{row['orderID']}}</td>
-                    <td id="sID">{{row['seasonID']}}</td>
+                    <td id="sID">{{row['seasonName']}}</td>
                     <td>{{row['quantitySold']}}</td>
                     <td>{{row['productTotal']}}</td>
                     <td><button class="cancelItem" id={{row['orderID']}}>Approve Cancellation</button></td>

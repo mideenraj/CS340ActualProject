@@ -27,8 +27,10 @@ def root():
         query = "SELECT * FROM OrderProducts;"
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
-        # Changes the productID column's value to 'Discontinued' for all deleted products and get name of all products
+
         for eachEntry in results:
+
+            # First, Changes the productID column's value to 'Discontinued' for all deleted products and get name of all products
             eachEntry['productID'] = str(eachEntry['productID'])
             if eachEntry['productID'] == 'None':
                 eachEntry['productID'] = '*Discontinued*'
@@ -38,6 +40,13 @@ def root():
                 cursor = db.execute_query(db_connection=db_connect_function(), query=query)
                 pName = cursor.fetchall()[0]['productName']
                 eachEntry['productName'] = pName
+
+            # Next, Get the seasonName from seasonID
+            query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachEntry['seasonID']}';"
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
+            sName = cursor.fetchall()[0]['seasonName']
+            eachEntry['seasonName'] = sName
+
         payload.append(results)     # Append to payload
 
         # -----Step 3: Query(s) for populating 'Current seasons'

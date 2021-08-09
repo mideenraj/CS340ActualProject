@@ -592,7 +592,7 @@ def load_products():
         # Step 5: Access the department name for each product
         for eachP in results:
             print("TEST_1---------------", eachP)
-            if eachP['departmentID'] is None
+            if eachP['departmentID'] is None:
                 depName = "*Removed"
             else:
                 query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"

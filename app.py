@@ -44,8 +44,9 @@ def root():
             # Next, Get the seasonName from seasonID
             query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachEntry['seasonID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
-            result = cursor.fetchall()[0]
-            print("TEST 101:", result)
+            result = cursor.fetchall()
+            print("TEST 100:", result)
+            print("TEST 101:", result[0])
             sName = result['seasonName']
             eachEntry['seasonName'] = sName
 

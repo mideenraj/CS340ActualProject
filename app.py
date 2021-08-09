@@ -641,12 +641,12 @@ def load_orders():
             last_insert = cursor1.fetchall()
 
             # Step 2: Delete all entries from OrderProducts that are tied to this order
-            query2 = f"DELETE * FROM OrderProducts WHERE orderID='{response_obj['orderID']}';"
+            query2 = f"DELETE FROM OrderProducts WHERE orderID='{response_obj['orderID']}';"
             cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             last_insert = cursor2.fetchall()
 
             # Step x: Return a confirmation
-            return {"status":"complete"}
+            return {"status": "complete"}
 
 
 # Route 4: 'Products' subpage

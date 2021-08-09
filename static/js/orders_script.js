@@ -138,7 +138,6 @@ async function delete_order(){
     var response = await fetch(url, fetchdata)
     //var data = await response.json()
 
-
     // Step 3: delete row from table
     var allrows = document.querySelectorAll(".order_row")
     for (var row of allrows){

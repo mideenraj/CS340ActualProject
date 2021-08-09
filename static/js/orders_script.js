@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // Event listener for 'Delete Order' Button
-    document.querySelectorAll(".delete_order").forEach(item => {item.addEventListener('click', delete_order)}
+    document.querySelectorAll(".delete_order").forEach(item => {item.addEventListener('click', delete_order)})
     
 });
 

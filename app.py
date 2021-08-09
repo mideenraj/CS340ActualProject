@@ -520,7 +520,7 @@ def load_orders():
             query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachO['seasonID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             result = cursor.fetchall()[0]
-            eachO['seasonName'] = result['seasonName']
+            #eachO['seasonName'] = result['seasonName']
 
         for each in result1:
             print("T2----------", each)

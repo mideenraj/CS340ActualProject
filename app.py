@@ -591,6 +591,7 @@ def load_products():
 
         # Step 5: Access the department name for each product
         for eachP in results:
+            print("TEST_1---------------", eachP)
             query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
             cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
             depName = cursor1.fetchall()[0]['name']

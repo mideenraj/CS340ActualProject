@@ -546,7 +546,7 @@ def load_orders():
         last_insert = cursor5.fetchall()
         last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
         if response_obj['customer'] == 'Guest':
-            last_insert['customerID'] = 'Guest'
+            last_insert[0]['customerID'] = 'Guest'
 
         # Step 7: Return the row
         return {"lastOrder": last_insert[0]}

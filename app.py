@@ -237,7 +237,6 @@ def root():
             # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
             if totalPrice - float(response_obj['productTotal']) == 0:
 
-                print("OrderID:", response_obj['orderID'])
                 query3 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}';"
                 db.execute_query(db_connection=db_connect_function(), query=query3)
 
@@ -261,8 +260,6 @@ def root():
 
         # If inserting item...
         elif response_obj["action"] == 'insertItem':
-
-            print("Test27:", response_obj)
 
             # Step 1: Get ID of Product
             query0 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
@@ -405,10 +402,6 @@ def root():
                 eachPS['product'] = productName
                 del eachPS['ProductID']
 
-            for val in payload:
-                for val2 in payload[val]:
-                    print(val2)
-                print("")
             return payload
 
 
@@ -500,10 +493,6 @@ def load_orders():
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
 
-        print("T1------------------")
-        for each in result1:
-            print(each)
-
         for eachO in result1:
             # Change Deleted customer's customerID to 'Guest'
             eachO['customerID'] = str(eachO['customerID'])
@@ -524,9 +513,6 @@ def load_orders():
             result = cursor.fetchall()[0]
             eachO['seasonName'] = result['seasonName']
 
-        print("T2------------------")
-        for each in result1:
-            print(each)
         payload.append(result1)
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
@@ -670,7 +656,6 @@ def load_products():
 
         # Step 5: Access the department name for each product
         for eachP in results:
-            print("TEST_1---------------", eachP)
             if eachP['departmentID'] is None:
                 depName = "*Removed*"
             else:
@@ -721,7 +706,6 @@ def load_products():
             query2 = f"SELECT * FROM Products WHERE productID='{response_obj['ID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query2)
             results = cursor.fetchall()
-            print("TEST 1 ----------------------", results)
 
             # Step 4: create payload with returned data
             payload = results[0]
@@ -812,17 +796,8 @@ def load_departments():
         results = cursor.fetchall()
         payload.append(results)
 
-        # Step 5: Print query results if Debugging
-        debug = False
-        if debug:
-            print("\n")
-            print(f"Type:{type(results)}")
-            print(f"Length: {len(results)}")
-            print("Result:")
-            for row in results:
-                print(row)
 
-        # Step 6: The specified file is rendered with the queried data
+        # Step 5: The specified file is rendered with the queried data
         return render_template("departments_subpage.j2", department_data=payload)
 
     elif request.method == 'POST':
@@ -841,8 +816,6 @@ def load_departments():
             query2 = f"SELECT * FROM Departments ORDER BY departmentID DESC LIMIT 1;"
             cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             depID = cursor2.fetchall()
-            print("______ test_1 _______")
-            print(depID)
             depID = str(depID[0]['departmentID'])
 
             # Step 2: Access new row through query and sent it back as a response
@@ -873,17 +846,7 @@ def load_seasons():
         results = cursor.fetchall()
         payload.append(results)
 
-        # Step 5: Print query results if Debugging
-        debug = False
-        if debug:
-            print("\n")
-            print(f"Type:{type(results)}")
-            print(f"Length: {len(results)}")
-            print("Result:")
-            for row in results:
-                print(row)
-
-        # Step 6: The specified file is rendered with the queried data
+        # Step 5: The specified file is rendered with the queried data
         return render_template("seasons_subpage.j2", season_data=payload)
 
     # If post req

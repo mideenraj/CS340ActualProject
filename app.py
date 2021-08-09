@@ -500,6 +500,10 @@ def load_orders():
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
 
+        print("T1------------------")
+        for each in result1:
+            print(each)
+
         for eachO in result1:
             # Change Deleted customer's customerID to 'Guest'
             eachO['customerID'] = str(eachO['customerID'])
@@ -519,6 +523,10 @@ def load_orders():
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             result = cursor.fetchall()[0]
             eachO['seasonName'] = result['seasonName']
+
+        print("T2------------------")
+        for each in result1:
+            print(each)
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"

@@ -35,10 +35,10 @@ CREATE TABLE `Departments` (
 CREATE TABLE `Products` (
   `productID` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `productName` VARCHAR(255) NOT NULL,
-  `departmentID` INT(11) NOT NULL,
+  `departmentID` INT(11),
   `salePrice` DECIMAL(6, 2) NOT NULL,
   `unitType`  varchar(255) NOT NULL,
-  CONSTRAINT `products_1` FOREIGN KEY (`departmentID`) REFERENCES `Departments` (`departmentID`) ON DELETE NO ACTION
+  CONSTRAINT `products_1` FOREIGN KEY (`departmentID`) REFERENCES `Departments` (`departmentID`) ON DELETE SET NULL
 );
 
 CREATE TABLE `Orders` (

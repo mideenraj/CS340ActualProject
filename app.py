@@ -570,7 +570,6 @@ def load_orders():
             return {"status":"complete"}
 
 
-
 # Route 4: 'Products' subpage
 @app.route('/products', methods=['POST', 'GET'])
 def load_products():

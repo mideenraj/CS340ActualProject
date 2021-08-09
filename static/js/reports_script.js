@@ -200,14 +200,14 @@ async function addItem(){
     // Step 6: Insert order into database
     var productName = document.querySelector("#select_productID").value
     var oid = document.querySelector("#select_orderID").value
-    var sid = document.querySelector("#select_seasonID").value
+    var sname = document.querySelector("#select_seasonID").value
     var quantity = document.querySelector("#select_quantity").value
     var total = (price*quantity).toFixed(2)
     var payload = {
         "action": "insertItem",
         "product": productName,
         "oid": oid,
-        "sid": sid,
+        "sname": sname,
         "quantity": quantity,
         "total": total
     }
@@ -237,11 +237,11 @@ async function addItem(){
     oid_cell.setAttribute('id', 'oID')
     newRow.appendChild(oid_cell)
 
-        // sid
-    var sid_cell = document.createElement('td')
-    sid_cell.textContent = response['sid']
-    sid_cell.setAttribute('id', 'sID')
-    newRow.appendChild(sid_cell)
+        // sname
+    var sname_cell = document.createElement('td')
+    sname_cell.textContent = response['sname']
+    sname_cell.setAttribute('id', 'sID')
+    newRow.appendChild(sname_cell)
 
         // quantity
     var quantity_cell = document.createElement('td')

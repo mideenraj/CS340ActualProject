@@ -264,9 +264,14 @@ def root():
             cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
             pid = cursor0.fetchall()[0]['productID']
 
+            # Step 1.1: set seasonName from ID
+            query0 = f"SELECT seasonID FROM Seasons WHERE seasonName='{response_obj['sname']}';"
+            cursor0 = db.execute_query(db_connection=db_connect_function(), query=query0)
+            sid = cursor0.fetchall()[0]['seasonID']
+
             # Step 2: Insert into OrderProducts
             query1 = f"INSERT INTO OrderProducts (productID, orderID, seasonID, quantitySold, productTotal) VALUES" \
-                     f"('{pid}', '{response_obj['oid']}', '{response_obj['sid']}', " \
+                     f"('{pid}', '{response_obj['oid']}', '{sid}', " \
                      f"'{response_obj['quantity']}', '{response_obj['total']}');"
             cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
 
@@ -274,7 +279,7 @@ def root():
             payload = {
                 "product": pid,
                 "oid": response_obj['oid'],
-                "sid": response_obj['sid'],
+                "sname": response_obj['sname'],
                 "quantity": response_obj['quantity'],
                 "total": response_obj['total']
             }

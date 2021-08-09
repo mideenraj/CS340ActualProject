@@ -28,6 +28,12 @@ def root():
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
 
+        print("------------------------------------------------------")
+        for each in results:
+            print(each)
+        print("------------------------------------------------------")
+
+
         for eachEntry in results:
 
             # First, Changes the productID column's value to 'Discontinued' for all deleted products and get name of all products

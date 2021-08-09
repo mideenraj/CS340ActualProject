@@ -208,10 +208,15 @@ def root():
         # If cancel request...
         if response_obj["action"] == 'cancel':
 
+            # ---Step 0: get ID of season
+            query = f"SELECT seasonID FROM Seasons WHERE seasonName='{response_obj['seasonName']}';"
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
+            sID = float(cursor.fetchall()[0]['seasonID'])
+
             # ---Step 1: delete order log from OrderProducts
             if response_obj['product'] == '*Discontinued*':
                 query1 = f"DELETE FROM OrderProducts WHERE productID is NULL AND orderID='" \
-                         f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
+                         f"{response_obj['orderID']}' AND seasonID='{sID}';"
             else:
                 # First, get the ID of the product using its name
                 query2 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
@@ -220,7 +225,7 @@ def root():
 
                 # Then, remove entry from OrderProducts
                 query1 = f"DELETE FROM OrderProducts WHERE productID='{pID}' AND orderID='" \
-                         f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
+                         f"{response_obj['orderID']}' AND seasonID='{sID}';"
             db.execute_query(db_connection=db_connect_function(), query=query1)
 
             # ---Step 2: subtract the cancelled amount from 'Orders' entry

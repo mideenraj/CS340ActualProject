@@ -59,7 +59,7 @@ async function cancelOrder(){
         "action": "cancel",
         "product": product,
         "orderID": o_ID,
-        "seasonID": season,
+        "seasonName": season,
         "quantitySold": quantity,
         "productTotal": itemTotal
     }

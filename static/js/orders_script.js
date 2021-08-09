@@ -133,7 +133,7 @@ async function delete_order(){
     for (var row of allrows){
         console.log("THIS:", row)
         if (row.id == orderToDeleteID){
-            row.remove
+            row.remove()
         }
     }
 

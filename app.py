@@ -31,8 +31,8 @@ def root():
         for eachEntry in results:
             eachEntry['productID'] = str(eachEntry['productID'])
             if eachEntry['productID'] == 'None':
-                eachEntry['productID'] = 'Discontinued'
-                eachEntry['productName'] = 'Discontinued'
+                eachEntry['productID'] = '*Discontinued*'
+                eachEntry['productName'] = '*Discontinued*'
             else:
                 query = f"SELECT productName FROM Products WHERE productID='{eachEntry['productID']}';"
                 cursor = db.execute_query(db_connection=db_connect_function(), query=query)
@@ -188,21 +188,25 @@ def root():
         if response_obj["action"] == 'cancel':
 
             # ---Step 1: delete order log from OrderProducts
-            if response_obj['productID'] == 'Discontinued':
-                query1 =  f"DELETE FROM OrderProducts WHERE productID is NULL AND orderID='" \
+            if response_obj['product'] == '*Discontinued*':
+                query1 = f"DELETE FROM OrderProducts WHERE productID is NULL AND orderID='" \
                          f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
             else:
-                query1 = f"DELETE FROM OrderProducts WHERE productID='{response_obj['productID']}' AND orderID='" \
+                # First, get the ID of the product using its name
+                query2 = f"SELECT productID FROM Products WHERE productName='{response_obj['product']}';"
+                cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                pID = float(cursor2.fetchall()[0]['productID'])
+
+                # Then, remove entry from OrderProducts
+                query1 = f"DELETE FROM OrderProducts WHERE productID='{pID}' AND orderID='" \
                          f"{response_obj['orderID']}' AND seasonID='{response_obj['seasonID']}';"
             db.execute_query(db_connection=db_connect_function(), query=query1)
 
             # ---Step 2: subtract the cancelled amount from 'Orders' entry
-
             # -First, access the total order price
             query2 = f"SELECT totalCost FROM Orders WHERE orderID='{response_obj['orderID']}';"
             cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
             totalPrice = float(cursor2.fetchall()[0]['totalCost'])
-
 
             # -Second, after subtracting the amount from the order total, if value is 0, delete order entirely....
             if totalPrice - float(response_obj['productTotal']) == 0:

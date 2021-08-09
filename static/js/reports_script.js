@@ -45,7 +45,7 @@ async function cancelOrder(){
     // ---Step 1: Access the details of cancelling item
     var parentRow = this.parentNode.parentNode
     var kidCells = parentRow.children
-    var p_ID = kidCells.item(0).textContent
+    var product = kidCells.item(0).textContent
     var o_ID = kidCells.item(1).textContent
     var season = kidCells.item(2).textContent
     var quantity = kidCells.item(3).textContent
@@ -53,11 +53,11 @@ async function cancelOrder(){
     //console.log(p_ID, o_ID, season, quantity, itemTotal)      // For debugging
 
 
-
+    
     // ---Step 2: Send request to remove item from OrderProducts
     var payload = {
         "action": "cancel",
-        "productID": p_ID,
+        "product": product,
         "orderID": o_ID,
         "seasonID": season,
         "quantitySold": quantity,

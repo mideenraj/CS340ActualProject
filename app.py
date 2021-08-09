@@ -379,27 +379,13 @@ def load_customers():
         payload = []
         payload.append(subpages)
 
-        # Step 2: Write query
+        # Step 2: Write query to get customer data and append to payload
         query = "SELECT * FROM Customers;"
-
-        # Step 3: Send query ('Cursor' acts as the person typing the specified command into MySQL)
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
-
-        # Step 4: Access result (This returns a tuple of selected rows from query)
         results = cursor.fetchall()
         payload.append(results)
 
-        # Step 5: Print query results if Debugging
-        debug = False
-        if debug:
-            print("\n")
-            print(f"Type:{type(results)}")
-            print(f"Length: {len(results)}")
-            print("Result:")
-            for row in results:
-                print(row)
-
-        # Step 6: The specified file is rendered with the queried data
+        # Step 3: The specified file is rendered with the queried data
         return render_template("customers_subpage.j2", customer_data=payload)
 
     elif request.method == 'POST':

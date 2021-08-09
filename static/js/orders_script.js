@@ -103,6 +103,9 @@ async function place_order() {
         //Append row to table
     document.querySelector(".orders").appendChild(newRow)
 
+    // Add event listener to delete button
+    del_butt.addEventListener('click', delete_order)
+
     
     // ---Step 5: Clear all input boxes (default to 0)
     var allProducts = document.querySelectorAll(".product_quantity")

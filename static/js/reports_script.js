@@ -150,7 +150,7 @@ async function addItem(){
 
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelector("#select_orderID").value
-    var seasonID = document.querySelector("#select_seasonID").value
+    var seasonName = document.querySelector("#select_seasonID").textcontent
 
     // Step 2: check if order/season pair exist in log
     var existence = false
@@ -160,7 +160,7 @@ async function addItem(){
         var cells = row.children
 
         // Compare with selected pair
-        if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonID){
+        if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonName){
             existence = true
             break
         }
@@ -168,6 +168,7 @@ async function addItem(){
 
     // Step 3: exit if the pair does not exist, else continue
     if (existence == false){
+        console.log
         return
     }
     

@@ -515,10 +515,10 @@ def load_orders():
                 eachO['customerName'] = fullName
 
             # Get Season Name from
-            query1 = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachO['seasonID']}';"
-            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-            result1 = cursor1.fetchall()[0]
-            eachO['seasonName'] = result1['seasonName']
+            query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachO['seasonID']}';"
+            cursor = db.execute_query(db_connection=db_connect_function(), query=query)
+            result = cursor.fetchall()[0]
+            eachO['seasonName'] = result['seasonName']
 
         for each in result1:
             print("----------", each)

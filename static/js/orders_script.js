@@ -128,7 +128,9 @@ async function delete_order(){
 
     // Step 3: delete row from table
     var allrows = document.querySelectorAll(".order_row")
+    console.log(allrows)
     for (var row of allrows){
+        console.log("THIS:", row)
         if (row.id == orderToDeleteID){
             row.remove
         }

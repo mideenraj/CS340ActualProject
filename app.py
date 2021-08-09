@@ -592,9 +592,12 @@ def load_products():
         # Step 5: Access the department name for each product
         for eachP in results:
             print("TEST_1---------------", eachP)
-            query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
-            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-            depName = cursor1.fetchall()[0]['name']
+            if eachP['departmentID'] is None
+                depName = "*Removed"
+            else:
+                query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
+                cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+                depName = cursor1.fetchall()[0]['name']
             eachP['departmentName'] = depName
         payload.append(results)     # Append rows to payload
 
@@ -608,17 +611,8 @@ def load_products():
             departmentData.append(dd)
         payload.append(departmentData)
 
-        # Step 5: Print query results if Debugging
-        debug = False
-        if debug:
-            print("\n")
-            print(f"Type:{type(results)}")
-            print(f"Length: {len(results)}")
-            print("Result:")
-            for row in results:
-                print(row)
 
-        # Step 6: The specified file is rendered with the queried data
+        # Step 7: The specified file is rendered with the queried data
         return render_template("products_subpage.j2", product_data=payload)
 
     # For taking commands (Update, delete, or insert)

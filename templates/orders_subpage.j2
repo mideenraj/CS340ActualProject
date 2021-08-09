@@ -38,7 +38,7 @@
 
         <!-- Sample Data -->
         {% for row in order_data[1] %}
-        <tr>
+        <tr class='order_row' id={{row['orderID']}}>
           <td>{{row['orderID']}}</td>
           <td>{{row['customerID']}}</td>
           <td>{{row['seasonID']}}</td>

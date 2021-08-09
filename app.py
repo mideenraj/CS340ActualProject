@@ -489,67 +489,79 @@ def load_orders():
     elif request.method == 'POST':
         response_obj = request.json
 
-        # Step 1: Determine current by cross-referencing date-of-purchase with seasonal dates
-        date_of_purchase = str(datetime.datetime.today()).split()[0]
-        query1 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
-        cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
-        result1 = cursor1.fetchall()
-        seasonID = result1[0]['seasonID']
+        # If this is a request to place an order
+        if response_obj['action'] == 'place':
+            # Step 1: Determine current by cross-referencing date-of-purchase with seasonal dates
+            date_of_purchase = str(datetime.datetime.today()).split()[0]
+            query1 = f"SELECT seasonID FROM Seasons WHERE startDate <= '{date_of_purchase}' AND endDate >= '{date_of_purchase}';"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            result1 = cursor1.fetchall()
+            seasonID = result1[0]['seasonID']
 
-        # Step 2: Calculate total cost
-        total = 0
-        for prod in response_obj["purchases"]:
-            query2 = f"SELECT salePrice FROM Products WHERE productID='{prod[0]}';"
-            cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
-            result2 = cursor2.fetchall()
-            price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
-            total += (price * int(prod[1]))
+            # Step 2: Calculate total cost
+            total = 0
+            for prod in response_obj["purchases"]:
+                query2 = f"SELECT salePrice FROM Products WHERE productID='{prod[0]}';"
+                cursor2 = db.execute_query(db_connection=db_connect_function(), query=query2)
+                result2 = cursor2.fetchall()
+                price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
+                total += (price * int(prod[1]))
 
 
-        # Step 3: Execute the order (aka insert into 'Orders')
-        if response_obj['customer'] == 'Guest':
-            query3 = f"INSERT INTO Orders (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
-        else:
-            query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
-        db.execute_query(db_connection=db_connect_function(), query=query3)
+            # Step 3: Execute the order (aka insert into 'Orders')
+            if response_obj['customer'] == 'Guest':
+                query3 = f"INSERT INTO Orders (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
+            else:
+                query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
+            db.execute_query(db_connection=db_connect_function(), query=query3)
 
-        # Step 4: Access ID of last inserted row
-        #query4 = f"SELECT LAST_INSERT_ID() FROM Orders;"
-        query4 = "SELECT * FROM Orders ORDER BY orderID DESC LIMIT 1;"
-        cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
-        orderID = cursor4.fetchall()
-        print("TEST ____________________________________", orderID)
-        orderID = str(orderID[0]['orderID'])
+            # Step 4: Access ID of last inserted row
+            #query4 = f"SELECT LAST_INSERT_ID() FROM Orders;"
+            query4 = "SELECT * FROM Orders ORDER BY orderID DESC LIMIT 1;"
+            cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
+            orderID = cursor4.fetchall()
+            print("TEST ____________________________________", orderID)
+            orderID = str(orderID[0]['orderID'])
 
-        # Step 5: Populate orderProducts
-        for eachItem in response_obj["purchases"]:
-            # First, Access the price for each product
-            query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
+            # Step 5: Populate orderProducts
+            for eachItem in response_obj["purchases"]:
+                # First, Access the price for each product
+                query5 = f"SELECT salePrice FROM Products WHERE productID='{eachItem[0]}';"
+                cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
+                result5 = cursor5.fetchall()
+                price = float(result5[0]['salePrice'])  # Since salePrice is of Decimal Type, change it to str
+
+                # Second, variabilize each column value
+                productID = eachItem[0]
+                orderID = orderID                # Constant
+                seasonID = seasonID              # Constant
+                quantity = eachItem[1]
+                productTotal = price * int(quantity)
+
+                # Third, insert into OrderProducts
+                query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
+                db.execute_query(db_connection=db_connect_function(), query=query5)
+
+            # Step 6: Access the latest row
+            query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
             cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
-            result5 = cursor5.fetchall()
-            price = float(result5[0]['salePrice'])  # Since salePrice is of Decimal Type, change it to str
+            last_insert = cursor5.fetchall()
+            last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
+            if response_obj['customer'] == 'Guest':
+                last_insert[0]['customerID'] = 'Guest'
 
-            # Second, variabilize each column value
-            productID = eachItem[0]
-            orderID = orderID                # Constant
-            seasonID = seasonID              # Constant
-            quantity = eachItem[1]
-            productTotal = price * int(quantity)
+            # Step 7: Return the row
+            return {"lastOrder": last_insert[0]}
 
-            # Third, insert into OrderProducts
-            query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
-            db.execute_query(db_connection=db_connect_function(), query=query5)
+        # If this is a request to delete an order
+        if response_obj['action'] == 'delete':
 
-        # Step 6: Access the latest row
-        query5 = f"SELECT * FROM Orders WHERE orderID='{orderID}';"
-        cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
-        last_insert = cursor5.fetchall()
-        last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
-        if response_obj['customer'] == 'Guest':
-            last_insert[0]['customerID'] = 'Guest'
+            query1 = f"DELETE FROM Orders WHERE orderID='{response_obj['orderID']}'"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            last_insert = cursor1.fetchall()
 
-        # Step 7: Return the row
-        return {"lastOrder": last_insert[0]}
+            return {"status":"complete"}
+
 
 
 # Route 4: 'Products' subpage

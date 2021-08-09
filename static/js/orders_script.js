@@ -57,6 +57,7 @@ async function place_order() {
 
     // ---Step 3: Store the data and sent request
     var payload = {}
+    payload['action'] = 'place'
     payload["customer"] = customerID
     payload["purchases"] = selectedProducts         // 'selectedProducts' will be a list of lists [[productID, quantity], [....]]
 
@@ -107,8 +108,31 @@ async function place_order() {
 // Function 2: 'Delete Order' button's callback function
 async function delete_order(){
 
+    // Step 1: get ID of row to delete
     var orderToDeleteID = this.id
-    console.log("THIS:", orderToDeleteID)
+
+    // Step 2: send request
+    var payload = {}
+    payload["action"] = 'delete'
+    payload["orderID"] = orderToDeleteID   
+
+    var url = orders_subpage
+    var fetchdata = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type' : 'application/json'}
+    }
+    var response = await fetch(url, fetchdata)
+    //var data = await response.json()
+
+
+    // Step 3: delete row from table
+    var allrows = document.querySelectorAll(".order_row")
+    for (var row of allrows){
+        if (row.id == orderToDeleteID){
+            row.remove
+        }
+    }
 
 
 

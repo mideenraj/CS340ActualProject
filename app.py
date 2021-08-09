@@ -44,8 +44,9 @@ def root():
             # Next, Get the seasonName from seasonID
             query = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachEntry['seasonID']}';"
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
-            print("TEST--- --- 1:", cursor.fetchall())
-            #sName = cursor.fetchall()[0]['seasonName']
+            result = cursor.fetchall()[0]
+            print("TEST 101:", result)
+            sName = result['seasonName']
             eachEntry['seasonName'] = sName
 
         payload.append(results)     # Append to payload

@@ -520,6 +520,8 @@ def load_orders():
             result1 = cursor1.fetchall()[0]
             eachO['seasonName'] = result1['seasonName']
 
+        for each in result1:
+            print("----------", each)
         payload.append(result1)     # Append to payload
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload

@@ -652,8 +652,10 @@ def load_products():
             # Step 4: create payload with returned data
             payload = results[0]
             payload["salePrice"] = str(payload["salePrice"])  # Since salePrice is of Decimal Type, change it to str
-            payload['depName'] = response_obj['department']
-
+            if response_obj['department'] != "":
+                payload['depName'] = response_obj['department']
+            else:
+                payload['depName'] = "*Removed*"
             # Step 5: Return response
             return payload
 

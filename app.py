@@ -540,8 +540,6 @@ def load_orders():
             quantity = eachItem[1]
             productTotal = price * int(quantity)
 
-
-
             # Third, insert into OrderProducts
             query5 = f"INSERT INTO OrderProducts VALUES ('{productID}', '{orderID}', '{seasonID}', '{quantity}', '{productTotal}');"
             db.execute_query(db_connection=db_connect_function(), query=query5)
@@ -551,6 +549,8 @@ def load_orders():
         cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
         last_insert = cursor5.fetchall()
         last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
+        if response_obj['customer'] == 'Guest':
+            last_insert['customerID'] = 'Guest'
 
         # Step 7: Return the row
         return {"lastOrder": last_insert[0]}

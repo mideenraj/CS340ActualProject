@@ -49,6 +49,9 @@ def root():
             sName = result['seasonName']
             eachEntry['seasonName'] = sName
 
+
+
+
         payload.append(results)     # Append to payload
 
         # -----Step 3: Query(s) for populating 'Current seasons'

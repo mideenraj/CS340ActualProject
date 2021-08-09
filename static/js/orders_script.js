@@ -81,13 +81,13 @@ async function place_order() {
     var oID = document.createElement('td')
     oID.textContent = rowData['orderID']
     newRow.appendChild(oID)
-        // customer ID data cell
+        // customer name data cell
     var cID = document.createElement('td')
-    cID.textContent = rowData['customerID']
+    cID.textContent = rowData['customerName']
     newRow.appendChild(cID)
-        // season ID data cell
+        // season name data cell
     var sID = document.createElement('td')
-    sID.textContent = rowData['seasonID']
+    sID.textContent = rowData['seasonName']
     newRow.appendChild(sID)
         // total cost data cell
     var total = document.createElement('td')

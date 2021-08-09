@@ -499,8 +499,6 @@ def load_orders():
         query1 = "SELECT * FROM Orders;"
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
-        for each in result1:
-            print("T1----------", each)
 
         for eachO in result1:
             # Change Deleted customer's customerID to 'Guest'
@@ -521,10 +519,6 @@ def load_orders():
             cursor = db.execute_query(db_connection=db_connect_function(), query=query)
             result = cursor.fetchall()[0]
             eachO['seasonName'] = result['seasonName']
-
-        for each in result1:
-            print("T2----------", each)
-        payload.append(result1)     # Append to payload
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
         query2 = "SELECT customerID, fName, lName FROM Customers;"
@@ -569,7 +563,6 @@ def load_orders():
                 price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
                 total += (price * int(prod[1]))
 
-
             # Step 3: Execute the order (aka insert into 'Orders')
             if response_obj['customer'] == 'Guest':
                 query3 = f"INSERT INTO Orders (seasonID, totalCost) VALUES ('{seasonID}', '{total}');"
@@ -609,8 +602,24 @@ def load_orders():
             cursor5 = db.execute_query(db_connection=db_connect_function(), query=query5)
             last_insert = cursor5.fetchall()
             last_insert[0]['totalCost'] = float(last_insert[0]['totalCost'])
+
+            # Set customer name to Guest if applicable
             if response_obj['customer'] == 'Guest':
-                last_insert[0]['customerID'] = 'Guest'
+                last_insert[0]['customerName'] = 'Guest'
+            else:   # Otherwise get customer name from ID
+                query4 = f"SELECT fName, lName FROM Customers customerID='{response_obj['customer']}';"
+                cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
+                result = cursor4.fetchall()[0]
+                fullName = result['fName'] + result['lName']
+                last_insert[0]['customerName'] = fullName
+
+            # Get season name from ID
+            query4 = f"SELECT seasonName FROM Seasons WHERE seasonID='{last_insert[0]['seasonID']}';"
+            cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
+            result = cursor4.fetchall()[0]
+            sName = result['seasonName']
+            last_insert[0]['seasonName'] = sName
+
 
             # Step 7: Return the row
             return {"lastOrder": last_insert[0]}

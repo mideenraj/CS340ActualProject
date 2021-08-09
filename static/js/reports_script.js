@@ -160,7 +160,6 @@ async function addItem(){
         var cells = row.children
 
         // Compare with selected pair
-        console.log("ROWS:", cells.item(1).textContent, cells.item(2).textContent)
         if (cells.item(1).textContent == orderID && cells.item(2).textContent == seasonID){
             existence = true
             break
@@ -226,9 +225,9 @@ async function addItem(){
     var newRow = document.createElement('tr')
     newRow.setAttribute('class', 'item_row')
 
-        // pid
+        // product name
     var product_cell = document.createElement('td')
-    product_cell.textContent = response['product']
+    product_cell.textContent = productName
     newRow.appendChild(product_cell)
 
         // oid

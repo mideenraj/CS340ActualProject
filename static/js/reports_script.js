@@ -168,7 +168,7 @@ async function addItem(){
 
     // Step 3: exit if the pair does not exist, else continue
     if (existence == false){
-        console.log
+        console.log("TEST_46")
         return
     }
     

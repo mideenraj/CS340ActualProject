@@ -150,7 +150,7 @@ async function addItem(){
 
     // Step 1: Access choosen order/season IDs
     var orderID = document.querySelector("#select_orderID").value
-    var seasonName = document.querySelector("#select_seasonID").textcontent
+    var seasonName = document.querySelector("#select_seasonID").value
 
     // Step 2: check if order/season pair exist in log
     var existence = false

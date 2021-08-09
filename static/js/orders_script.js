@@ -96,7 +96,7 @@ async function place_order() {
     var del_butt = document.createElement('button')
     del_butt.setAttribute('class', 'delete_order')
     del_butt.setAttribute('id', rowData['orderID'])
-    del_butt.textContent = rowData['Delete Order']
+    del_butt.textContent = 'Delete Order'
     del_butt_cell.appendChild(del_butt)
     newRow.appendChild(del_butt_cell)
 

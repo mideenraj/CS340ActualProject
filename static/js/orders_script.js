@@ -91,6 +91,14 @@ async function place_order() {
     var total = document.createElement('td')
     total.textContent = rowData['totalCost']
     newRow.appendChild(total)
+        // total cost data cell
+    var del_butt_cell = document.createElement('td')
+    var del_butt = document.createElement('button')
+    del_butt.setAttribute('class', 'delete_order')
+    del_butt.setAttribute('id', rowData['orderID'])
+    del_butt.textContent = rowData['Delete Order']
+    del_butt_cell.appendChild(del_butt)
+    newRow.appendChild(del_butt_cell)
 
         //Append row to table
     document.querySelector(".orders").appendChild(newRow)
@@ -128,17 +136,11 @@ async function delete_order(){
 
     // Step 3: delete row from table
     var allrows = document.querySelectorAll(".order_row")
-    console.log("TEST:", orderToDeleteID)
-    console.log(allrows)
     for (var row of allrows){
-        console.log("THIS:", row)
         if (row.id == orderToDeleteID){
             row.remove()
         }
     }
-
-
-
 
 
 }

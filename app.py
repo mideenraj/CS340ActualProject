@@ -509,6 +509,10 @@ def load_orders():
             price = float(result2[0]['salePrice'])             # Since salePrice is of Decimal Type, change it to str
             total += (price * int(prod[1]))
 
+        # Step 2.1: If payload' customer value is 'Guest' set customer to None
+        if response_obj['customer'] == 'Guest':
+            response_obj['customer'] = None
+
         # Step 3: Execute the order (aka insert into 'Orders')
         query3 = f"INSERT INTO Orders VALUES ('0', '{response_obj['customer']}', '{seasonID}', '{total}');"
         db.execute_query(db_connection=db_connect_function(), query=query3)

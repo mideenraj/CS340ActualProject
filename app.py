@@ -499,11 +499,27 @@ def load_orders():
         query1 = "SELECT * FROM Orders;"
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
-        # Change Deleted customer's customerID to 'Guest'
+
         for eachO in result1:
+            # Change Deleted customer's customerID to 'Guest'
             eachO['customerID'] = str(eachO['customerID'])
             if eachO['customerID'] == 'None':
-                eachO['customerID'] = 'Guest'
+                eachO['customerName'] = "Guest"
+
+            # Store First/Last name of customer
+            else:
+                query1 = f"SELECT fName, lName FROM Customers WHERE customerID='{eachO['customerID']}';"
+                cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+                result1 = cursor1.fetchall()[0]
+                fullName = result1['fName'] +" " + result1['lName']
+                eachO['customerName'] = fullName
+
+            # Get Season Name from
+            query1 = f"SELECT seasonName FROM Seasons WHERE seasonID='{eachO['seasonID']}';"
+            cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
+            result1 = cursor1.fetchall()[0]
+            eachO['seasonName'] = result1['seasonName']
+
         payload.append(result1)     # Append to payload
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload
@@ -517,7 +533,6 @@ def load_orders():
             fullName = each_customer['fName'] + " " + each_customer['lName']
             customer_info.append((id, fullName))
         payload.append(customer_info)
-
 
         # Step 4: Write Query 3 (Product selection menu) and append to payload
         query3 = "SELECT productID, productName, salePrice, unitType FROM Products;"

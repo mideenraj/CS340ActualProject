@@ -40,8 +40,8 @@
         {% for row in order_data[1] %}
         <tr class='order_row' id={{row['orderID']}}>
           <td>{{row['orderID']}}</td>
-          <td>{{row['customerID']}}</td>
-          <td>{{row['seasonID']}}</td>
+          <td>{{row['customerName']}}</td>
+          <td>{{row['seasonName']}}</td>
           <td>{{row['totalCost']}}</td>
           <td><button id={{row['orderID']}} class="delete_order">Delete Order</button> </td>
         </tr>

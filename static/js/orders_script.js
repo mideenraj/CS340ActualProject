@@ -60,13 +60,12 @@ async function place_order() {
         body: JSON.stringify(payload),
         headers: {'Content-Type' : 'application/json'}
     }
-
+    
     var response = await fetch(url, fetchdata)
     var data = await response.json()
 
     // ---Step 4: Use the returned data to display new row in table
     var rowData = data["lastOrder"]
-    console.log("TEST_1:", rowData)
         // New row
     var newRow = document.createElement('tr')
         // order ID data cell
@@ -88,7 +87,6 @@ async function place_order() {
 
         //Append row to table
     document.querySelector(".orders").appendChild(newRow)
-
 
     
     // ---Step 5: Clear all input boxes (default to 0)

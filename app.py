@@ -406,7 +406,6 @@ def load_customers():
 
             # Step 3: create payload with returned data
             payload = results[0]
-            #print("TEST_1:", payload)          # For Debugging
             payload["birthDate"] = response_obj['dob'] # Since salePrice is of Date Type, change it to str
 
             # Step 4: Return response
@@ -426,9 +425,6 @@ def load_customers():
 
         # If insert request...
         elif response_obj["action"] == 'insert':
-            print("!!!!!! !!!!!!!! !!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!")
-
-            print("THIS:", response_obj)
 
             # Step 1: Send query
             query = f"INSERT INTO Customers (fName, lName, birthDate, zipCode) VALUES " \
@@ -460,11 +456,11 @@ def load_orders():
         query1 = "SELECT * FROM Orders;"
         cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)
         result1 = cursor1.fetchall()
-        # Change Deleted customer's customerID to 'De-Registered'
+        # Change Deleted customer's customerID to 'Guest'
         for eachO in result1:
             eachO['customerID'] = str(eachO['customerID'])
             if eachO['customerID'] == 'None':
-                eachO['customerID'] = 'De-Registered'
+                eachO['customerID'] = 'Guest'
         payload.append(result1)     # Append to payload
 
         # Step 3: Write Query 2 (Customer selection drop down menu population) and append to payload

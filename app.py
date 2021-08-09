@@ -27,11 +27,17 @@ def root():
         query = "SELECT * FROM OrderProducts;"
         cursor = db.execute_query(db_connection=db_connect_function(), query=query)
         results = cursor.fetchall()     # Access result (This returns a tuple of selected rows from query)
-        # Changes the productID column's value to 'Discontinued' for all deleted products
+        # Changes the productID column's value to 'Discontinued' for all deleted products and get name of all products
         for eachEntry in results:
             eachEntry['productID'] = str(eachEntry['productID'])
             if eachEntry['productID'] == 'None':
                 eachEntry['productID'] = 'Discontinued'
+                eachEntry['productName'] = 'Discontinued'
+            else:
+                query = f"SELECT productName FROM Products WHERE productID='{eachEntry['productID']}';"
+                cursor = db.execute_query(db_connection=db_connect_function(), query=query)
+                pName = cursor.fetchall()[0]['productName']
+                eachEntry['productName'] = pName
         payload.append(results)     # Append to payload
 
         # -----Step 3: Query(s) for populating 'Current seasons'
@@ -593,7 +599,7 @@ def load_products():
         for eachP in results:
             print("TEST_1---------------", eachP)
             if eachP['departmentID'] is None:
-                depName = "*Removed"
+                depName = "*Removed*"
             else:
                 query1 = f"SELECT name FROM Departments WHERE departmentID='{eachP['departmentID']}';"
                 cursor1 = db.execute_query(db_connection=db_connect_function(), query=query1)

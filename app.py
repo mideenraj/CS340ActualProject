@@ -615,7 +615,7 @@ def load_orders():
             if response_obj['customer'] == 'Guest':
                 last_insert[0]['customerName'] = 'Guest'
             else:   # Otherwise get customer name from ID
-                query4 = f"SELECT fName, lName FROM Customers customerID='{response_obj['customer']}';"
+                query4 = f"SELECT fName, lName FROM Customers WHERE customerID='{response_obj['customer']}';"
                 cursor4 = db.execute_query(db_connection=db_connect_function(), query=query4)
                 result = cursor4.fetchall()[0]
                 fullName = result['fName'] + result['lName']
